@@ -311,20 +311,19 @@ GameObject:
   m_Component:
   - component: {fileID: 146303911}
   - component: {fileID: 146303910}
-  - component: {fileID: 146303917}
-  - component: {fileID: 146303916}
-  - component: {fileID: 146303915}
-  - component: {fileID: 146303914}
-  - component: {fileID: 146303913}
   - component: {fileID: 146303912}
-  - component: {fileID: 146303918}
+  - component: {fileID: 146303919}
+  - component: {fileID: 146303920}
+  - component: {fileID: 146303921}
+  - component: {fileID: 146303913}
+  - component: {fileID: 146303914}
   m_Layer: 0
   m_Name: RosConnector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &146303910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -374,10 +373,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 146303909}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8e7046e9f110da4a81262f9658c8514, type: 3}
+  m_Script: {fileID: 11500000, guid: 938611d5f671cfe4f9be87c66d865ae1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Vertical
+  Topic: /sickldmrs/scan0
+  laserScanReader: {fileID: 1920181024}
+  FrameId: Unity
 --- !u!114 &146303914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -386,11 +387,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 146303909}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8e7046e9f110da4a81262f9658c8514, type: 3}
+  m_Script: {fileID: 11500000, guid: 50bd75cc61c2e44a29910a1e88be6a9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Horizontal
---- !u!114 &146303915
+  TankDriver: {fileID: 1252373727}
+  Float64SubscriberThrottle: {fileID: 0}
+  Float64SubscriberSteering: {fileID: 0}
+--- !u!114 &146303919
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -398,52 +401,44 @@ MonoBehaviour:
   m_GameObject: {fileID: 146303909}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92dedf3f173285b4d9a806dec2334596, type: 3}
+  m_Script: {fileID: 11500000, guid: b43d4d2dc08234b509cf981e56d86857, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Topic: /joy
+  Topic: /LLC/EFFORTS/Steering
+  TimeStep: 0.1
+  SubscribedTransform: {fileID: 0}
+  TankDriver: {fileID: 0}
+  whatever: 0
+--- !u!114 &146303920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 146303909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b43d4d2dc08234b509cf981e56d86857, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Topic: /LLC/EFFORTS/Throttle
+  TimeStep: 0.1
+  SubscribedTransform: {fileID: 0}
+  TankDriver: {fileID: 0}
+  whatever: 0
+--- !u!114 &146303921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 146303909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 938611d5f671cfe4f9be87c66d865ae1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Topic: /SENSORS/IBEO
+  laserScanReader: {fileID: 1920181024}
   FrameId: Unity
---- !u!114 &146303916
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 146303909}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fe4cf3b1dd3507418f7ec019f9193ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Topic: /joint_states
-  TimeStep: 0
-  JointNames: []
-  JointStateWriters: []
---- !u!114 &146303917
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 146303909}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8346600dd4db234680344092ad74320, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UrdfRobot: {fileID: 0}
---- !u!114 &146303918
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 146303909}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef6e2677fa36b0c46a9f6d8bd354c686, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Topic: /camera/rgb/image_raw/
-  TimeStep: 0
-  meshRenderer: {fileID: 0}
 --- !u!1 &149996730
 GameObject:
   m_ObjectHideFlags: 0
@@ -5114,7 +5109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30a3570e2c6da45e399de8873b6b3033, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ManualInput: 1
+  ManualInput: 0
   LeftWheels:
   - {fileID: 2100878069}
   - {fileID: 1051528530}
@@ -7126,6 +7121,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1920181023}
+  - component: {fileID: 1920181024}
   m_Layer: 8
   m_Name: Laser Sensor
   m_TagString: Untagged
@@ -7141,13 +7137,36 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1920181022}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.02, z: -0.07}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 38264417}
+  - {fileID: 2034543233}
   m_Father: {fileID: 1963901206}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1920181024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1920181022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c87b3c7b7739511498b2993d8daf6c51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  samples: 360
+  update_rate: 1800
+  angle_min: 0
+  angle_max: 6.28
+  angle_increment: 0.0174533
+  time_increment: 0
+  scan_time: 0
+  range_min: 0.12
+  range_max: 3.5
+  ranges: []
+  intensities: []
 --- !u!1 &1963901205
 GameObject:
   m_ObjectHideFlags: 0
@@ -7190,9 +7209,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1963901205}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: b8432a84d03a044b2b7b0768fd0f109b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Shade: {fileID: 0}
+  horizontalFOV: 0
+  verticalFOV: 0
+  depthCam: {fileID: 2034543235}
+  DrawLidar: 1
 --- !u!1 &1974138366
 GameObject:
   m_ObjectHideFlags: 0
@@ -7619,6 +7643,83 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2000986887}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &2034543232
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2034543233}
+  - component: {fileID: 2034543235}
+  - component: {fileID: 2034543234}
+  m_Layer: 8
+  m_Name: Camera-Laser
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2034543233
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2034543232}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1920181023}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!81 &2034543234
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2034543232}
+  m_Enabled: 1
+--- !u!20 &2034543235
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2034543232}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
 --- !u!1 &2076887379
 GameObject:
   m_ObjectHideFlags: 0

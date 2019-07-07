@@ -53,9 +53,9 @@ public class TankDriver : MonoBehaviour
             angularRequest = -(Input.GetAxis("Horizontal"));
             angularRequest = Mathf.Clamp(angularRequest, -1, 1);
             throttle = Input.GetAxis("Vertical");
-
+            Apply(throttle, angularRequest);
         }
-        Apply(throttle, angularRequest);
+
 
     }
     public void Drive(float Throttle, float Steer)

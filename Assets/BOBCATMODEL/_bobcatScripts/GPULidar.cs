@@ -4,7 +4,7 @@ using UnityEngine;
 public class GPULidar : MonoBehaviour
 {
     Material material;
-    float depthLevel = 1;
+    public  float depthLevel = 1;
     public Shader Shade;
     public float horizontalFOV, verticalFOV;
     Matrix4x4 projMat;

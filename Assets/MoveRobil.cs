@@ -6,14 +6,14 @@ namespace RosSharp.RosBridgeClient
 public class MoveRobil : MonoBehaviour {
 
 	public TankDriver TankDriver;
-	public Float64Subscriber Float64SubscriberThrottle;
-	public Float64Subscriber Float64SubscriberSteering;
+	public Float64Subscriber Float64SubThrottle;
+	public Float64Subscriber Float64SubSteering;
 	// Use this for initialization
 	void Start () 
 	{
-		
-		Float64SubscriberThrottle=GetComponent<Float64Subscriber>();
-		Float64SubscriberSteering=GetComponent<Float64Subscriber>();
+		//The attribute has been assigned in the scene so shouldn't be here
+		//Float64SubscriberThrottle=GetComponent<Float64Subscriber>();
+		//Float64SubscriberSteering=GetComponent<Float64Subscriber>();
 	}
 	
 	// Update is called once per frame
@@ -22,7 +22,11 @@ public class MoveRobil : MonoBehaviour {
 
 		if(!TankDriver.ManualInput)
 		{
-			TankDriver.Apply((float)Float64SubscriberThrottle.whatever,(float)Float64SubscriberSteering.whatever);
+#if VERBOSE
+			Debug.Log("Got ThrottleWhatever="+Float64SubscriberThrottle.whatever.ToString() + " and SteerWhatever=" + Float64SubscriberSteering.whatever.ToString());
+			Debug.Log("Got ThrottleRate="+Float64SubscriberThrottle.rate.ToString() + " and SteerRate=" + Float64SubscriberSteering.rate.ToString());
+#endif
+			TankDriver.Apply((float)Float64SubThrottle.whatever,(float)Float64SubSteering.whatever);
 		}
 		
 	}

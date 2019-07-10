@@ -391,8 +391,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TankDriver: {fileID: 1252373727}
-  Float64SubscriberThrottle: {fileID: 0}
-  Float64SubscriberSteering: {fileID: 0}
+  Float64SubscriberThrottle: {fileID: 146303920}
+  Float64SubscriberSteering: {fileID: 146303919}
 --- !u!114 &146303919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -407,7 +407,7 @@ MonoBehaviour:
   Topic: /LLC/EFFORTS/Steering
   TimeStep: 0.1
   SubscribedTransform: {fileID: 0}
-  TankDriver: {fileID: 0}
+  TankDriver: {fileID: 1252373727}
   whatever: 0
 --- !u!114 &146303920
 MonoBehaviour:
@@ -423,7 +423,7 @@ MonoBehaviour:
   Topic: /LLC/EFFORTS/Throttle
   TimeStep: 0.1
   SubscribedTransform: {fileID: 0}
-  TankDriver: {fileID: 0}
+  TankDriver: {fileID: 1252373727}
   whatever: 0
 --- !u!114 &146303921
 MonoBehaviour:

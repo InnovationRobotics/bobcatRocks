@@ -26,7 +26,7 @@ namespace RosSharp.RosBridgeClient
         public TankDriver TankDriver;
 
         private float previousRealTime;
-        public double whatever;
+        public float whatever, rate;
         private bool isMessageReceived;
 
         protected override void Start()
@@ -36,26 +36,28 @@ namespace RosSharp.RosBridgeClient
 
         protected override void ReceiveMessage(Messages.Standard.Float64 message)
         {
-            whatever = message.data;
+            whatever = (float)message.data;
             isMessageReceived = true;
         }
 
         private void Update()
         {
             if (isMessageReceived)
-                ProcessMessage();
-                
-
+                ProcessMessage();        
 
         }
         private void ProcessMessage()
         {
             float deltaTime = Time.realtimeSinceStartup - previousRealTime;
-            double rate = whatever * deltaTime;
+            rate = whatever * deltaTime;
             previousRealTime = Time.realtimeSinceStartup;
-            Debug.Log("Rate="+rate.ToString());
-
+            //Debug.Log("Rate="+rate.ToString());
             isMessageReceived = false;
+            if (Topic == "/LLC/EFFORTS/Throttle"){
+                      TankDriver.SetThrottle(rate); 
+                      Debug.Log("Rate="+rate.ToString());
+            } 
+            else TankDriver.SetSteer(rate);   
         }
     }
 }

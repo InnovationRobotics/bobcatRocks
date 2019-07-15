@@ -391,8 +391,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TankDriver: {fileID: 1252373727}
-  Float64SubscriberThrottle: {fileID: 146303920}
-  Float64SubscriberSteering: {fileID: 146303919}
+  Float64SubThrottle: {fileID: 146303920}
+  Float64SubSteering: {fileID: 146303919}
 --- !u!114 &146303919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -409,6 +409,7 @@ MonoBehaviour:
   SubscribedTransform: {fileID: 0}
   TankDriver: {fileID: 1252373727}
   whatever: 0
+  rate: 0
 --- !u!114 &146303920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -425,6 +426,7 @@ MonoBehaviour:
   SubscribedTransform: {fileID: 0}
   TankDriver: {fileID: 1252373727}
   whatever: 0
+  rate: 0
 --- !u!114 &146303921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7297,7 +7299,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 8400000, guid: 986a24b8413614dbca66e9be05077d54, type: 2}
+  m_TargetTexture: {fileID: 8400000, guid: c3e10676ba62848faa29f78d1fcf2148, type: 2}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1

@@ -48,6 +48,7 @@ namespace RosSharp.RosBridgeClient
         }
         private void ProcessMessage()
         {
+            /**** Not used - Move Robil is used instead
             float deltaTime = Time.realtimeSinceStartup - previousRealTime;
             rate = whatever * deltaTime;
             previousRealTime = Time.realtimeSinceStartup;
@@ -55,9 +56,10 @@ namespace RosSharp.RosBridgeClient
             isMessageReceived = false;
             if (Topic == "/LLC/EFFORTS/Throttle"){
                       TankDriver.SetThrottle(rate); 
-                      Debug.Log("Rate="+rate.ToString());
+                      //Debug.Log("Rate="+rate.ToString());
             } 
             else TankDriver.SetSteer(rate);   
+            */
         }
     }
 }

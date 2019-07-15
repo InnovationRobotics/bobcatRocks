@@ -29,7 +29,7 @@ public class GPULidar : MonoBehaviour
         if (Shade != null)
         {
             material.SetFloat("_DepthLevel", depthLevel);
-            Graphics.Blit(src, dest, material);
+            Graphics.Blit(src, dest, material);// raw interface to Unity drawing function
         }
         else
         {

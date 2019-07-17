@@ -210,20 +210,7 @@ namespace RosSharp.Urdf
 
         private static Matrix3x3 Quaternion2Matrix(Quaternion quaternion)
         {
-            //2019.1 Quaternion rosQuaternion = Quaternion.Normalize(quaternion);
-            Quaternion rosQuaternion;
-            double qlengthsq, qlength;
-            float fqlength;
-
-            qlengthsq = Math.Pow(quaternion.x,2) + Math.Pow(quaternion.y,2) + Math.Pow(quaternion.z,2) + Math.Pow(quaternion.w,2);
-            qlength = Math.Sqrt(qlengthsq);
-            fqlength = (float) qlength;
-
-            rosQuaternion.x = quaternion.x/fqlength;
-            rosQuaternion.y = quaternion.y/fqlength;
-            rosQuaternion.z = quaternion.z/fqlength;
-            rosQuaternion.w = quaternion.w/fqlength;
-// End of instead of 2019.1 
+            Quaternion rosQuaternion = Quaternion.Normalize(quaternion);
             float qx = rosQuaternion.x;
             float qy = rosQuaternion.y;
             float qz = rosQuaternion.z;

@@ -86,11 +86,11 @@ namespace RosSharp.RosBridgeClient
 
             GUILayout.Space(20);
             EditorGUILayout.BeginHorizontal();
-            Debug.Log("assetPath = " + assetPath);
+
             if (GUILayout.Button("Read Robot Description"))
             {
                 SetEditorPrefs();
-         
+
                 Thread rosSocketConnectThread = new Thread(() => transferHandler.TransferUrdf(protocolType, address, timeout, assetPath, urdfParameter));
                 rosSocketConnectThread.Start();
             }

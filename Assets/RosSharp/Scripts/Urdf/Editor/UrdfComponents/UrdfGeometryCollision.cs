@@ -1,5 +1,5 @@
 ﻿/*
-© Siemens AG, 2018
+© Siemens AG, 2018-2019
 Author: Suzannah Smith (suzannah.smith@siemens.com)
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -89,8 +89,7 @@ namespace RosSharp.Urdf.Editor
             if (visualToCopy.childCount == 0) return;
 
             GameObject objectToCopy = visualToCopy.GetChild(0).gameObject;
-            GameObject prefabObject = (GameObject)PrefabUtility.GetPrefabObject(objectToCopy);
-// 2019.1         GameObject prefabObject = (GameObject)PrefabUtility.GetCorrespondingObjectFromSource(objectToCopy);
+            GameObject prefabObject = (GameObject)PrefabUtility.GetCorrespondingObjectFromSource(objectToCopy);
 
             GameObject collisionObject;
             if (prefabObject != null)

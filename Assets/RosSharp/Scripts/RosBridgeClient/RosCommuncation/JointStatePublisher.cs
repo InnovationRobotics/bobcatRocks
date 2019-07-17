@@ -1,5 +1,5 @@
 ﻿/*
-© Siemens AG, 2017-2018
+© Siemens AG, 2017-2019
 Author: Dr. Martin Bischoff (martin.bischoff@siemens.com)
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -59,13 +59,12 @@ namespace RosSharp.RosBridgeClient
 
         private void UpdateJointState(int i)
         {
-            float position, velocity, effort;
 
             JointStateReaders[i].Read(
                 out message.name[i],
-                out position,
-                out velocity,
-                out effort);
+                out float position,
+                out float velocity,
+                out float effort);
 
             message.position[i] = position;
             message.velocity[i] = velocity;

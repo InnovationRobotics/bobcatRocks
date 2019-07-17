@@ -13,25 +13,27 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-using System.Collections.Generic;
+// Adding Timestamp switching
+// Shimadzu corp , 2019, Akira NODA (a-noda@shimadzu.co.jp / you.akira.noda@gmail.com)
+
+using UnityEngine;
 
 namespace RosSharp.RosBridgeClient
 {
-    public class JointStateSubscriber : Subscriber<Messages.Sensor.JointState>
+    public class Timer: MonoBehaviour
     {
-        public List<string> JointNames;
-        public List<JointStateWriter> JointStateWriters;
-
-        protected override void ReceiveMessage(Messages.Sensor.JointState message)
+        protected void Awake()
         {
-            int index;
-            for (int i = 0; i < message.name.Length; i++)
-            {
-                index = JointNames.IndexOf(message.name[i]);
-                if (index != -1)
-                    JointStateWriters[index].Write((float) message.position[i]);
-            }
+            HeaderExtensions.Timer = this;
+        }
+
+        public virtual Messages.Standard.Time Now()
+        {
+            Messages.Standard.Time stamp = new Messages.Standard.Time();
+            float time = Time.realtimeSinceStartup;
+            stamp.secs = (uint)time;
+            stamp.nsecs = (uint)(1e9 * (time - stamp.secs));
+            return stamp;
         }
     }
 }
-

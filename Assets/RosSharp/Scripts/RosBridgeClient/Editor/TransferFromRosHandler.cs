@@ -55,7 +55,7 @@ namespace RosSharp.RosBridgeClient
             this.timeout = timeout;
             this.assetPath = assetPath;
             this.urdfParameter = urdfParameter;
-            Debug.Log("assetPath="+this.assetPath);
+
             // initialize
             ResetStatusEvents();
 
@@ -73,7 +73,7 @@ namespace RosSharp.RosBridgeClient
         private void ImportAssets()
         {
             // setup Urdf Transfer
-            UrdfTransferFromRos urdfTransfer = new UrdfTransferFromRos(rosSocket, this.assetPath, this.urdfParameter);
+            UrdfTransferFromRos urdfTransfer = new UrdfTransferFromRos(rosSocket, assetPath, urdfParameter);
             StatusEvents["robotNameReceived"] = urdfTransfer.Status["robotNameReceived"];
             StatusEvents["robotDescriptionReceived"] = urdfTransfer.Status["robotDescriptionReceived"];
             StatusEvents["resourceFilesReceived"] = urdfTransfer.Status["resourceFilesReceived"];

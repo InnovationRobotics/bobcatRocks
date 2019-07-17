@@ -1,5 +1,5 @@
 ﻿/*
-© Siemens AG, 2017
+© Siemens AG, 2017-2019
 Author: Dr. Martin Bischoff (martin.bischoff@siemens.com)
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -36,9 +36,7 @@ namespace RosSharp
             if (gameObject == null)
                 return;
 
-            PrefabUtility.CreatePrefab(getPrefabAssetPath(stlFile), gameObject);
- //2019.1           PrefabUtility.SaveAsPrefabAsset(gameObject, getPrefabAssetPath(stlFile));
-
+            PrefabUtility.SaveAsPrefabAsset(gameObject, getPrefabAssetPath(stlFile));
             Object.DestroyImmediate(gameObject);
         }
 

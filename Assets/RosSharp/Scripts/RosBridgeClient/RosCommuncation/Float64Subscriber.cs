@@ -22,7 +22,7 @@ namespace RosSharp.RosBridgeClient
 {
     public class Float64Subscriber : Subscriber<Messages.Standard.Float64>
     {
-        public Transform SubscribedTransform;
+        
         public TankDriver TankDriver;
 
         private float previousRealTime;

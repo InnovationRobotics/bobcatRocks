@@ -20,14 +20,13 @@ namespace RosSharp.RosBridgeClient
 {
     public class NavSatFixPublisher : Publisher<Messages.Sensor.NavSatFix>
     {
-const double  CENTER_X_NS = 31.2622;		// GPS coordinates
-const double  CENTER_Y_EW = 34.803611;	// of lab 320
+const double  CENTER_X_NS = 31.2622f;		// GPS coordinates
+const double  CENTER_Y_EW = 34.803611f;	// of lab 320
 const float  DEGREE_TO_M = 111000; 		//1 degree has appprox. 111km
 const double PI  =3.141592653589793238463;
 
         public Transform PublishedTransform;
         public string FrameId = "Unity";
-        public Rigidbody rb;
         public int pfreq = 20;
         Vector3 _init_pos = Vector3.zero;
         private Messages.Sensor.NavSatFix message;
@@ -41,11 +40,10 @@ const double PI  =3.141592653589793238463;
         {
             base.Start();
             InitializeMessage();
-            start_latitude = 31.2622f; //32.0017549051;
-            start_longitude = 34.803611f; //34.9083870312;           
+            start_latitude = (float)CENTER_X_NS;//31.2622f; //32.0017549051;
+            start_longitude = (float)CENTER_Y_EW; //34.803611f; //34.9083870312;           
             start_altitude = 2.0f;
             _init_pos = PublishedTransform.position;
-            test = (sbyte) Messages.Sensor.NavSatStatus.StatusType.STATUS_FIX;
 
         }
 
@@ -69,8 +67,9 @@ const double PI  =3.141592653589793238463;
                     status = (sbyte)Messages.Sensor.NavSatStatus.StatusType.STATUS_FIX,
                     service = (short)Messages.Sensor.NavSatStatus.ServiceType.SERVICE_GPS
                 },
-                latitude = 32.0017549051f,
-                longitude = 34.9083870312f          
+                latitude = start_latitude,
+                longitude = start_longitude,
+                altitude = start_altitude          
             };
             message.position_covariance = new float[] {1,0,0,0,1,0,0,0,1};
             message.position_covariance_type=  0;
@@ -100,13 +99,6 @@ const double PI  =3.141592653589793238463;
             LonRad = Math.Atan2(Math.Sin(brng)*Math.Sin(dist/R)*Math.Cos(stLatRad),Math.Cos(dist/R)-Math.Sin(stLatRad)*Math.Sin(LatRad*PI/180));
             message.longitude = start_longitude + (float) (LonRad*180/PI); //Degrees
             Publish(message);
-        }
-
-//#define ABS(x) (x > 0 ? x : -x)
-        private double ABS(double x)
-        {
-            if (x>0) return x;
-            else return (-x);
         }
 
     }

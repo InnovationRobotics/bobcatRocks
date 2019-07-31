@@ -68,9 +68,9 @@ namespace RosSharp.RosBridgeClient
             message.header.Update();
          
            //Compute current coordinates
-           message.longitude = rb.velocity.y;
+           message.longitude = rb.velocity.x;
            message.latitude = rb.velocity.z;
-           message.altitude = rb.velocity.x;
+           message.altitude = rb.velocity.y;
             Debug.Log("velocity="+rb.velocity.ToString());
             Publish(message);
         }

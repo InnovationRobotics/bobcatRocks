@@ -51,7 +51,7 @@ namespace RosSharp.RosBridgeClient
             RosBridgeClient.Protocols.IProtocol protocol = GetProtocol(protocolType, serverUrl);
             protocol.OnConnected += onConnected;
             protocol.OnClosed += onClosed;
-
+            Debug.Log("protocolType: " + protocolType + " serverUrl:" + serverUrl);
             return new RosSocket(protocol, serializer);
         }
 

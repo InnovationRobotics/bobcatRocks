@@ -65,22 +65,21 @@ const double PI  =3.141592653589793238463;
                     frame_id = FrameId
                 },
                 status = new Messages.Sensor.NavSatStatus()
-                
+                {
+                    status = (sbyte)Messages.Sensor.NavSatStatus.StatusType.STATUS_FIX,
+                    service = (short)Messages.Sensor.NavSatStatus.ServiceType.SERVICE_GPS
+                },
+                latitude = 32.0017549051f,
+                longitude = 34.9083870312f          
             };
+            message.position_covariance = new float[] {1,0,0,0,1,0,0,0,1};
+            message.position_covariance_type=  0;
         }
 
         private void UpdateMessage()
         {
             message.header.Update();
-            message.status.status =  (sbyte)Messages.Sensor.NavSatStatus.StatusType.STATUS_FIX;
-            message.status.service= (short)Messages.Sensor.NavSatStatus.ServiceType.SERVICE_GPS;
-           
-           message.latitude = 32.0017549051f;
-           message.longitude = 34.9083870312f;           
-           
-           message.position_covariance = new float[] {1,0,0,0,1,0,0,0,1};
-           message.position_covariance_type=  0;
-
+         
            //Compute current coordinates
            tmpPos = PublishedTransform.position;
            other_dist = (tmpPos - _init_pos).magnitude;

@@ -385,6 +385,7 @@ GameObject:
   - component: {fileID: 146303915}
   - component: {fileID: 146303916}
   - component: {fileID: 146303917}
+  - component: {fileID: 146303918}
   m_Layer: 0
   m_Name: RosConnector
   m_TagString: Untagged
@@ -429,7 +430,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 146303909}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91d53079956b96b3fbce6436057dd450, type: 3}
   m_Name: 
@@ -495,7 +496,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 146303909}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4bd934fbc4303a4e6baea2edf6391d69, type: 3}
   m_Name: 
@@ -503,7 +504,6 @@ MonoBehaviour:
   Topic: /SENSORS/GPS
   PublishedTransform: {fileID: 1252373729}
   FrameId: Unity
-  rb: {fileID: 1252373728}
   pfreq: 20
 --- !u!114 &146303917
 MonoBehaviour:
@@ -512,7 +512,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 146303909}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 74711581c60ffedf5980fc74fcfd82b0, type: 3}
   m_Name: 
@@ -520,6 +520,24 @@ MonoBehaviour:
   Topic: /SENSORS/GPS/Speed
   FrameId: Unity
   rb: {fileID: 1252373728}
+--- !u!114 &146303918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 146303909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 277cdf825afc4f02e89632d42f9fa476, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PublishedTransform: {fileID: 146303911}
+  FrameId: Unity
+  rb: {fileID: 1252373728}
+  imu_pub: {fileID: 0}
+  gps_speed_pub: {fileID: 0}
+  gps_pub: {fileID: 0}
 --- !u!114 &146303919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5633,7 +5651,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30a3570e2c6da45e399de8873b6b3033, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ManualInput: 0
+  ManualInput: 1
   LeftWheels:
   - {fileID: 2100878069}
   - {fileID: 1051528530}

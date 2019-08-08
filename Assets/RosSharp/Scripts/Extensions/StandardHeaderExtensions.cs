@@ -39,5 +39,16 @@ namespace RosSharp.RosBridgeClient
             header.seq++;
             header.stamp = timer.Now();
         }
+
+        public static void TimeSynchronization(this Messages.Standard.Header header, Messages.Standard.Time sync_time )
+        {
+            if (timer == null)
+            {
+                GameObject obj = new GameObject("DefaultTimer(UnityEpoch)");
+                timer=defaultTimer=obj.AddComponent<Timer>();
+            }
+            header.seq++;
+            header.stamp = sync_time;
+        }
     }
 }

@@ -22,6 +22,8 @@ namespace RosSharp.RosBridgeClient
     {
         public string FrameId = "Unity";
         public Rigidbody rb;
+        public bool Outside_Time_Synchronization=false;
+
         private Messages.Sensor.NavSatFix message;
         private float start_latitude, start_longitude, start_altitude;
 
@@ -65,16 +67,28 @@ namespace RosSharp.RosBridgeClient
 
         private void UpdateMessage()
         {
-            message.header.Update();
+           if (!Outside_Time_Synchronization){
+                message.header.Update();
          
-           //Compute current coordinates
-           message.longitude = rb.velocity.x;
-           message.latitude = rb.velocity.z;
-           message.altitude = rb.velocity.y;
-            Debug.Log("velocity="+rb.velocity.ToString());
-            Publish(message);
+                //Compute current coordinates
+                message.longitude = rb.velocity.x;
+                message.latitude = rb.velocity.z;
+                message.altitude = rb.velocity.y;
+                Debug.Log("velocity="+rb.velocity.ToString());
+                Publish(message);
+           }
         }
 
-
+        public void SendSynchronizedMessage(Messages.Standard.Time synchronized_time)
+        {
+                message.header.TimeSynchronization(synchronized_time);
+                //Compute current coordinates
+                message.longitude = rb.velocity.x;
+                message.latitude = rb.velocity.z;
+                message.altitude = rb.velocity.y;
+                Debug.Log("SendSynchronizedMessage velocity="+rb.velocity.ToString());
+                Publish(message);
+           
+        }
     }
 }

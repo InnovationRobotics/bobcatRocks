@@ -19,9 +19,10 @@ namespace RosSharp.RosBridgeClient
 {
     public class ImuPublisher : Publisher<Messages.Sensor.Imu>
     {
-        public Transform PublishedTransform;
         public string FrameId = "Unity";
         public Rigidbody rb;
+
+        public bool Outside_Time_Synchronization=false;
         Vector3 lastPos = Vector3.zero;
         private Messages.Sensor.Imu message;
 
@@ -30,8 +31,6 @@ namespace RosSharp.RosBridgeClient
             base.Start();
             InitializeMessage();
             //rb = GetComponent<Rigidbody>();
-
-
         }
 
         private void FixedUpdate()
@@ -52,18 +51,37 @@ namespace RosSharp.RosBridgeClient
 
         private void UpdateMessage()
         {
-            message.header.Update();
-           message.orientation = GetGeometryQuaternion(PublishedTransform.rotation.Unity2Ros());
-           message.orientation_covariance = new float[] {1,0,0,0,1,0,0,0,1};
-           message.angular_velocity=  GetGeometryVector3(rb.angularVelocity.Unity2Ros());
-           message.angular_velocity_covariance = new float[] {1,0,0,0,1,0,0,0,1};
-           Vector3 distancePerFrame = PublishedTransform.position - lastPos;
-           lastPos = PublishedTransform.position;
-           Vector3 speed = distancePerFrame * Time.deltaTime;
-           message.linear_acceleration=  GetGeometryVector3(speed.Unity2Ros());
-           message.linear_acceleration_covariance = new float[] {1,0,0,0,1,0,0,0,1};
+            if (!Outside_Time_Synchronization){
+                message.header.Update();
+                message.orientation = GetGeometryQuaternion(rb.rotation.Unity2Ros());
+                message.orientation_covariance = new float[] {1,0,0,0,1,0,0,0,1};
+                message.angular_velocity=  GetGeometryVector3(rb.angularVelocity.Unity2Ros());
+                message.angular_velocity_covariance = new float[] {1,0,0,0,1,0,0,0,1};
+                Vector3 distancePerFrame = rb.position - lastPos;
+                lastPos = rb.position;
+                Vector3 speed = distancePerFrame * Time.deltaTime;
+                message.linear_acceleration=  GetGeometryVector3(speed.Unity2Ros());
+                message.linear_acceleration_covariance = new float[] {1,0,0,0,1,0,0,0,1};
 
-            Publish(message);
+                Publish(message);
+            }
+        }
+
+        public void SendSynchronizedMessage(Messages.Standard.Time synchronized_time)
+        {
+                Debug.Log("IMU:Send Sync Messages..."); //+message.header.stamp);
+                message.header.TimeSynchronization(synchronized_time);
+                message.orientation = GetGeometryQuaternion(rb.rotation.Unity2Ros());
+                message.orientation_covariance = new float[] {1,0,0,0,1,0,0,0,1};
+                message.angular_velocity=  GetGeometryVector3(rb.angularVelocity.Unity2Ros());
+                message.angular_velocity_covariance = new float[] {1,0,0,0,1,0,0,0,1};
+                Vector3 distancePerFrame = rb.position - lastPos;
+                lastPos = rb.position;
+                Vector3 speed = distancePerFrame * Time.deltaTime;
+                message.linear_acceleration=  GetGeometryVector3(speed.Unity2Ros());
+                message.linear_acceleration_covariance = new float[] {1,0,0,0,1,0,0,0,1};
+
+                Publish(message);
         }
 
         private Messages.Geometry.Vector3 GetGeometryVector3(Vector3 position)

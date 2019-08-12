@@ -436,9 +436,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Topic: /SENSORS/INS
-  PublishedTransform: {fileID: 1252373729}
   FrameId: Unity
   rb: {fileID: 1252373728}
+  Outside_Time_Synchronization: 0
 --- !u!114 &146303913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -502,9 +502,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Topic: /SENSORS/GPS
-  PublishedTransform: {fileID: 1252373729}
+  rb: {fileID: 1252373728}
   FrameId: Unity
   pfreq: 20
+  Outside_Time_Synchronization: 0
 --- !u!114 &146303917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -520,6 +521,7 @@ MonoBehaviour:
   Topic: /SENSORS/GPS/Speed
   FrameId: Unity
   rb: {fileID: 1252373728}
+  Outside_Time_Synchronization: 0
 --- !u!114 &146303918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -532,7 +534,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 277cdf825afc4f02e89632d42f9fa476, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PublishedTransform: {fileID: 146303911}
   FrameId: Unity
   rb: {fileID: 1252373728}
   imu_pub: {fileID: 0}
@@ -5651,7 +5652,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30a3570e2c6da45e399de8873b6b3033, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ManualInput: 1
+  ManualInput: 0
   LeftWheels:
   - {fileID: 2100878069}
   - {fileID: 1051528530}

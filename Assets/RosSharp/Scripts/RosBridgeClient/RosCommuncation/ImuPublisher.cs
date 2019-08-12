@@ -14,6 +14,7 @@ limitations under the License.
 */
 
 using UnityEngine;
+using System;
 
 namespace RosSharp.RosBridgeClient
 {
@@ -25,20 +26,22 @@ namespace RosSharp.RosBridgeClient
         public bool Outside_Time_Synchronization=false;
         Vector3 lastPos = Vector3.zero;
         private Messages.Sensor.Imu message;
-
+       
         protected override void Start()
         {
             base.Start();
-            InitializeMessage();
+         
             //rb = GetComponent<Rigidbody>();
         }
 
         private void FixedUpdate()
         {
-            UpdateMessage();
+            if (!Outside_Time_Synchronization){
+                UpdateMessage();
+            }
         }
 
-        private void InitializeMessage()
+        public void InitializeMessage()
         {
             message = new Messages.Sensor.Imu
             {
@@ -47,6 +50,7 @@ namespace RosSharp.RosBridgeClient
                     frame_id = FrameId
                 }
             };
+            
         }
 
         private void UpdateMessage()
@@ -69,7 +73,7 @@ namespace RosSharp.RosBridgeClient
 
         public void SendSynchronizedMessage(Messages.Standard.Time synchronized_time)
         {
-                Debug.Log("IMU:Send Sync Messages..."); //+message.header.stamp);
+                Debug.Log("IMU:Send Sync Messages..."+message.header.stamp); //+message.header.stamp);
                 message.header.TimeSynchronization(synchronized_time);
                 message.orientation = GetGeometryQuaternion(rb.rotation.Unity2Ros());
                 message.orientation_covariance = new float[] {1,0,0,0,1,0,0,0,1};

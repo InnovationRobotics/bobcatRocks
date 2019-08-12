@@ -33,26 +33,32 @@ namespace RosSharp.RosBridgeClient
 
         public NavSatFixPublisher gps_pub;
 
+        private GameObject me;
+
         protected void Start()
         { 
-            myref = transform;
-            transform.GetComponent<RosConnector>();
-            imu_pub = myref.AddComponentIfNotExists<ImuPublisher>();//new ImuPublisher();
+            //myref = transform;
+            //me = gameObject;//.GetComponent<RosConnector>();
+        //    imu_pub = new ImuPublisher();
+            imu_pub = gameObject.AddComponent<ImuPublisher>() as ImuPublisher;//new ImuPublisher();
             imu_pub.Topic = "/SENSORS/INS";
             imu_pub.rb = rb;
             imu_pub.enabled = true;
             imu_pub.Outside_Time_Synchronization = true;
-            gps_speed_pub = myref.AddComponentIfNotExists<GPSSpeedPublisher>();
+            imu_pub.InitializeMessage();
+            gps_speed_pub = gameObject.AddComponent<GPSSpeedPublisher>() as GPSSpeedPublisher;
             gps_speed_pub.Topic = "/SENSORS/GPS/Speed";
             gps_speed_pub.rb = rb;
             gps_speed_pub.enabled = true;
             gps_speed_pub.Outside_Time_Synchronization = true;
-            gps_pub = myref.AddComponentIfNotExists<NavSatFixPublisher>();
+            gps_speed_pub.InitializeMessage();
+            gps_pub = gameObject.AddComponent<NavSatFixPublisher>() as NavSatFixPublisher;
             gps_pub.Topic = "/SENSORS/GPS";
             gps_pub.rb = rb;
             gps_pub.pfreq = 20;
             gps_pub.enabled = true;
             gps_pub.Outside_Time_Synchronization = true;
+            gps_pub.InitializeMessage();
 
         
             //rb = GetComponent<Rigidbody>();
@@ -105,29 +111,11 @@ namespace RosSharp.RosBridgeClient
             float time = Time.realtimeSinceStartup;
             synced.secs = (uint)time;
             synced.nsecs = (uint)(1e9 * (time - synced.secs));
-            imu_pub.SendSynchronizedMessage(synced);
             gps_pub.SendSynchronizedMessage(synced);
             gps_speed_pub.SendSynchronizedMessage(synced);
+            imu_pub.SendSynchronizedMessage(synced);
+
             
-        }
-
-        private Messages.Geometry.Vector3 GetGeometryVector3(Vector3 position)
-        {
-            Messages.Geometry.Vector3 geometryVector3 = new Messages.Geometry.Vector3();
-            geometryVector3.x = position.x;
-            geometryVector3.y = position.y;
-            geometryVector3.z = position.z;
-            return geometryVector3;
-        }
-
-        private Messages.Geometry.Quaternion GetGeometryQuaternion(Quaternion quaternion)
-        {
-            Messages.Geometry.Quaternion geometryQuaternion = new Messages.Geometry.Quaternion();
-            geometryQuaternion.x = quaternion.x;
-            geometryQuaternion.y = quaternion.y;
-            geometryQuaternion.z = quaternion.z;
-            geometryQuaternion.w = quaternion.w;
-            return geometryQuaternion;
         }
 
     }

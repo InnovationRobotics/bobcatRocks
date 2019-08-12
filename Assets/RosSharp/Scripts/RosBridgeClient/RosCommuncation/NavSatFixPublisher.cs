@@ -43,8 +43,8 @@ const double PI  =3.141592653589793238463;
         {
             base.Start();
             InitializeMessage();
-            start_latitude = (float)CENTER_X_NS;//31.2622f; //32.0017549051;
-            start_longitude = (float)CENTER_Y_EW; //34.803611f; //34.9083870312;           
+            start_latitude =32.0017549051f;// (float)CENTER_X_NS;//31.2622f; //32.0017549051;
+            start_longitude = 34.9083870312f; //(float)CENTER_Y_EW; //34.803611f; //34.9083870312;           
             start_altitude = 2.0f;
             _init_pos = rb.position;
         }
@@ -56,7 +56,7 @@ const double PI  =3.141592653589793238463;
             UpdateMessage();
         }
 
-        private void InitializeMessage()
+        public void InitializeMessage()
         {
             message = new Messages.Sensor.NavSatFix
             {

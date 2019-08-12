@@ -14,7 +14,7 @@ limitations under the License.
 */
 
 using UnityEngine;
-using System;
+
 
 namespace RosSharp.RosBridgeClient
 {
@@ -44,7 +44,7 @@ namespace RosSharp.RosBridgeClient
             UpdateMessage();
         }
 
-        private void InitializeMessage()
+        public void InitializeMessage()
         {
             message = new Messages.Sensor.NavSatFix
             {

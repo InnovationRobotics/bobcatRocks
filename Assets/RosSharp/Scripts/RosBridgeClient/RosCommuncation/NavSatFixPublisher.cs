@@ -36,7 +36,6 @@ const double PI  =3.141592653589793238463;
         private double stLatRad, stLonRad, LatRad, LonRad;
         private Vector3 tmpPos = Vector3.zero;
         private double other_dist, dist, brng, R;
-        private sbyte test;
 
 
         protected override void Start()
@@ -52,8 +51,9 @@ const double PI  =3.141592653589793238463;
         private void FixedUpdate()
         {
           //  if (Time.deltaTime <1.0/pfreq) return;
-
-            UpdateMessage();
+            if (!Outside_Time_Synchronization){ 
+                    UpdateMessage();
+            }
         }
 
         public void InitializeMessage()
@@ -79,30 +79,10 @@ const double PI  =3.141592653589793238463;
 
         private void UpdateMessage()
         {
-             if (!Outside_Time_Synchronization){
-                        message.header.Update();
-         
-                        //Compute current coordinates
-                        tmpPos = rb.position;
-                        other_dist = (tmpPos - _init_pos).magnitude;
-                        dist = Math.Sqrt((tmpPos.x-_init_pos.x)*(tmpPos.x-_init_pos.x)+(tmpPos.y-_init_pos.y)*(tmpPos.y-_init_pos.y));
-                        // if ((tmpPos.magnitude*_init_pos.magnitude)==0.0f) brng = Math.Atan2(tmpPos.x,tmpPos.y);
-                        // else 
-                        brng = Math.Atan2(tmpPos.y - _init_pos.y, tmpPos.x - _init_pos.x);
-                        //acos(pos.Dot(_init_pos)/(pos.GetLength()*_init_pos.GetLength()));
-                        brng *= 1; //not clear what this statement does!
-                            
-                        R = 6378.1*1000;
-                        message.altitude = tmpPos.z;
-
-                        stLatRad = start_latitude*PI/180; 
-                        LatRad = Math.Asin(Math.Sin(stLatRad)*Math.Cos(dist/R)+Math.Cos(stLatRad)*Math.Sin(dist/R)*Math.Cos(brng));
-                        message.latitude = (float)(LatRad*180/PI); //Degrees
-		
-                        LonRad = Math.Atan2(Math.Sin(brng)*Math.Sin(dist/R)*Math.Cos(stLatRad),Math.Cos(dist/R)-Math.Sin(stLatRad)*Math.Sin(LatRad*PI/180));
-                        message.longitude = start_longitude + (float) (LonRad*180/PI); //Degrees
-                        Publish(message);
-             }
+            message.header.Update();
+            ComposeAndComputeMessage();
+            Publish(message);
+             
         }
 
         public void SendSynchronizedMessage(Messages.Standard.Time synchronized_time)
@@ -110,7 +90,12 @@ const double PI  =3.141592653589793238463;
             Debug.Log("GPS:Send Sync Messages..."); //+message.header.stamp);
 
             message.header.TimeSynchronization(synchronized_time);
-            //Compute current coordinates
+            ComposeAndComputeMessage();
+            Publish(message);
+        }
+
+        private void ComposeAndComputeMessage()
+        {
              tmpPos = rb.position;
              other_dist = (tmpPos - _init_pos).magnitude;
              dist = Math.Sqrt((tmpPos.x-_init_pos.x)*(tmpPos.x-_init_pos.x)+(tmpPos.y-_init_pos.y)*(tmpPos.y-_init_pos.y));
@@ -129,9 +114,7 @@ const double PI  =3.141592653589793238463;
 		
              LonRad = Math.Atan2(Math.Sin(brng)*Math.Sin(dist/R)*Math.Cos(stLatRad),Math.Cos(dist/R)-Math.Sin(stLatRad)*Math.Sin(LatRad*PI/180));
              message.longitude = start_longitude + (float) (LonRad*180/PI); //Degrees
-             Publish(message);
         }
-
 
     }
 }

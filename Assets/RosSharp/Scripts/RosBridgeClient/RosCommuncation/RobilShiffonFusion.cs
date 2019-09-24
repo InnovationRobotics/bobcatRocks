@@ -27,14 +27,14 @@ namespace RosSharp.RosBridgeClient
         private Messages.Sensor.NavSatFix gps_speed_msg;
         private Messages.Sensor.NavSatFix gps_msg;
 
-        public ImuPublisher imu_pub;
-        public GPSSpeedPublisher gps_speed_pub;
+        private ImuPublisher imu_pub;
+        private GPSSpeedPublisher gps_speed_pub;
         private float start_latitude, start_longitude, start_altitude;
 
-        public NavSatFixPublisher gps_pub;
+        private NavSatFixPublisher gps_pub;
 
         private GameObject me;
-
+        private bool firstCall;
         protected void Start()
         { 
             //myref = transform;
@@ -59,6 +59,7 @@ namespace RosSharp.RosBridgeClient
             gps_pub.enabled = true;
             gps_pub.Outside_Time_Synchronization = true;
             gps_pub.InitializeMessage();
+            firstCall = true;
 
         
             //rb = GetComponent<Rigidbody>();
@@ -68,44 +69,14 @@ namespace RosSharp.RosBridgeClient
 
         private void FixedUpdate()
         {
-            UpdateMessages();
+            if (firstCall == true){
+                firstCall = false;
+            } else {
+                UpdateMessages();
+            }
         }
 
-        private void InitializeMessages()
-        {
-#if SOMETHING_ELSE
-            //Initialize Imu
-
-            imu_msg = new Messages.Sensor.Imu
-            {
-                header = new Messages.Standard.Header()
-                {
-                    frame_id = FrameId
-                }
-            };
-
-            //Initialize GPS Speed
-            gps_speed_msg = new Messages.Sensor.NavSatFix
-            {
-                header = new Messages.Standard.Header()
-                {
-                    frame_id = FrameId
-                },
-                status = new Messages.Sensor.NavSatStatus()
-                {
-                    status = (sbyte)Messages.Sensor.NavSatStatus.StatusType.STATUS_FIX,
-                    service = (short)Messages.Sensor.NavSatStatus.ServiceType.SERVICE_GPS
-                },
-                latitude = start_latitude,
-                longitude = start_longitude,
-                altitude = start_altitude          
-            };
-            gps_speed_msg.position_covariance = new float[] {1,0,0,0,1,0,0,0,1};
-            gps_speed_msg.position_covariance_type=  0;
-#endif
-        }
-
-        private void UpdateMessages()
+         private void UpdateMessages()
         {
             Messages.Standard.Time synced = new Messages.Standard.Time();
             float time = Time.realtimeSinceStartup;

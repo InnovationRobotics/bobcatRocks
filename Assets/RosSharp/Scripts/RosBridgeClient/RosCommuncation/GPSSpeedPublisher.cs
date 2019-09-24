@@ -40,7 +40,9 @@ namespace RosSharp.RosBridgeClient
         private void FixedUpdate()
         {
           //  if (Time.deltaTime <1.0/pfreq) return;
-
+            if (Outside_Time_Synchronization){
+                return;
+            }
             UpdateMessage();
         }
 
@@ -67,7 +69,6 @@ namespace RosSharp.RosBridgeClient
 
         private void UpdateMessage()
         {
-           if (!Outside_Time_Synchronization){
                 message.header.Update();
          
                 //Compute current coordinates
@@ -76,7 +77,7 @@ namespace RosSharp.RosBridgeClient
                 message.altitude = rb.velocity.y;
                 Debug.Log("velocity="+rb.velocity.ToString());
                 Publish(message);
-           }
+           
         }
 
         public void SendSynchronizedMessage(Messages.Standard.Time synchronized_time)

@@ -536,9 +536,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FrameId: Unity
   rb: {fileID: 1252373728}
-  imu_pub: {fileID: 0}
-  gps_speed_pub: {fileID: 0}
-  gps_pub: {fileID: 0}
 --- !u!114 &146303919
 MonoBehaviour:
   m_ObjectHideFlags: 0

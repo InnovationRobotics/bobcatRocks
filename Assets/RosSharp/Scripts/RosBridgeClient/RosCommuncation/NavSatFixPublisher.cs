@@ -14,6 +14,7 @@ limitations under the License.
 */
 
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 
 namespace RosSharp.RosBridgeClient
@@ -30,10 +31,16 @@ const double PI  =3.141592653589793238463;
         public string FrameId = "Unity";
         public int pfreq = 20;
         public bool Outside_Time_Synchronization=false;
+
+        public Text GPSCoordinates;
+        public Text XZpositions;
+        public Text XZDistance;
+        public Text Bearing;
+
         Vector3 _init_pos = Vector3.zero;
         private Messages.Sensor.NavSatFix message;
         private float start_latitude, start_longitude, start_altitude;
-        private double stLatRad, stLonRad, LatRad, LonRad;
+        private double stLatRad, stLonRad, complementaryLatRad, LatRad, LatDeg, additionalLongitudeRad, additionalLongitudeDeg, LonRad, LonDeg;
         private Vector3 tmpPos = Vector3.zero;
         private double other_dist, dist, brng, R;
 
@@ -51,9 +58,12 @@ const double PI  =3.141592653589793238463;
         private void FixedUpdate()
         {
           //  if (Time.deltaTime <1.0/pfreq) return;
+
             if (!Outside_Time_Synchronization){ 
                     UpdateMessage();
+                    setGPStext();
             }
+
         }
 
         public void InitializeMessage()
@@ -79,10 +89,12 @@ const double PI  =3.141592653589793238463;
 
         private void UpdateMessage()
         {
-            message.header.Update();
-            ComposeAndComputeMessage();
-            Publish(message);
-             
+
+             if (!Outside_Time_Synchronization){
+                        message.header.Update();
+                        ComposeAndComputeMessage(); 
+                        //Publish(message);
+             }
         }
 
         public void SendSynchronizedMessage(Messages.Standard.Time synchronized_time)
@@ -98,23 +110,82 @@ const double PI  =3.141592653589793238463;
         {
              tmpPos = rb.position;
              other_dist = (tmpPos - _init_pos).magnitude;
-             dist = Math.Sqrt((tmpPos.x-_init_pos.x)*(tmpPos.x-_init_pos.x)+(tmpPos.y-_init_pos.y)*(tmpPos.y-_init_pos.y));
+             
+             // Original:
+            //  dist = Math.Sqrt((tmpPos.x-_init_pos.x)*(tmpPos.x-_init_pos.x)+(tmpPos.y-_init_pos.y)*(tmpPos.y-_init_pos.y));
+
+
+            //Ehud:
+            // in Unity the +Z is the North and +X is the East
+            dist = Math.Sqrt(Math.Pow((tmpPos.x - _init_pos.x),2.0) + Math.Pow((tmpPos.z - _init_pos.z), 2.0));
+
+
+
              // if ((tmpPos.magnitude*_init_pos.magnitude)==0.0f) brng = Math.Atan2(tmpPos.x,tmpPos.y);
              // else 
-             brng = Math.Atan2(tmpPos.y - _init_pos.y, tmpPos.x - _init_pos.x);
+            //  brng = Math.Atan2(tmpPos.y - _init_pos.y, tmpPos.x - _init_pos.x);
+
+
+            // Ehud:
+            // in Unity the +Z is the North and +X is the East
+            brng = Math.Atan2(tmpPos.x - _init_pos.x, tmpPos.z - _init_pos.z);
+
+
              //acos(pos.Dot(_init_pos)/(pos.GetLength()*_init_pos.GetLength()));
              brng *= 1; //not clear what this statement does!
                  
+
              R = 6378.1*1000;
              message.altitude = tmpPos.z;
 
-             stLatRad = start_latitude*PI/180; 
-             LatRad = Math.Asin(Math.Sin(stLatRad)*Math.Cos(dist/R)+Math.Cos(stLatRad)*Math.Sin(dist/R)*Math.Cos(brng));
-             message.latitude = (float)(LatRad*180/PI); //Degrees
-		
-             LonRad = Math.Atan2(Math.Sin(brng)*Math.Sin(dist/R)*Math.Cos(stLatRad),Math.Cos(dist/R)-Math.Sin(stLatRad)*Math.Sin(LatRad*PI/180));
-             message.longitude = start_longitude + (float) (LonRad*180/PI); //Degrees
+
+             stLatRad = start_latitude*PI/180;
+
+            // original
+            //LatRad = Math.Asin(Math.Sin(stLatRad)*Math.Cos(dist/R)+Math.Cos(stLatRad)*Math.Sin(dist/R)*Math.Cos(brng));
+            //LonRad = Math.Atan2(Math.Sin(brng) * Math.Sin(dist / R) * Math.Cos(stLatRad), Math.Cos(dist / R) - Math.Sin(stLatRad) * Math.Sin(LatRad * PI / 180));
+            //message.longitude = start_longitude + (float)(LonRad * 180 / PI); //Degrees
+
+
+            //Ehud:
+
+            // Spherical Law of Cosines: cos(a) = cos(b)*cos(c) + sin(b)*sin(c)*cos(A)
+            complementaryLatRad = Math.Acos(Math.Cos(dist/R) * Math.Cos((PI/2)-stLatRad) +
+                               Math.Sin(dist/R) * Math.Sin((PI/2)-stLatRad) * Math.Cos(brng));
+
+            LatRad = (PI / 2) - complementaryLatRad;
+            LatDeg = LatRad * (180 / PI);
+
+            // Spherical Law of Sines: sin(a)/sin(A) = sin(b)/sin(B)  => sin(a) = (sin(b)*sin(A))/sin(b)
+            additionalLongitudeRad = Math.Asin((Math.Sin(dist / R) * Math.Sin(brng)) / Math.Sin(complementaryLatRad));
+            additionalLongitudeDeg = additionalLongitudeRad * (180/PI);
+
+            LonDeg = start_longitude + additionalLongitudeDeg;
+
+
+
+            //***************************************************************************************** */
+
+            message.latitude = (float)(LatDeg); //Degrees
+            
+            message.longitude = (float)(LonDeg); //Degrees
+        
+             Publish(message);
         }
 
+        private void setGPStext(){
+            GPSCoordinates = GameObject.Find("GPS_coordinates_text").GetComponent<Text>();
+            GPSCoordinates.text = "Latitude:  " + LatDeg + "    Longitude:   " + LonDeg;
+
+            XZpositions = GameObject.Find("X_Z_positions").GetComponent<Text>();
+            XZpositions.text = "init pos =  ( " + Math.Round(_init_pos.x) + " , " + Math.Round(_init_pos.z) + " )  ;  tmp pos =  ( " + tmpPos.x + " , " + tmpPos.z + " )";
+
+            XZDistance = GameObject.Find("XZDistance").GetComponent<Text>();
+            XZDistance.text = "Distance is:  " + dist;
+
+            Bearing = GameObject.Find("Bearing").GetComponent<Text>();
+            Bearing.text = "Bearing:  " + (brng * (180/PI));
+
+        }
     }
 }

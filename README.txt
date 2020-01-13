@@ -1,4 +1,4 @@
-This is the Unity3D simulation that runs with ROS-Unity3D-Gazebo package.
+This is the Unity3D simulation of a bobcat that can use its arm to catch a stone.
 The original package is in: 
 https://github.com/siemens/ros-sharp/tree/master/Unity3D/Assets/RosSharp
 

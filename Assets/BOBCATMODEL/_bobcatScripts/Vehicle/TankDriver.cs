@@ -50,38 +50,13 @@ public class TankDriver : MonoBehaviour
         ForwardVel = myref.InverseTransformDirection(rb.velocity).z;
         if (ManualInput)
         {
-            angularRequest = -(Input.GetAxis("Horizontal"));
+            angularRequest = (Input.GetAxisRaw("Horizontal"));
             angularRequest = Mathf.Clamp(angularRequest, -1, 1);
-            throttleRequest = Input.GetAxis("Vertical");
-#if !OTHERWAY
+            throttleRequest= (Input.GetAxis("Vertical"));
             Apply(throttleRequest, angularRequest);
-#endif
+
         }
-#if OTHERWAY
-        Apply(throttleRequest, angularRequest);
-#endif
-    }
-    public void SetThrottle(float InThrottle)
-    {
-#if OTHERWAY
-        if (ManualInput) return;
-        throttleRequest = InThrottle;
-#endif
-    }
-    public void SetSteer(float InSteer)
-    {
-#if OTHERWAY
-        if (ManualInput) return;
-        angularRequest = InSteer;
-#endif
-    }
-    public void Drive(float Throttle, float Steer)
-    {
-#if OTHER_OTHERWAY
-        if (ManualInput) return;
-        angularRequest = Steer;
-        throttleRequest = Throttle;
-#endif
+
     }
     public void Apply(float Throttle, float Steer)
     {

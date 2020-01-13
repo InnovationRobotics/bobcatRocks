@@ -7,6 +7,7 @@ public class BobcatArm : MonoBehaviour
     public ConfigurableJoint Arm;
     public HingeJoint loader, brackets;
     public float armpos = 0.05f, loaderpos = -15;
+    public float bracketspos = -15;
     // Use this for initialization
     void Start()
     {
@@ -28,5 +29,14 @@ public class BobcatArm : MonoBehaviour
         var temp = loader.spring;
         temp.targetPosition = loaderpos;
         loader.spring = temp;
+
+      
+    bracketspos += 15f * Time.fixedDeltaTime * Input.GetAxis("bracket");
+            bracketspos = Mathf.Clamp(bracketspos, -110, 110);
+            var tempbrackets = brackets.spring;
+            tempbrackets.targetPosition = bracketspos;
+            brackets.spring = tempbrackets; 
+        
+
     }
 }

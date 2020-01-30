@@ -25,7 +25,7 @@ InputManager:
     m_Name: Vertical
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: down
+    negativeButton: joystick button 5
     positiveButton: up
     altNegativeButton: s
     altPositiveButton: w
@@ -323,7 +323,7 @@ InputManager:
     snap: 0
     invert: 0
     type: 0
-    axis: 3
+    axis: 6
     joyNum: 0
   - serializedVersion: 3
     m_Name: Loader
@@ -339,7 +339,7 @@ InputManager:
     snap: 0
     invert: 0
     type: 0
-    axis: 3
+    axis: 4
     joyNum: 0
   - serializedVersion: 3
     m_Name: bracket
@@ -355,5 +355,5 @@ InputManager:
     snap: 0
     invert: 0
     type: 0
-    axis: 3
+    axis: 6
     joyNum: 0

@@ -52,6 +52,7 @@ namespace RosSharp.RosBridgeClient
         {
             newState = state;
             isNewStateReceived = true;
+            Debug.Log("State="+newState.ToString());
         }
     }
 }

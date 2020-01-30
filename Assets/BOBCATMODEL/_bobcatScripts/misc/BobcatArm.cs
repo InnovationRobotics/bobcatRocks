@@ -21,7 +21,7 @@ public class BobcatArm : MonoBehaviour
  void Awake()
 {
     control=new Controllers (); 
-    control.GamePlay.Arm.performed+= X=>MoveArm();
+    control.GamePlay.Arm.performed+= X=>MoveArm(0);
     
 
     

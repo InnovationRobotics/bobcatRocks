@@ -131,10 +131,8 @@ GameObject:
   - component: {fileID: 28285943}
   - component: {fileID: 28285942}
   - component: {fileID: 28285941}
-  - component: {fileID: 28285938}
-  - component: {fileID: 28285944}
   - component: {fileID: 28285945}
-  - component: {fileID: 28285946}
+  - component: {fileID: 28285938}
   m_Layer: 0
   m_Name: RosConnector
   m_TagString: Untagged
@@ -151,13 +149,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 28285937}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b43d4d2dc08234b509cf981e56d86857, type: 3}
+  m_Script: {fileID: 11500000, guid: d293f7ecd04acc780b83665d4bca476c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Topic: /LLC/EFFORTS/Steering
+  Topic: /LLC/EFFORTS/Joints
   TimeStep: 0.1
-  whatever: 0
-  rate: 0
+  JointNames:
+  - arm
+  - loader
+  - bracket
+  bobcatArm: {fileID: 1252373725}
 --- !u!114 &28285941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,22 +207,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &28285944
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 28285937}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b43d4d2dc08234b509cf981e56d86857, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Topic: /LLC/EFFORTS/Throttle
-  TimeStep: 0.1
-  whatever: 0
-  rate: 0
 --- !u!114 &28285945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,30 +220,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TankDriver: {fileID: 1252373727}
-  Float64SubThrottle: {fileID: 28285944}
-  Float64SubSteering: {fileID: 28285938}
---- !u!114 &28285946
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 28285937}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fe4cf3b1dd3507418f7ec019f9193ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Topic: /LLC/EFFORTS/Joints
-  TimeStep: 0.1
-  JointNames:
-  - arm
-  - loader
-  - bracket
-  JointStateWriters:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  Float64SubThrottle: {fileID: 0}
+  Float64SubSteering: {fileID: 0}
 --- !u!1 &38264416
 GameObject:
   m_ObjectHideFlags: 0
@@ -5767,6 +5730,7 @@ MonoBehaviour:
   armpos: 0.05
   loaderpos: -15
   bracketspos: -15
+  tankDriver: {fileID: 0}
 --- !u!114 &1252373726
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -26,7 +26,7 @@
                 {
                     "name": "",
                     "id": "62537f4e-b998-428b-8f5c-748148c024bd",
-                    "path": "<Gamepad>/rightStick",
+                    "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

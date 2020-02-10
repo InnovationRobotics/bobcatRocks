@@ -37,6 +37,7 @@ namespace RosSharp.RosBridgeClient
         protected override void ReceiveMessage(Messages.Standard.Float64 message)
         {
             whatever = (float)message.data;
+            Debug.Log("ZZZZZ Got ThrottleWhatever=");
             isMessageReceived = true;
         }
 

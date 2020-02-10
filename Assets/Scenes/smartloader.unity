@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 28285941}
   - component: {fileID: 28285945}
   - component: {fileID: 28285938}
+  - component: {fileID: 28285939}
   m_Layer: 0
   m_Name: RosConnector
   m_TagString: Untagged
@@ -147,18 +148,32 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 28285937}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d293f7ecd04acc780b83665d4bca476c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Topic: /LLC/EFFORTS/Joints
+  Topic: /LLC/EFFORTS/Jointsts
   TimeStep: 0.1
   JointNames:
   - arm
   - loader
   - bracket
   bobcatArm: {fileID: 1252373725}
+--- !u!114 &28285939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 28285937}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d95431d914e4f9e418d18a84c28c4fba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Topic: /chatter
+  TimeStep: 0.1
 --- !u!114 &28285941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,7 +181,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 28285937}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac3b5c497c54f1b4ab2a96f69bc1586d, type: 3}
   m_Name: 
@@ -192,7 +207,7 @@ MonoBehaviour:
   Timeout: 10
   Serializer: 0
   Protocol: 1
-  RosBridgeServerUrl: ws://127.0.0.1:9090
+  RosBridgeServerUrl: ws://192.168.100.61:9090
 --- !u!4 &28285943
 Transform:
   m_ObjectHideFlags: 0

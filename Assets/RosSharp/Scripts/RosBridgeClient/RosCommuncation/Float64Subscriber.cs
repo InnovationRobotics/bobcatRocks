@@ -20,7 +20,7 @@ using UnityEngine;
 
 namespace RosSharp.RosBridgeClient
 {
-    public class Float64Subscriber : Subscriber<Messages.Standard.Float64>
+    public class Float64Subscriber : UnitySubscriber<MessageTypes.Std.Float64>
     {
         
  //       public TankDriver TankDriver;
@@ -34,7 +34,7 @@ namespace RosSharp.RosBridgeClient
             base.Start();
         }
 
-        protected override void ReceiveMessage(Messages.Standard.Float64 message)
+        protected override void ReceiveMessage(MessageTypes.Std.Float64 message)
         {
             whatever = (float)message.data;
             Debug.Log("ZZZZZ Got ThrottleWhatever=");

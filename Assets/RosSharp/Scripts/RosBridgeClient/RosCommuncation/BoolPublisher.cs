@@ -15,12 +15,12 @@ limitations under the License.
 
 namespace RosSharp.RosBridgeClient
 {
-    public class BoolPublisher : Publisher<Messages.Standard.Bool>
+    public class BoolPublisher : UnityPublisher<MessageTypes.Std.Bool>
     {
         public bool ValueToPublish = true;
         //public float Rate;
 
-        private Messages.Standard.Bool message;
+        private MessageTypes.Std.Bool message;
 
         protected override void Start()
         {
@@ -37,7 +37,7 @@ namespace RosSharp.RosBridgeClient
 
         private void InitializeMessage()
         {
-            message = new Messages.Standard.Bool ();
+            message = new MessageTypes.Std.Bool();
             message.data = ValueToPublish;
         }
 

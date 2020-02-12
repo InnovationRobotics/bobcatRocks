@@ -16,7 +16,7 @@ namespace RosSharp.RosBridgeClient
 
         protected override void ReceiveMessage(String message)
         {
-            Debug.Log("Message received");
+            //Debug.Log("Message received");
             isMessageReceived = true;
             //throw new System.NotImplementedException();
         }

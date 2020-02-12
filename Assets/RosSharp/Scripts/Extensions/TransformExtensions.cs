@@ -13,6 +13,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+
 using System;
 using System.IO;
 using UnityEngine;
@@ -81,6 +82,7 @@ namespace RosSharp
 
             childTransform.localPosition = Vector3.zero;
             childTransform.localScale = Vector3.one;
+
         }
 
         public static Vector3 Ros2Unity(this Vector3 vector3)

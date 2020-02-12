@@ -1,7 +1,5 @@
 ﻿//Written by Yossi Cohen <yossicohen2000@gmail.com>
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TankDriver : MonoBehaviour
@@ -50,9 +48,9 @@ public class TankDriver : MonoBehaviour
         ForwardVel = myref.InverseTransformDirection(rb.velocity).z;
         if (ManualInput)
         {
-            angularRequest = (Input.GetAxisRaw("Horizontal"));
+            angularRequest = -(Input.GetAxisRaw("Horizontal"));
             angularRequest = Mathf.Clamp(angularRequest, -1, 1);
-            throttleRequest= (Input.GetAxis("Vertical"));
+            throttleRequest = (Input.GetAxis("Vertical"));
             Apply(throttleRequest, angularRequest);
 
         }
@@ -60,7 +58,7 @@ public class TankDriver : MonoBehaviour
     }
     public void Apply(float Throttle, float Steer)
     {
-        Debug.Log("Apply has been called with Throttle="+Throttle.ToString() + " and Steer=" + Steer.ToString());
+        Debug.Log("Apply has been called with Throttle=" + Throttle.ToString() + " and Steer=" + Steer.ToString());
         Torque = MaxTorque * Throttle;
         rightSpeed = Throttle * MaxSpeed + Steer * MaxSteeringSpeed;
         leftSpeed = Throttle * MaxSpeed - Steer * MaxSteeringSpeed;

@@ -13,6 +13,7 @@ TagManager:
   - Dozer
   - Terrain Compressor
   - Sand Holder
+  - Rock
   layers:
   - Default
   - TransparentFX

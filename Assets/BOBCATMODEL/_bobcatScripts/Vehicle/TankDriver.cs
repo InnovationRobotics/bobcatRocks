@@ -58,6 +58,7 @@ public class TankDriver : MonoBehaviour
     }
     public void Apply(float Throttle, float Steer)
     {
+
         Debug.Log("Apply has been called with Throttle=" + Throttle.ToString() + " and Steer=" + Steer.ToString());
         Torque = MaxTorque * Throttle;
         rightSpeed = Throttle * MaxSpeed + Steer * MaxSteeringSpeed;
@@ -67,6 +68,7 @@ public class TankDriver : MonoBehaviour
         {
             angvel = rightHinges[i].velocity;
             // Wheels[i].angularDrag = Break * MaxBreakingTorque;
+            ForwardVel = Throttle != 0 ? ForwardVel : 0;
             appliedTrq = Torque - Mathf.Clamp((VelocityDamping + tempWheelFriction) * ForwardVel, -MaxBreakingTorque, MaxTorque);
 
             var tempmotor = rightHinges[i].motor;

@@ -17,10 +17,12 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace RosSharp.RosBridgeClient
 {
-    public class JointStateSubscriber : Subscriber<Messages.Sensor.JointState>
+    public class JointStateSubscriberNoURDF : Subscriber<Messages.Sensor.JointState>
     {
         public List<string> JointNames;
-        public List<JointStateWriter> JointStateWriters;
+        //public List<JointStateWriter> JointStateWriters;
+
+        public BobcatArm bobcatArm;
 
         protected override void ReceiveMessage(Messages.Sensor.JointState message)
         {
@@ -29,8 +31,16 @@ namespace RosSharp.RosBridgeClient
             {
                 Debug.Log("Dealing with="+message.name[i]);
                 index = JointNames.IndexOf(message.name[i]);
-                if (index != -1)
-                    JointStateWriters[index].Write((float) message.position[i]);
+                
+                if (index != -1) {
+                   // JointStateWriters[index].Write((float) message.position[i]);
+                   if (message.name[i] == "arm") 
+                            bobcatArm.MoveArm((float)message.position[i]);
+                   if (message.name[i] == "loader")
+                            bobcatArm.MoveLoader((float)message.position[i]);
+                   if (message.name[i] == "bracket")
+                            bobcatArm.MoveBracket((float)message.position[i]);
+                } 
             }
         }
     }

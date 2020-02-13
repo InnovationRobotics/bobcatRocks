@@ -9,12 +9,10 @@ public class SpawnPoint : MonoBehaviour
     public Terrain Terrain;
     private TerrainData terrainData;
 
-    public GameObject BobCat;
-    public GameObject Rock;
     public float divRange;
     public float hm;
 
-    public FoucsCameraToTarget Target;
+    public focusCamera Target;
     // Start is called before the first frame update
     void Start()
     {
@@ -63,7 +61,7 @@ public class SpawnPoint : MonoBehaviour
 
         }
 
-        GenerateTerrain(Terrain, hm);// RAndom Terrain
+        // GenerateTerrain(Terrain, hm);// RAndom Terrain
     }
 
     // Update is called once per frame

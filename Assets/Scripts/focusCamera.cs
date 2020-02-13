@@ -2,7 +2,7 @@
 using UnityEngine;
 
 
-public class FoucsCameraToTarget : MonoBehaviour
+public class focusCamera : MonoBehaviour
 {
 
     // The target we are following

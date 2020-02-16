@@ -26,13 +26,13 @@ public class TankDriver : Subscriber<RosSharp.RosBridgeClient.Messages.Sensor.Jo
           ForwardVel = 0;
     float throttle, tempWheelFriction, angvel, appliedTrq, angular;
     float throttleRos, angularRos;
-
     public float rightSpeed;
     public float leftSpeed;
     Rigidbody rb;
 
 
 
+    //ARM PARAMS
 
     public ConfigurableJoint Arm;
     public HingeJoint loader, brackets;
@@ -47,9 +47,6 @@ public class TankDriver : Subscriber<RosSharp.RosBridgeClient.Messages.Sensor.Jo
     {
         control = new Controllers();
         control.GamePlay.Arm.performed += X => MoveArm(0);
-
-
-
     }
     void OnEnable()
     {
@@ -79,7 +76,8 @@ public class TankDriver : Subscriber<RosSharp.RosBridgeClient.Messages.Sensor.Jo
     void FixedUpdate()
     {
         ForwardVel = myref.InverseTransformDirection(rb.velocity).z;
-        if (ManualInput)
+        if (ManualInput)//For KeyBoard Use
+
         {
             angular = -(Input.GetAxisRaw("Horizontal"));
             angular = Mathf.Clamp(angular, -1, 1);
@@ -92,17 +90,12 @@ public class TankDriver : Subscriber<RosSharp.RosBridgeClient.Messages.Sensor.Jo
 
 
         }
-        else
+        else //From Ros 
         {
-            ApplyFromRos(throttleRos, angularRos);
+            Apply(throttleRos, angularRos);
             MoveArm(armRos);
-
             MoveLoader(loaderRos);
-
         }
-
-
-
 
     }
     public void Apply(float Throttle, float Steer)
@@ -113,6 +106,7 @@ public class TankDriver : Subscriber<RosSharp.RosBridgeClient.Messages.Sensor.Jo
         rightSpeed = Throttle * MaxSpeed + Steer * MaxSteeringSpeed;
         leftSpeed = Throttle * MaxSpeed - Steer * MaxSteeringSpeed;
         rb.AddRelativeForce(0, 0, Throttle * HelperForce);
+
         for (int i = 0; i < rightHinges.Length; i++)
         {
             angvel = rightHinges[i].velocity;
@@ -130,38 +124,10 @@ public class TankDriver : Subscriber<RosSharp.RosBridgeClient.Messages.Sensor.Jo
             leftHinges[i].motor = tempmotor;
             // Wheels[i].AddRelativeTorque(new Vector3(appliedTrq, 0, 0), ForceMode.Force);
         }
-        //Steering
+
 
     }
-    public void ApplyFromRos(float Throttle, float Steer)
-    {
 
-
-        Torque = MaxTorque * Throttle;
-        rightSpeed = Throttle * MaxSpeed + Steer * MaxSteeringSpeed;
-        leftSpeed = Throttle * MaxSpeed - Steer * MaxSteeringSpeed;
-        rb.AddRelativeForce(0, 0, Throttle * HelperForce);
-        for (int i = 0; i < rightHinges.Length; i++)
-        {
-            angvel = rightHinges[i].velocity;
-            // Wheels[i].angularDrag = Break * MaxBreakingTorque;
-            ForwardVel = Throttle != 0 ? ForwardVel : 0;
-
-            appliedTrq = Torque - Mathf.Clamp((VelocityDamping + tempWheelFriction) * ForwardVel, -MaxBreakingTorque, MaxTorque);
-
-            var tempmotor = rightHinges[i].motor;
-            tempmotor.targetVelocity = rightSpeed;
-            tempmotor.force = MaxTorque;
-            rightHinges[i].motor = tempmotor;
-            tempmotor = leftHinges[i].motor;
-            tempmotor.targetVelocity = leftSpeed;
-            tempmotor.force = MaxTorque;
-            leftHinges[i].motor = tempmotor;
-            // Wheels[i].AddRelativeTorque(new Vector3(appliedTrq, 0, 0), ForceMode.Force);
-        }
-        //Steering
-
-    }
 
     public void MoveArm(float parameter)
     {
@@ -171,7 +137,6 @@ public class TankDriver : Subscriber<RosSharp.RosBridgeClient.Messages.Sensor.Jo
         {
             Arm.targetPosition = new Vector3(armpos, armpos, armpos);
         }
-
     }
 
     public void MoveLoader(float parameter)
@@ -219,17 +184,11 @@ public class TankDriver : Subscriber<RosSharp.RosBridgeClient.Messages.Sensor.Jo
 
         Debug.Log("Joystic " + message);
         throttleRos = message.axes[5];
-        throttleRos = throttleRos > 0 ? 0 : Mathf.Abs(throttleRos);
-
-
-        if (message.axes[2] == -1)//Breaks
-        {
-            throttleRos = 0;
-        }
-
-        angularRos = message.axes[0];
-        armRos = message.axes[4];
-        loaderRos = message.axes[3];
+        throttleRos = throttleRos > 0 ? 0 : Mathf.Abs(throttleRos);//throttle trigger preesed from 1 to -1 (-1 is press state) 
+        message.axes[2] = message.axes[2] == -1 ? throttleRos = 0 : message.axes[2];//If Brackes Trigger Pressed throttle =0;
+        angularRos = message.axes[0];//Sterring
+        armRos = message.axes[4]; //Arm Up/down
+        loaderRos = message.axes[3]; //Loader Up/Down
 
 
     }

@@ -23,7 +23,7 @@ public class SpawnPoint : MonoBehaviour
 
         //todo Set In Outside File
         //json parser ***all data commeing from json file 
-        var confFile = FileFinder.Find(Application.streamingAssetsPath, "SpawnPointConfig" + ".json");  //todo Set In Outside File
+        var confFile = FileFinder.Find(Application.streamingAssetsPath, "InitialScene" + ".json");  //todo Set In Outside File
         var m_JsonString = File.ReadAllText(confFile);
         ObjectList = JsonUtility.FromJson<ObjList>(m_JsonString);
 
@@ -34,7 +34,7 @@ public class SpawnPoint : MonoBehaviour
         {
             RaycastHit hit;
 
-            Vector3 ShootRayFrom = new Vector3(obj.Postion.x, 1000, obj.Postion.z);
+            Vector3 ShootRayFrom = new Vector3(obj.Position.x, 1000, obj.Position.z);
             Ray ray = new Ray(ShootRayFrom, Vector3.down);
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
@@ -51,7 +51,7 @@ public class SpawnPoint : MonoBehaviour
 
                 go.name = obj.Id;
 
-                go.transform.position = new Vector3(obj.Postion.x, hit.point.y + 0.3f, obj.Postion.z);
+                go.transform.position = new Vector3(obj.Position.x, hit.point.y + 0.3f, obj.Position.z);
                 go.transform.rotation = obj.Rotation;
             }
             else

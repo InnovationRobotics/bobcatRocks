@@ -49,6 +49,8 @@ public class SpawnPoint : MonoBehaviour
                     Target.Center();
                 }
 
+                go.name = obj.Id;
+
                 go.transform.position = new Vector3(obj.Postion.x, hit.point.y + 0.3f, obj.Postion.z);
                 go.transform.rotation = obj.Rotation;
             }

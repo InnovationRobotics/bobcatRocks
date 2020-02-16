@@ -2,10 +2,11 @@
 	"Objects": 
 	[
 		{
-			 "Name": "BobCat",			 
+			 "Name": "BobCat",		
+			 "Id":"BobCat",
 			 "Postion": 
 			 {
-				"x": 277,
+			    "x": 277,
 				"y": 0,
 				"z": 130
 			 },			
@@ -19,7 +20,8 @@
 	    },
 		
 		{
-			 "Name": "Rock",			 
+			 "Name": "Rock",
+			 "Id":"1", 
 			 "Postion":
 			 {
 				"x":277,
@@ -36,7 +38,8 @@
 		},
 		
 	    { 
-			 "Name": "Rock",			 
+			 "Name": "Rock",
+			 "Id":"2",
 			 "Postion":
 			 {
 				"x":278,

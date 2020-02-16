@@ -20,5 +20,6 @@ namespace RosSharp.RosBridgeClient
     public abstract class JoyButtonWriter : MonoBehaviour
     {
         public abstract void Write(int value);
+
     }
 }

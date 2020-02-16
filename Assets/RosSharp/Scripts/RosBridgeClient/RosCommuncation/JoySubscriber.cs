@@ -13,6 +13,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+
 namespace RosSharp.RosBridgeClient
 {
     public class JoySubscriber : Subscriber<Messages.Sensor.Joy>
@@ -20,13 +21,14 @@ namespace RosSharp.RosBridgeClient
         public JoyButtonWriter[] joyButtonWriters;
         public JoyAxisWriter[] joyAxisWriters;
 
-		protected override void Start()
-		{
-			base.Start();
-		}
-		
+        protected override void Start()
+        {
+            base.Start();
+        }
+
         protected override void ReceiveMessage(Messages.Sensor.Joy joy)
         {
+
             int I = joyButtonWriters.Length < joy.buttons.Length ? joyButtonWriters.Length : joy.buttons.Length;
             for (int i = 0; i < I; i++)
                 if (joyButtonWriters[i] != null)

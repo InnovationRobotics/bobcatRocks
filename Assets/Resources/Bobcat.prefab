@@ -1767,10 +1767,8 @@ GameObject:
   - component: {fileID: 54598063599901798}
   - component: {fileID: 114496659372462358}
   - component: {fileID: 114246605115049006}
-  - component: {fileID: 114468721317105700}
   - component: {fileID: 114244995158491014}
   - component: {fileID: -6550758778137425233}
-  - component: {fileID: 6282559067412317208}
   m_Layer: 0
   m_Name: Bobcat
   m_TagString: Vehicle
@@ -1827,12 +1825,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1197961431942990}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30a3570e2c6da45e399de8873b6b3033, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ManualInput: 1
+  Topic: /joy
+  TimeStep: 0.1
+  ManualInput: 0
   LeftWheels:
   - {fileID: 54454160095182982}
   - {fileID: 54913791590992564}
@@ -1861,6 +1861,13 @@ MonoBehaviour:
   ForwardVel: 0
   rightSpeed: 0
   leftSpeed: 0
+  Arm: {fileID: 153823702794239672}
+  loader: {fileID: 59978921733302710}
+  brackets: {fileID: 59972219316075862}
+  armpos: 0.05
+  loaderpos: -15
+  bracketspos: -15
+  tankDriver: {fileID: 0}
 --- !u!114 &114246605115049006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1875,25 +1882,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   com: {fileID: 4323781987164822}
   rb: {fileID: 0}
---- !u!114 &114468721317105700
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1197961431942990}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f909141fc69e4ad489a45bd33ababea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Arm: {fileID: 153823702794239672}
-  loader: {fileID: 59978921733302710}
-  brackets: {fileID: 59972219316075862}
-  armpos: 0.05
-  loaderpos: -15
-  bracketspos: -15
-  tankDriver: {fileID: 0}
 --- !u!114 &114244995158491014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1924,22 +1912,7 @@ MonoBehaviour:
   Timeout: 10
   Serializer: 0
   Protocol: 1
-  RosBridgeServerUrl: ws://192.168.100.61:9090
---- !u!114 &6282559067412317208
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1197961431942990}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa23b622c60c13f48bdfa74b2e974f20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Topic: /bobcatpose
-  PublishedTransform: {fileID: 4829190384447878}
-  FrameId: Unity
+  RosBridgeServerUrl: ws://172.23.40.132:9090
 --- !u!1 &1209509276222382
 GameObject:
   m_ObjectHideFlags: 0

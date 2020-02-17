@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 4656438577951875766}
   - component: {fileID: 4652442486251610294}
   - component: {fileID: 344091778979322442}
-  - component: {fileID: 2482784126920971833}
+  - component: {fileID: 4076704682467726603}
   m_Layer: 0
   m_Name: Rock
   m_TagString: Rock
@@ -317,18 +317,18 @@ MonoBehaviour:
   Serializer: 0
   Protocol: 0
   RosBridgeServerUrl: ws://172.23.40.132:9090
---- !u!114 &2482784126920971833
+--- !u!114 &4076704682467726603
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4653140132175292052}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa23b622c60c13f48bdfa74b2e974f20, type: 3}
+  m_Script: {fileID: 11500000, guid: 47085ef1ce1065942a19fff6f04a57e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Topic: /stone/Pose
-  PublishedTransform: {fileID: 4656438577951875766}
+  Topic: /stone/<id>/Pose
+  PublishedTransform: {fileID: 0}
   FrameId: Unity

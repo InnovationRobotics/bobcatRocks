@@ -975,7 +975,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.00000007159831, y: 0.0027941468, z: -0.8857102}
+  m_ConnectedAnchor: {x: 0.00000007159831, y: 0.0027941468, z: -0.6816826}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 2
@@ -1769,6 +1769,7 @@ GameObject:
   - component: {fileID: 114246605115049006}
   - component: {fileID: 114244995158491014}
   - component: {fileID: -6550758778137425233}
+  - component: {fileID: 7223604958663298079}
   m_Layer: 0
   m_Name: Bobcat
   m_TagString: Vehicle
@@ -1913,6 +1914,21 @@ MonoBehaviour:
   Serializer: 0
   Protocol: 1
   RosBridgeServerUrl: ws://172.23.40.132:9090
+--- !u!114 &7223604958663298079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197961431942990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa23b622c60c13f48bdfa74b2e974f20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Topic: /mavros/local_position/pose
+  PublishedTransform: {fileID: 0}
+  FrameId: Unity
 --- !u!1 &1209509276222382
 GameObject:
   m_ObjectHideFlags: 0
@@ -2034,7 +2050,7 @@ Transform:
   m_GameObject: {fileID: 1213834545658948}
   m_LocalRotation: {x: -0.00000013345681, y: 0.5735765, z: 0.819152, w: 0.000000093447476}
   m_LocalPosition: {x: 0.00000018088218, y: 1.2267736, z: -0.70545566}
-  m_LocalScale: {x: 1, y: 0.99999994, z: 0.99999994}
+  m_LocalScale: {x: 1, y: 0.99999994, z: 1.2992998}
   m_Children: []
   m_Father: {fileID: 4829190384447878}
   m_RootOrder: 1

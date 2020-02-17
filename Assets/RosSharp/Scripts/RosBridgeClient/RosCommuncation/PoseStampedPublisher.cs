@@ -26,8 +26,10 @@ namespace RosSharp.RosBridgeClient
 
         protected override void Start()
         {
+            PublishedTransform = transform;
             base.Start();
             InitializeMessage();
+
         }
 
         private void FixedUpdate()

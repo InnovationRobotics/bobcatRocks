@@ -12,30 +12,33 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-
+using UnityEngine;
 namespace RosSharp.RosBridgeClient
 {
-    public class OverrideRCInSubscriber : Subscriber<Messages.Mavros.OverrideRcIn>
+    public class OverrideRCInSubscriber : Subscriber<Messages.Mavros.OverrideRCIn>
     {
-        public JoyButtonWriter[] joyButtonWriters;
-        public JoyAxisWriter[] joyAxisWriters;
+        //public OverrideChannelsWriter[] channelWriters;
+       
 
 		protected override void Start()
 		{
 			base.Start();
 		}
 		
-        protected override void ReceiveMessage(Messages.Sensor.Joy joy)
+        protected override void ReceiveMessage(Messages.Mavros.OverrideRCIn orc)
         {
-            int I = joyButtonWriters.Length < joy.buttons.Length ? joyButtonWriters.Length : joy.buttons.Length;
+            int idx;
+            for (idx=0; idx<8; idx++)
+            {
+                Debug.Log("channel[" + idx.ToString() + "]=" + orc.channels[idx].ToString());
+            }
+            /***
+            int I = channelWriters.Length < orc.channels.Length ? channelWriters.Length : orc.channels.Length;
             for (int i = 0; i < I; i++)
-                if (joyButtonWriters[i] != null)
-                    joyButtonWriters[i].Write(joy.buttons[i]);
+                if (channelWriters[i] != null)
+                    channelWriters[i].Write(orc.channels[i]); **/
 
-            I = joyAxisWriters.Length < joy.axes.Length ? joyAxisWriters.Length : joy.axes.Length;
-            for (int i = 0; i < I; i++)
-                if (joyAxisWriters[i] != null)
-                    joyAxisWriters[i].Write(joy.axes[i]);
+            
         }
     }
 }

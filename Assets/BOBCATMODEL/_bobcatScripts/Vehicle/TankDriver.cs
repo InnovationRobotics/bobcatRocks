@@ -183,9 +183,30 @@ public class TankDriver : Subscriber<RosSharp.RosBridgeClient.Messages.Sensor.Jo
 
 
         Debug.Log("Joystic " + message);
-        throttleRos = message.axes[5];
-        throttleRos = throttleRos > 0 ? 0 : Mathf.Abs(throttleRos);//throttle trigger preesed from 1 to -1 (-1 is press state) 
-        message.axes[2] = message.axes[2] == -1 ? throttleRos = 0 : message.axes[2];//If Brackes Trigger Pressed throttle =0;
+
+        if (message.axes[5] < 0 && message.axes[2] > 0)
+        {
+            throttleRos = message.axes[5];
+            throttleRos = Mathf.Abs(throttleRos);
+        }
+        else if (message.axes[5] > 0)
+        {
+            throttleRos = 0;
+        }
+        if (message.axes[2] < 0 && message.axes[5] > 0)
+        {
+            throttleRos = message.axes[2];
+        }
+
+
+
+
+        //throttleRos = message.axes[5] < 0 && message.axes[2] > 0 ? Mathf.Abs(throttleRos) : 0;//throttle trigger preesed from 1 to -1 (-1 is press state) 
+
+
+        //throttleRos = message.axes[2] < 0 && message.axes[5] > 0 ? throttleRos : 0;//Reverse
+
+        //message.axes[2] = message.axes[2] == -1 ? throttleRos = 0 : message.axes[2];//If Brackes Trigger Pressed throttle =0;
         angularRos = message.axes[0];//Sterring
         armRos = message.axes[4]; //Arm Up/down
         loaderRos = message.axes[3]; //Loader Up/Down

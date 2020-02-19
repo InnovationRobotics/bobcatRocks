@@ -22,8 +22,9 @@ namespace RosSharp.RosBridgeClient
 
         private Messages.Standard.Bool message;
 
-        protected override void Start()
+        public  void Start()
         {
+          
             base.Start();
             InitializeMessage();
         }

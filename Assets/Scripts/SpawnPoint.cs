@@ -14,7 +14,7 @@ public class SpawnPoint : MonoBehaviour
 
     public focusCamera Target;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
 
 

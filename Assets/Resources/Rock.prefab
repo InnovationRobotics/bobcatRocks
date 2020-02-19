@@ -170,7 +170,7 @@ GameObject:
   - component: {fileID: 4652442487406467381}
   m_Layer: 0
   m_Name: Rock_03_LOD1
-  m_TagString: Untagged
+  m_TagString: Rock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -315,7 +315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Timeout: 10
   Serializer: 0
-  Protocol: 0
+  Protocol: 1
   RosBridgeServerUrl: ws://172.23.40.132:9090
 --- !u!114 &4076704682467726603
 MonoBehaviour:
@@ -329,6 +329,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47085ef1ce1065942a19fff6f04a57e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Topic: /stone/<id>/Pose
+  Topic: 
   PublishedTransform: {fileID: 0}
   FrameId: Unity

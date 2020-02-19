@@ -1167,7 +1167,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1139510684820330}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.000000029802326, y: 0.23780377, z: -0.11587349}
+  m_LocalPosition: {x: -0, y: 0.238, z: -0.244}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4434688657868620}
@@ -3294,7 +3294,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4147299776469478
 Transform:
   m_ObjectHideFlags: 0
@@ -6395,6 +6395,12 @@ GameObject:
   - component: {fileID: 54934725818143376}
   - component: {fileID: 59978921733302710}
   - component: {fileID: 114378815666757014}
+  - component: {fileID: 5217486722536778800}
+  - component: {fileID: 7894361291381344718}
+  - component: {fileID: 4691644794062540623}
+  - component: {fileID: 3889611253174198702}
+  - component: {fileID: 5567677336130661786}
+  - component: {fileID: 3779399683452553933}
   m_Layer: 0
   m_Name: loader
   m_TagString: Untagged
@@ -6538,6 +6544,94 @@ MonoBehaviour:
   Iterations: 15
   VelIterations: 5
   MaxRotSpeed: 7
+--- !u!114 &5217486722536778800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1842488557937528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff98778ae051cfd40a6e4effdf851ebd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Timeout: 10
+  Serializer: 0
+  Protocol: 0
+  RosBridgeServerUrl: ws://172.23.40.132:9090
+--- !u!114 &7894361291381344718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1842488557937528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e444f70a89651ed4bb879d3b23868ba4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Topic: /arm/height
+  ValueToPublish: 0
+  LayerMask:
+    serializedVersion: 2
+    m_Bits: 1024
+--- !u!114 &4691644794062540623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1842488557937528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91d53079956b96b3fbce6436057dd450, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Topic: /arm/blade/Imu
+  FrameId: Unity
+  rb: {fileID: 54934725818143376}
+  Outside_Time_Synchronization: 0
+--- !u!65 &3889611253174198702
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1842488557937528}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.657522, y: 0.56014556, z: 0.61313653}
+  m_Center: {x: 0.00999999, y: 0.22991875, z: -0.44420657}
+--- !u!114 &5567677336130661786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1842488557937528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 128205eb362ad2700bfc8da655dfda04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Topic: /stone/<id>/IsLoaded
+  ValueToPublish: 0
+--- !u!114 &3779399683452553933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1842488557937528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12cbafd168254e7449a826aa3314164f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1870226264446148
 GameObject:
   m_ObjectHideFlags: 0

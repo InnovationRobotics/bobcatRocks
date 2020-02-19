@@ -13,38 +13,24 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
+using UnityEngine;
+
 namespace RosSharp.RosBridgeClient
 {
-    public class Int32Publisher : Publisher<Messages.Standard.Int32>
+    [RequireComponent(typeof(RosConnector))]
+    public abstract class CustomPublisher<T> : MonoBehaviour where T : Message
     {
-        public int ValueToPublish = 0;
-        //public float Rate;
+        public string Topic;
+        private string publicationId;
 
-        private Messages.Standard.Int32 message;
-
-        protected override void Start()
+        protected virtual void ConnectWithTopic(string topic)
         {
-            base.Start();
-            InitializeMessage();
+            publicationId = GetComponent<RosConnector>().RosSocket.Advertise<T>(Topic);
         }
 
-        private void Update()
+        protected void Publish(T message)
         {
-            UpdateMessage();
-        }
-
-
-
-        private void InitializeMessage()
-        {
-            message = new Messages.Standard.Int32();
-            message.data = ValueToPublish;
-        }
-
-        private void UpdateMessage()
-        {
-            message.data = ValueToPublish;
-            Publish(message);
+            GetComponent<RosConnector>().RosSocket.Publish(publicationId, message);
         }
     }
 }

@@ -30,8 +30,8 @@ namespace RosSharp.RosBridgeClient
         protected override void Start()
         {
             base.Start();
-         
-            //rb = GetComponent<Rigidbody>();
+            InitializeMessage();
+            rb = GetComponent<Rigidbody>();
         }
 
         private void FixedUpdate()

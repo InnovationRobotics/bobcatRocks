@@ -38,7 +38,6 @@ public class BobcatArm : MonoBehaviour
     {
         if (tankDriver.ManualInput)
         {
-
             MoveArm(Input.GetAxis("Arm"));
             MoveLoader(Input.GetAxis("Loader"));
             MoveBracket(Input.GetAxis("bracket"));

@@ -18,18 +18,24 @@ using UnityEngine;
 namespace RosSharp.RosBridgeClient
 {
     public class RockPoseStampedPublisher : Publisher<Messages.Geometry.PoseStamped>
+
     {
         public Transform PublishedTransform;
         public string FrameId = "Unity";
 
         private Messages.Geometry.PoseStamped message;
 
-        protected override void Start()
+
+
+        void Start()
         {
             PublishedTransform = transform;
-            Topic = "/ stone /" + gameObject.name + "/ Pose";
+            Topic = "/stone/" + gameObject.name + "/Pose";
             base.Start();
+
+
             InitializeMessage();
+
 
         }
 
@@ -40,6 +46,7 @@ namespace RosSharp.RosBridgeClient
 
         private void InitializeMessage()
         {
+
             message = new Messages.Geometry.PoseStamped
             {
                 header = new Messages.Standard.Header()
@@ -47,15 +54,18 @@ namespace RosSharp.RosBridgeClient
                     frame_id = FrameId
                 }
             };
+
         }
 
         private void UpdateMessage()
         {
+
             message.header.Update();
             message.pose.position = GetGeometryPoint(PublishedTransform.position.Unity2Ros());
             message.pose.orientation = GetGeometryQuaternion(PublishedTransform.rotation.Unity2Ros());
 
             Publish(message);
+
         }
 
         private Messages.Geometry.Point GetGeometryPoint(Vector3 position)

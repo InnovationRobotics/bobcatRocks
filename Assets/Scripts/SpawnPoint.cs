@@ -53,6 +53,7 @@ public class SpawnPoint : MonoBehaviour
 
                 go.transform.position = new Vector3(obj.Position.x, hit.point.y + 0.3f, obj.Position.z);
                 go.transform.rotation = obj.Rotation;
+                go.transform.localScale = obj.Scale;
             }
             else
             {

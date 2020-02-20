@@ -16,6 +16,7 @@ limitations under the License.
 */
 
 using System;
+using System.IO;
 using System.Threading;
 using UnityEngine;
 
@@ -29,7 +30,7 @@ namespace RosSharp.RosBridgeClient
         public enum Protocols { WebSocketSharp, WebSocketNET };
         public RosBridgeClient.RosSocket.SerializerEnum Serializer;
         public Protocols Protocol;
-       
+        URLConfig IpFromJSon;
         public string RosBridgeServerUrl = "ws://192.168.100.61:9090";
         public static string IPAddres ;
 
@@ -37,7 +38,13 @@ namespace RosSharp.RosBridgeClient
 
         public void Awake()
         {
-           
+            //todo Set In Outside File
+            //json parser ***all data commeing from json file 
+            var confFile = FileFinder.Find(Application.streamingAssetsPath, "URLConfig" + ".json");  //todo Set In Outside File
+            var m_JsonString = File.ReadAllText(confFile);
+            IpFromJSon = JsonUtility.FromJson<URLConfig>(m_JsonString);
+
+            RosBridgeServerUrl = IpFromJSon.URL;
             new Thread(ConnectAndWait).Start();
         }
 

@@ -20,6 +20,7 @@ namespace RosSharp.RosBridgeClient
 
         void FixedUpdate()
         {
+
             UpdateMessage();
         }
 
@@ -34,11 +35,13 @@ namespace RosSharp.RosBridgeClient
         private void UpdateMessage()
         {
             RaycastHit hit;
-
+          
             if (Physics.Raycast(transform.position, Vector3.down, out hit, Mathf.Infinity, LayerMask))
             {
                 Debug.DrawLine(transform.position, hit.point, Color.blue);
-                ValueToPublish = (int)hit.distance;
+                Debug.Log("distance" + hit.distance);
+                var flDistance = hit.distance * 100;
+                ValueToPublish = (int)flDistance;
                 message.data = ValueToPublish;
                 Publish(message);
             }

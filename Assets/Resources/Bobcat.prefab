@@ -226,7 +226,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1024475690002954}
-  m_Mesh: {fileID: 4300114, guid: 2eed3e15a49234c9e98473b7928523d2, type: 3}
+  m_Mesh: {fileID: -7115497265959226626, guid: 2eed3e15a49234c9e98473b7928523d2, type: 3}
 --- !u!23 &23827664863258928
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1560,7 +1560,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1166550395914502}
-  m_Mesh: {fileID: 4300116, guid: 2eed3e15a49234c9e98473b7928523d2, type: 3}
+  m_Mesh: {fileID: -773007129872289759, guid: 2eed3e15a49234c9e98473b7928523d2, type: 3}
 --- !u!23 &23519315360428200
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1770,6 +1770,8 @@ GameObject:
   - component: {fileID: 114244995158491014}
   - component: {fileID: -6550758778137425233}
   - component: {fileID: 7223604958663298079}
+  - component: {fileID: 799350604138979066}
+  - component: {fileID: -1786066141858191349}
   m_Layer: 0
   m_Name: Bobcat
   m_TagString: Vehicle
@@ -1913,7 +1915,7 @@ MonoBehaviour:
   Timeout: 10
   Serializer: 0
   Protocol: 1
-  RosBridgeServerUrl: ws://172.23.40.132:9090
+  RosBridgeServerUrl: ws://192.168.100.61:9090
 --- !u!114 &7223604958663298079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1929,6 +1931,37 @@ MonoBehaviour:
   Topic: /mavros/local_position/pose
   PublishedTransform: {fileID: 0}
   FrameId: Unity
+--- !u!114 &799350604138979066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197961431942990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbbca38ff49c96240b3a4a7c15a79916, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Topic: /mavros/local_position/velocity
+  PublishedTransform: {fileID: 4829190384447878}
+  FrameId: Unity
+--- !u!114 &-1786066141858191349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197961431942990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91d53079956b96b3fbce6436057dd450, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Topic: /mavros/imu/data
+  FrameId: Unity
+  rb: {fileID: 54598063599901798}
+  Outside_Time_Synchronization: 0
 --- !u!1 &1209509276222382
 GameObject:
   m_ObjectHideFlags: 0
@@ -3697,7 +3730,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1493198718110496}
-  m_Mesh: {fileID: 4300056, guid: 2eed3e15a49234c9e98473b7928523d2, type: 3}
+  m_Mesh: {fileID: 1090570839041873681, guid: 2eed3e15a49234c9e98473b7928523d2, type: 3}
 --- !u!23 &23979696985667534
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6559,7 +6592,7 @@ MonoBehaviour:
   Timeout: 10
   Serializer: 0
   Protocol: 0
-  RosBridgeServerUrl: ws://172.23.40.132:9090
+  RosBridgeServerUrl: ws://192.168.100.61:9090
 --- !u!114 &7894361291381344718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6604,8 +6637,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.657522, y: 0.56014556, z: 0.61313653}
-  m_Center: {x: 0.00999999, y: 0.22991875, z: -0.44420657}
+  m_Size: {x: 1.657522, y: 0.4666912, z: 0.3728037}
+  m_Center: {x: 0.00999999, y: 0.26946813, z: -0.3240401}
 --- !u!114 &5567677336130661786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7620,7 +7653,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1939413933468502}
-  m_Mesh: {fileID: 4300064, guid: 2eed3e15a49234c9e98473b7928523d2, type: 3}
+  m_Mesh: {fileID: 6919899854278450498, guid: 2eed3e15a49234c9e98473b7928523d2, type: 3}
 --- !u!23 &23464133859738386
 MeshRenderer:
   m_ObjectHideFlags: 0

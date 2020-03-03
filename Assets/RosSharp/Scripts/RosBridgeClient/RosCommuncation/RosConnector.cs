@@ -42,8 +42,9 @@ namespace RosSharp.RosBridgeClient
             //json parser ***all data commeing from json file 
             var confFile = FileFinder.Find(Application.streamingAssetsPath, "URLConfig" + ".json");  //todo Set In Outside File
             var m_JsonString = File.ReadAllText(confFile);
+            Debug.LogError("m_JsonString=" + m_JsonString);
             IpFromJSon = JsonUtility.FromJson<URLConfig>(m_JsonString);
-
+           
             RosBridgeServerUrl = IpFromJSon.URL;
             new Thread(ConnectAndWait).Start();
         }

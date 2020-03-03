@@ -39,7 +39,7 @@ namespace RosSharp.RosBridgeClient
             if (Physics.Raycast(transform.position, Vector3.down, out hit, Mathf.Infinity, LayerMask))
             {
                 Debug.DrawLine(transform.position, hit.point, Color.blue);
-                Debug.Log("distance" + hit.distance);
+// Debug.Log("distance" + hit.distance);
                 var flDistance = hit.distance * 100;
                 ValueToPublish = (int)flDistance;
                 message.data = ValueToPublish;

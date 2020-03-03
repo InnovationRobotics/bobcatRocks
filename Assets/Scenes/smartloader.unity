@@ -253,13 +253,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 28285937}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac3b5c497c54f1b4ab2a96f69bc1586d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Topic: /joy
-  TimeStep: 0
+  TimeStep: 0.1
   joyButtonWriters: []
   joyAxisWriters: []
 --- !u!114 &28285942

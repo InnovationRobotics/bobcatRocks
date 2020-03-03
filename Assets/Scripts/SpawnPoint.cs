@@ -24,9 +24,12 @@ public class SpawnPoint : MonoBehaviour
         //todo Set In Outside File
         //json parser ***all data commeing from json file 
         var confFile = FileFinder.Find(Application.streamingAssetsPath, "InitialScene" + ".json");  //todo Set In Outside File
+        Debug.Log("Found file:" + confFile);
         var m_JsonString = File.ReadAllText(confFile);
         ObjectList = JsonUtility.FromJson<ObjList>(m_JsonString);
 
+        var objListLen = ObjectList.Objects.Count;
+        Debug.Log("Found " + objListLen.ToString() + " objects");
 
 
         foreach (var obj in ObjectList.Objects)
@@ -54,6 +57,8 @@ public class SpawnPoint : MonoBehaviour
                 go.transform.position = new Vector3(obj.Position.x, hit.point.y + 0.3f, obj.Position.z);
                 go.transform.rotation = obj.Rotation;
                 go.transform.localScale = obj.Scale;
+                Debug.Log("The given " + obj.Name + " position point is here: "+ go.transform.position);
+
             }
             else
             {

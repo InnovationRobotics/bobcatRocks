@@ -182,7 +182,8 @@ public class TankDriver : Subscriber<RosSharp.RosBridgeClient.Messages.Sensor.Jo
 
 
 
-        Debug.Log("Joystic " + message);
+     //   Debug.Log("Joystic " + message);
+        Debug.Log("Received JOY values=" + message.axes[0].ToString() + "," + message.axes[2].ToString() + "," + message.axes[3].ToString() + "," + message.axes[4].ToString() + "," + message.axes[5].ToString());
 
         if (message.axes[5] < 0 && message.axes[2] > 0)
         {

@@ -20,10 +20,10 @@ public class StoneDetect : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-     if (other.gameObject.tag == "Rock")
+     if (other.gameObject.tag == "Loader")
         {
             boolPublisher.ValueToPublish = true;
-            boolPublisher. Topic = "/stone/" + other.gameObject.transform.parent.name + "/IsLoaded";
+            boolPublisher. Topic = "/stone/" + transform.name + "/IsLoaded";
             boolPublisher.Start();
         }
     }

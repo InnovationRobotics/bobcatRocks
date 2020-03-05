@@ -10,6 +10,9 @@ public class StoneDetect : MonoBehaviour
     void Start()
     {
         boolPublisher = GetComponent<BoolPublisher>();
+
+        boolPublisher.ValueToPublish = false;
+        boolPublisher.Topic = "/stone/" + transform.name + "/IsLoaded";
     }
 
     // Update is called once per frame

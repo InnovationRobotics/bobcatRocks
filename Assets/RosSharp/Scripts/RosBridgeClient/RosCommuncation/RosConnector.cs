@@ -38,15 +38,24 @@ namespace RosSharp.RosBridgeClient
 
         public void Awake()
         {
-            //todo Set In Outside File
-            //json parser ***all data commeing from json file 
-            var confFile = FileFinder.Find(Application.streamingAssetsPath, "URLConfig" + ".json");  //todo Set In Outside File
-            var m_JsonString = File.ReadAllText(confFile);
-            Debug.LogError("m_JsonString=" + m_JsonString);
-            IpFromJSon = JsonUtility.FromJson<URLConfig>(m_JsonString);
-           
-            RosBridgeServerUrl = IpFromJSon.URL;
-            new Thread(ConnectAndWait).Start();
+            string m_JsonString="";
+            try
+            {
+                //todo Set In Outside File
+                //json parser ***all data commeing from json file 
+                var confFile = FileFinder.Find(Application.streamingAssetsPath, "URLConfig" + ".json");  //todo Set In Outside File
+                m_JsonString = File.ReadAllText(confFile);
+               
+                IpFromJSon = JsonUtility.FromJson<URLConfig>(m_JsonString);
+
+                RosBridgeServerUrl = IpFromJSon.URL;
+                new Thread(ConnectAndWait).Start();
+            }
+            catch (Exception)
+            {
+
+                Debug.LogError("m_JsonString=" + m_JsonString);
+            }
         }
 
         private void ConnectAndWait()

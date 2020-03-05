@@ -45,6 +45,11 @@ public class GameManager : Subscriber<RosSharp.RosBridgeClient.Messages.Sensor.J
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    
+    private void OnApplicationQuit()
+    {
+        GetComponent<RosConnector>().RosSocket.Close();
+    }
+
+
 }
 

@@ -14,6 +14,7 @@ limitations under the License.
 */
 
 using UnityEngine;
+using AGXUnity;
 
 namespace RosSharp.RosBridgeClient
 {
@@ -21,7 +22,7 @@ namespace RosSharp.RosBridgeClient
     {
         Transform myref;
         public string FrameId = "Unity";
-        public Rigidbody rb;
+        public RigidBody rb;
         Vector3 lastPos = Vector3.zero;
         private Messages.Sensor.Imu imu_msg;
         private Messages.Sensor.NavSatFix gps_speed_msg;

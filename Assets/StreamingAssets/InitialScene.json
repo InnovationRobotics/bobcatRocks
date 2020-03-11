@@ -1,21 +1,23 @@
 {
 	"Objects": 
 	[
+		
+		
 		{
-			 "Name": "BobCat",		
-			 "Id":"BobCat",
+			 "Name":"wheel_loader_DL300",		
+			 "Id":"wheel_loader_DL300",
 			 "Position": 
 			 {
-			    "x": 277,
+			    "x": 0.2,
 				"y": 0,
-				"z": 130
+				"z": -8.5
 			 },			
 			 "Rotation":
 			 {
-				"x": 0,
+				"x": -0.7071068,
 				"y": 0,
-				"z": 0.0,
-				"w": 0
+				"z": 0,
+				"w": 0.7071068
 			 },
 			  "Scale": 
 			 {
@@ -30,9 +32,9 @@
 			 "Id":"1", 
 			 "Position":
 			 {
-				"x":277,
+				"x":5,
 				"y": 9,
-				"z": 135
+				"z": 2
 		     },
 			 "Rotation": 
 			 {
@@ -54,9 +56,9 @@
 			 "Id":"2", 
 			 "Position":
 			 {
-				"x":277,
+				"x":6,
 				"y": 9,
-				"z": 140
+				"z": 3
 		     },
 			 "Rotation": 
 			 {

@@ -16,6 +16,7 @@ limitations under the License.
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using AGXUnity;
 
 namespace RosSharp.RosBridgeClient
 {
@@ -26,7 +27,7 @@ const double  CENTER_Y_EW = 34.803611f;	// of lab 320
 const float  DEGREE_TO_M = 111000; 		//1 degree has appprox. 111km
 const double PI  =3.141592653589793238463;
 
-        public Rigidbody rb;
+        public RigidBody rb;
 
         public string FrameId = "Unity";
         public int pfreq = 20;
@@ -52,7 +53,7 @@ const double PI  =3.141592653589793238463;
             start_latitude =32.0017549051f;// (float)CENTER_X_NS;//31.2622f; //32.0017549051;
             start_longitude = 34.9083870312f; //(float)CENTER_Y_EW; //34.803611f; //34.9083870312;           
             start_altitude = 2.0f;
-            _init_pos = rb.position;
+            _init_pos = rb.transform.position;
         }
 
         private void FixedUpdate()
@@ -108,7 +109,7 @@ const double PI  =3.141592653589793238463;
 
         private void ComposeAndComputeMessage()
         {
-             tmpPos = rb.position;
+             tmpPos = rb.transform.position;
              other_dist = (tmpPos - _init_pos).magnitude;
              
              // Original:

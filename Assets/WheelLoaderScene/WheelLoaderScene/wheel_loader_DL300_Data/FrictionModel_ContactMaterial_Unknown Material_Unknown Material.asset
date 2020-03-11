@@ -1,0 +1,242 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9019548065682579437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7119a14bd67d1a84b9caafde286f8582, type: 3}
+  m_Name: FrictionModel_ContactMaterial_WheelLoaderBucketMaterial_DoosanDL300BucketMaterial
+  m_EditorClassIdentifier: 
+  m_solveType: 3
+  m_type: 0
+  m_normalForceMagnitude: 100
+  m_scaleNormalForceWithDepth: 0
+--- !u!114 &-8205966117223572303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7119a14bd67d1a84b9caafde286f8582, type: 3}
+  m_Name: FrictionModel_ContactMaterial_Unknown Material_DoosanDL300FrontTireMaterial
+  m_EditorClassIdentifier: 
+  m_solveType: 3
+  m_type: 0
+  m_normalForceMagnitude: 100
+  m_scaleNormalForceWithDepth: 0
+--- !u!114 &-5212618729874742950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7119a14bd67d1a84b9caafde286f8582, type: 3}
+  m_Name: FrictionModel_ContactMaterial_WheelLoaderBucketMaterial_DoosanDL300RearTireMaterial
+  m_EditorClassIdentifier: 
+  m_solveType: 3
+  m_type: 0
+  m_normalForceMagnitude: 100
+  m_scaleNormalForceWithDepth: 0
+--- !u!114 &-4790507119627505600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7119a14bd67d1a84b9caafde286f8582, type: 3}
+  m_Name: FrictionModel_ContactMaterial_DoosanDL300RearTireMaterial_DoosanDL300BucketMaterial
+  m_EditorClassIdentifier: 
+  m_solveType: 3
+  m_type: 0
+  m_normalForceMagnitude: 100
+  m_scaleNormalForceWithDepth: 0
+--- !u!114 &-2976480382161718859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7119a14bd67d1a84b9caafde286f8582, type: 3}
+  m_Name: FrictionModel_ContactMaterial_Unknown Material_DoosanDL300RearTireMaterial
+  m_EditorClassIdentifier: 
+  m_solveType: 3
+  m_type: 0
+  m_normalForceMagnitude: 100
+  m_scaleNormalForceWithDepth: 0
+--- !u!114 &-351829719735713407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7119a14bd67d1a84b9caafde286f8582, type: 3}
+  m_Name: FrictionModel_ContactMaterial_DoosanDL300BucketMaterial_DoosanDL300BucketMaterial
+  m_EditorClassIdentifier: 
+  m_solveType: 3
+  m_type: 0
+  m_normalForceMagnitude: 100
+  m_scaleNormalForceWithDepth: 0
+--- !u!114 &-335177627858286943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7119a14bd67d1a84b9caafde286f8582, type: 3}
+  m_Name: FrictionModel_ContactMaterial_DoosanDL300RearTireMaterial_DoosanDL300RearTireMaterial
+  m_EditorClassIdentifier: 
+  m_solveType: 3
+  m_type: 0
+  m_normalForceMagnitude: 100
+  m_scaleNormalForceWithDepth: 0
+--- !u!114 &-263959275012729376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7119a14bd67d1a84b9caafde286f8582, type: 3}
+  m_Name: FrictionModel_ContactMaterial_WheelLoaderBucketMaterial_WheelLoaderBucketMaterial
+  m_EditorClassIdentifier: 
+  m_solveType: 3
+  m_type: 0
+  m_normalForceMagnitude: 100
+  m_scaleNormalForceWithDepth: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7119a14bd67d1a84b9caafde286f8582, type: 3}
+  m_Name: FrictionModel_ContactMaterial_Unknown Material_Unknown Material
+  m_EditorClassIdentifier: 
+  m_solveType: 3
+  m_type: 0
+  m_normalForceMagnitude: 100
+  m_scaleNormalForceWithDepth: 0
+--- !u!114 &75607661151364748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7119a14bd67d1a84b9caafde286f8582, type: 3}
+  m_Name: FrictionModel_ContactMaterial_WheelLoaderBucketMaterial_DoosanDL300FrontTireMaterial
+  m_EditorClassIdentifier: 
+  m_solveType: 3
+  m_type: 0
+  m_normalForceMagnitude: 100
+  m_scaleNormalForceWithDepth: 0
+--- !u!114 &260748773061317329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7119a14bd67d1a84b9caafde286f8582, type: 3}
+  m_Name: FrictionModel_ContactMaterial_Unknown Material_WheelLoaderBucketMaterial
+  m_EditorClassIdentifier: 
+  m_solveType: 3
+  m_type: 0
+  m_normalForceMagnitude: 100
+  m_scaleNormalForceWithDepth: 0
+--- !u!114 &1498205626117867143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7119a14bd67d1a84b9caafde286f8582, type: 3}
+  m_Name: FrictionModel_ContactMaterial_DoosanDL300FrontTireMaterial_DoosanDL300FrontTireMaterial
+  m_EditorClassIdentifier: 
+  m_solveType: 3
+  m_type: 0
+  m_normalForceMagnitude: 100
+  m_scaleNormalForceWithDepth: 0
+--- !u!114 &1591960944112093523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7119a14bd67d1a84b9caafde286f8582, type: 3}
+  m_Name: FrictionModel_ContactMaterial_DoosanDL300FrontTireMaterial_DoosanDL300BucketMaterial
+  m_EditorClassIdentifier: 
+  m_solveType: 3
+  m_type: 0
+  m_normalForceMagnitude: 100
+  m_scaleNormalForceWithDepth: 0
+--- !u!114 &4314061683519891058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7119a14bd67d1a84b9caafde286f8582, type: 3}
+  m_Name: FrictionModel_ContactMaterial_DoosanDL300FrontTireMaterial_DoosanDL300RearTireMaterial
+  m_EditorClassIdentifier: 
+  m_solveType: 3
+  m_type: 0
+  m_normalForceMagnitude: 100
+  m_scaleNormalForceWithDepth: 0
+--- !u!114 &5764575307846520769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7119a14bd67d1a84b9caafde286f8582, type: 3}
+  m_Name: FrictionModel_ContactMaterial_Unknown Material_DoosanDL300BucketMaterial
+  m_EditorClassIdentifier: 
+  m_solveType: 3
+  m_type: 0
+  m_normalForceMagnitude: 100
+  m_scaleNormalForceWithDepth: 0

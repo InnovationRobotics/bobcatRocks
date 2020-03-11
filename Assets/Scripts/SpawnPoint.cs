@@ -43,14 +43,18 @@ public class SpawnPoint : MonoBehaviour
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
 
-
-                GameObject go = Instantiate(Resources.Load(obj.Name) as GameObject);
-
-                if (obj.Name == "BobCat")
+                GameObject go;
+                if (obj.Name == "wheel_loader_DL300")
                 {
+                    go= GameObject.FindGameObjectWithTag("Vehicle");
                     Target.ExaminedObjects = go.transform;
                     Target.Center();
                 }
+                else
+                {
+                    go = Instantiate(Resources.Load(obj.Name) as GameObject);
+                }
+              
 
                 go.name = obj.Id;
 

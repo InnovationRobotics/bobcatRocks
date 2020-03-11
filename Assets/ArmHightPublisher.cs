@@ -8,13 +8,13 @@ namespace RosSharp.RosBridgeClient
         //public float Rate;
 
         private Messages.Standard.Int32 message;
-        private Transform Parent;
+       // private Transform Parent;
         public LayerMask LayerMask;
 
         protected override void Start()
         {
             base.Start();
-            Parent = FindObjectOfType<TankDriver>().transform;
+          //  Parent = FindObjectOfType<TankDriver>().transform;
             InitializeMessage();
         }
 

@@ -14,6 +14,7 @@ limitations under the License.
 */
 
 using UnityEngine;
+using AGXUnity;
 
 
 namespace RosSharp.RosBridgeClient
@@ -21,7 +22,7 @@ namespace RosSharp.RosBridgeClient
     public class GPSSpeedPublisher : Publisher<Messages.Sensor.NavSatFix>
     {
         public string FrameId = "Unity";
-        public Rigidbody rb;
+        public RigidBody rb;
         public bool Outside_Time_Synchronization=false;
 
         private Messages.Sensor.NavSatFix message;
@@ -72,10 +73,10 @@ namespace RosSharp.RosBridgeClient
                 message.header.Update();
          
                 //Compute current coordinates
-                message.longitude = rb.velocity.x;
-                message.latitude = rb.velocity.z;
-                message.altitude = rb.velocity.y;
-                Debug.Log("velocity="+rb.velocity.ToString());
+                message.longitude = rb.LinearVelocity.x;
+                message.latitude = rb.LinearVelocity.z;
+                message.altitude = rb.LinearVelocity.y;
+                Debug.Log("velocity="+rb.LinearVelocity.ToString());
                 Publish(message);
            
         }
@@ -84,10 +85,10 @@ namespace RosSharp.RosBridgeClient
         {
                 message.header.TimeSynchronization(synchronized_time);
                 //Compute current coordinates
-                message.longitude = rb.velocity.x;
-                message.latitude = rb.velocity.z;
-                message.altitude = rb.velocity.y;
-                Debug.Log("SendSynchronizedMessage velocity="+rb.velocity.ToString());
+                message.longitude = rb.LinearVelocity.x;
+                message.latitude = rb.LinearVelocity.z;
+                message.altitude = rb.LinearVelocity.y;
+                Debug.Log("SendSynchronizedMessage velocity="+rb.LinearVelocity.ToString());
                 Publish(message);
            
         }

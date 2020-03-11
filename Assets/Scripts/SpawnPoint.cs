@@ -47,7 +47,7 @@ public class SpawnPoint : MonoBehaviour
                 if (obj.Name == "wheel_loader_DL300")
                 {
                     go= GameObject.FindGameObjectWithTag("Vehicle");
-                    Target.ExaminedObjects = go.transform;
+                    
                     Target.Center();
                 }
                 else

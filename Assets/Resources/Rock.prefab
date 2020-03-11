@@ -167,7 +167,8 @@ GameObject:
   - component: {fileID: 4656438578199639610}
   - component: {fileID: 4676414952353198222}
   - component: {fileID: 4666148878165087232}
-  - component: {fileID: 4652442487406467381}
+  - component: {fileID: 1651855251}
+  - component: {fileID: 1651855254}
   m_Layer: 0
   m_Name: Rock_03_LOD1
   m_TagString: Rock
@@ -235,20 +236,37 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &4652442487406467381
-MeshCollider:
+--- !u!114 &1651855251
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4653140131783685862}
-  m_Material: {fileID: 13400000, guid: fecd96de2d9c44047b0048091092d74a, type: 2}
-  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300002, guid: 48320e7576ce0664eb501ebbd6c815da, type: 3}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85e5dfc463eef1d499cfc0f62bd45311, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_collisionsEnabled: 1
+  m_isSensor: 0
+  m_material: {fileID: 11400000, guid: 21f6c0eccde36e34ea0d2962e1f80201, type: 2}
+  m_legacySourceObject: {fileID: 0}
+  m_sourceObjects:
+  - {fileID: 4300002, guid: 48320e7576ce0664eb501ebbd6c815da, type: 3}
+--- !u!114 &1651855254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4653140131783685862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae391dd7479f7994cbb3267af606ce65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_shape: {fileID: 1651855251}
 --- !u!1 &4653140132175292052
 GameObject:
   m_ObjectHideFlags: 0
@@ -258,11 +276,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4656438577951875766}
-  - component: {fileID: 4652442486251610294}
   - component: {fileID: 344091778979322442}
   - component: {fileID: 4076704682467726603}
   - component: {fileID: 1307140087419808805}
   - component: {fileID: 8069283758595387359}
+  - component: {fileID: 1859665756}
+  - component: {fileID: 1859665758}
   m_Layer: 0
   m_Name: Rock
   m_TagString: Rock
@@ -279,7 +298,7 @@ Transform:
   m_GameObject: {fileID: 4653140132175292052}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 0.36, y: 0.37, z: 0.55}
   m_Children:
   - {fileID: 4656438579666018510}
   - {fileID: 4656438578199639610}
@@ -287,22 +306,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &4652442486251610294
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4653140132175292052}
-  serializedVersion: 2
-  m_Mass: 75
-  m_Drag: 0.1
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!114 &344091778979322442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -360,3 +363,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12cbafd168254e7449a826aa3314164f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1859665756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4653140132175292052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e01f271d05be96f44852cb49dfac5711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_massPropertiesAsAsset: {fileID: 0}
+  m_motionControl: 3
+  m_handleAsParticle: 0
+  m_linearVelocity: {x: 0, y: 0, z: 0}
+  m_angularVelocity: {x: 0, y: 0, z: 0}
+  m_linearVelocityDamping: {x: 0, y: 0, z: 0}
+  m_angularVelocityDamping: {x: 0, y: 0, z: 0}
+--- !u!114 &1859665758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4653140132175292052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6321dc8adfa28b64a812f93e1a8626f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_mass:
+    m_defaultToggle: 1
+    m_defaultValue: 1013.9193
+    m_userValue: 1
+  m_inertiaDiagonal:
+    m_defaultToggle: 1
+    m_defaultValue: {x: 256.80862, y: 273.01523, z: 112.76599}
+    m_userValue: {x: 1, y: 1, z: 1}
+  m_massCoefficients: {x: 0, y: 0, z: 0}
+  m_inertiaCoefficients: {x: 0, y: 0, z: 0}

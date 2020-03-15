@@ -46,22 +46,22 @@ public class SpawnPoint : MonoBehaviour
                 GameObject go;
                 if (obj.Name == "wheel_loader_DL300")
                 {
-                    go= GameObject.FindGameObjectWithTag("Vehicle");
-                    
+                    go = GameObject.FindGameObjectWithTag("Vehicle");
+
                     Target.Center();
                 }
                 else
                 {
                     go = Instantiate(Resources.Load(obj.Name) as GameObject);
                 }
-              
+
 
                 go.name = obj.Id;
 
                 go.transform.position = new Vector3(obj.Position.x, hit.point.y + 0.3f, obj.Position.z);
                 go.transform.rotation = obj.Rotation;
                 go.transform.localScale = obj.Scale;
-                Debug.Log("The given " + obj.Name + " position point is here: "+ go.transform.position);
+                Debug.Log("The given " + obj.Name + " position point is here: " + go.transform.position);
 
             }
             else

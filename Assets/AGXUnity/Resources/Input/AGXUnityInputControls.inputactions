@@ -1,5 +1,5 @@
 {
-    "name": "Controls",
+    "name": "AGXUnityInputControls",
     "maps": [
         {
             "name": "WheelLoader",
@@ -118,7 +118,7 @@
                     "id": "bfdaf6d8-6624-4c5f-92a7-aa822960c5b9",
                     "path": "<Keyboard>/d",
                     "interactions": "",
-                    "processors": "Invert",
+                    "processors": "",
                     "groups": "",
                     "action": "Steer",
                     "isComposite": false,
@@ -151,7 +151,7 @@
                     "id": "d1c9f8ab-8606-44ad-a401-3232f19990a4",
                     "path": "<Keyboard>/downArrow",
                     "interactions": "",
-                    "processors": "Invert",
+                    "processors": "",
                     "groups": "",
                     "action": "Elevate",
                     "isComposite": false,
@@ -184,7 +184,7 @@
                     "id": "d58d89ad-5a9e-4bf3-9e41-ba0793e38e7e",
                     "path": "<Keyboard>/leftArrow",
                     "interactions": "",
-                    "processors": "Invert",
+                    "processors": "",
                     "groups": "",
                     "action": "Tilt",
                     "isComposite": false,

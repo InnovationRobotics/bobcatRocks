@@ -1,6 +1,5 @@
 ﻿using RosSharp.RosBridgeClient;
 using RosSharp.RosBridgeClient.Messages.Sensor;
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,11 +7,16 @@ public class GameManager : Subscriber<RosSharp.RosBridgeClient.Messages.Sensor.J
 {
 
 
-
+    public static GameManager Instance;
 
     private TankDriver tankDriver;
-   
-    
+
+    public bool ManualInput;
+
+    void Awake()
+    {
+        Instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +27,7 @@ public class GameManager : Subscriber<RosSharp.RosBridgeClient.Messages.Sensor.J
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) 
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             ResetScene();
         }
@@ -31,8 +35,8 @@ public class GameManager : Subscriber<RosSharp.RosBridgeClient.Messages.Sensor.J
 
     public void ToggeleManualInput(bool state)
     {
-        tankDriver = FindObjectOfType<TankDriver>();
-        tankDriver.ManualInput = !tankDriver.ManualInput;
+
+        ManualInput = !ManualInput;
     }
 
     protected override void ReceiveMessage(Joy message)
@@ -45,7 +49,7 @@ public class GameManager : Subscriber<RosSharp.RosBridgeClient.Messages.Sensor.J
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-   
+
 
 
 }

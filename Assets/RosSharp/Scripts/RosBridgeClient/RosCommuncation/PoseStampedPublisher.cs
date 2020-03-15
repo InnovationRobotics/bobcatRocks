@@ -63,6 +63,8 @@ namespace RosSharp.RosBridgeClient
             geometryPoint.x = position.x;
             geometryPoint.y = position.y;
             geometryPoint.z = position.z;
+
+            // Debug.Log("position " + transform.position.x + " " + transform.position.y + " " + transform.position.z);
             return geometryPoint;
         }
 

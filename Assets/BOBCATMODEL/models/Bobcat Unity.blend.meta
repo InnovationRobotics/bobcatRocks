@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 2eed3e15a49234c9e98473b7928523d2
 ModelImporter:
-  serializedVersion: 26
+  serializedVersion: 19300
   internalIDToNameTable:
   - first:
       1: 100000
@@ -1441,7 +1441,7 @@ ModelImporter:
       name: white_002
     second: {fileID: 2100000, guid: 40aadfadf3ec548ff851d54438e648fb, type: 2}
   materials:
-    importMaterials: 1
+    materialImportMode: 2
     materialName: 2
     materialSearch: 1
     materialLocation: 0
@@ -1505,7 +1505,6 @@ ModelImporter:
     normalSmoothingSource: 0
   referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
   humanDescription:
     serializedVersion: 3
     human: []
@@ -1523,8 +1522,10 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
+  avatarSetup: 1
   additionalBone: 0
   userData: 
   assetBundleName: 

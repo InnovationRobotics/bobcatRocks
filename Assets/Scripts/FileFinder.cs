@@ -23,9 +23,11 @@ public static class FileFinder
     public static string Find(string path,string fileName)
     {
         var files = Directory.GetFiles(path, fileName, SearchOption.AllDirectories);
+        Debug.Log("Here: Search for "+ fileName);
+
         foreach(var x in files)
         {
-           
+           Debug.Log("There Search for "+ x);
                 if (x.Split('\\').Last() == fileName)
                     try
                     {

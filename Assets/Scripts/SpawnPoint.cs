@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using UnityEngine;
+using static FileFinder;
 
 public class SpawnPoint : MonoBehaviour
 {
@@ -23,8 +24,12 @@ public class SpawnPoint : MonoBehaviour
 
         //todo Set In Outside File
         //json parser ***all data commeing from json file 
-        var confFile = FileFinder.Find(Application.streamingAssetsPath, "InitialScene" + ".json");  //todo Set In Outside File
-        Debug.Log("Found file:" + confFile);
+	    Debug.Log("streaming...:"+Application.streamingAssetsPath);
+        //var confFile = FileFinder.Find(Application.streamingAssetsPath, "InitialScene.json"); 
+         //todo Set In Outside File
+        //Debug.Log("Found file:" + confFile);
+        var confFile = Application.streamingAssetsPath+"/InitialScene.json";
+        //var m_JsonString = File.ReadAllText("/home/sload/git/fromgameuser/bobcatRocks/Assets/StreamingAssets/InitialScene.json");
         var m_JsonString = File.ReadAllText(confFile);
         ObjectList = JsonUtility.FromJson<ObjList>(m_JsonString);
 

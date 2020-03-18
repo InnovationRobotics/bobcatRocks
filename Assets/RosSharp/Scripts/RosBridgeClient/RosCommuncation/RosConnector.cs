@@ -43,12 +43,16 @@ namespace RosSharp.RosBridgeClient
             {
                 //todo Set In Outside File
                 //json parser ***all data commeing from json file 
-                //var confFile = FileFinder.Find(Application.streamingAssetsPath, "URLConfig" + ".json");  //todo Set In Outside File
-                //m_JsonString = File.ReadAllText(confFile);
-                m_JsonString = File.ReadAllText("/home/sload/git/fromgameuser/bobcatRocks/Assets/StreamingAssets/URLConfig.json");
-                IpFromJSon = JsonUtility.FromJson<URLConfig>(m_JsonString);
-
-                RosBridgeServerUrl = IpFromJSon.URL;
+                var confFile = Application.streamingAssetsPath+"/URLConfig.json";  //todo Set In Outside File
+                if (File.Exists(confFile)){
+                    //m_JsonString = File.ReadAllText(confFile);
+                    m_JsonString = File.ReadAllText(confFile);
+                    IpFromJSon = JsonUtility.FromJson<URLConfig>(m_JsonString);
+                    RosBridgeServerUrl = IpFromJSon.URL;
+                }
+                else {
+                    RosBridgeServerUrl = "ws://127.0.0.1:9090";
+                }
                 new Thread(ConnectAndWait).Start();
             }
             catch (Exception)

@@ -30,52 +30,52 @@ public class SpawnPoint : MonoBehaviour
         //Debug.Log("Found file:" + confFile);
         var confFile = Application.streamingAssetsPath+"/InitialScene.json";
         //var m_JsonString = File.ReadAllText("/home/sload/git/fromgameuser/bobcatRocks/Assets/StreamingAssets/InitialScene.json");
-        var m_JsonString = File.ReadAllText(confFile);
-        ObjectList = JsonUtility.FromJson<ObjList>(m_JsonString);
+        if (File.Exists(confFile)){
+            var m_JsonString = File.ReadAllText(confFile);
+            ObjectList = JsonUtility.FromJson<ObjList>(m_JsonString);
 
-        var objListLen = ObjectList.Objects.Count;
-        Debug.Log("Found " + objListLen.ToString() + " objects");
+            var objListLen = ObjectList.Objects.Count;
+            Debug.Log("Found " + objListLen.ToString() + " objects");
 
 
-        foreach (var obj in ObjectList.Objects)
+            foreach (var obj in ObjectList.Objects)
 
-        {
-            RaycastHit hit;
-
-            Vector3 ShootRayFrom = new Vector3(obj.Position.x, 1000, obj.Position.z);
-            Ray ray = new Ray(ShootRayFrom, Vector3.down);
-
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
+                RaycastHit hit;
 
+                Vector3 ShootRayFrom = new Vector3(obj.Position.x, 1000, obj.Position.z);
+                Ray ray = new Ray(ShootRayFrom, Vector3.down);
 
-                GameObject go = Instantiate(Resources.Load(obj.Name) as GameObject);
-
-                if (obj.Name == "BobCat")
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity))
                 {
-                    Target.ExaminedObjects = go.transform;
-                    Target.Center();
+
+
+                    GameObject go = Instantiate(Resources.Load(obj.Name) as GameObject);
+
+                    if (obj.Name == "BobCat")
+                    {
+                        Target.ExaminedObjects = go.transform;
+                        Target.Center();
+                    }
+
+                    go.name = obj.Id;
+
+                    go.transform.position = new Vector3(obj.Position.x, hit.point.y + 0.3f, obj.Position.z);
+                    go.transform.rotation = obj.Rotation;
+                    go.transform.localScale = obj.Scale;
+                    Debug.Log("The given " + obj.Name + " position point is here: "+ go.transform.position);
+
+                } else {
+
+                    Debug.LogError("The given " + obj.Name + " postion point is out of boundary, please try diffrent position ");
                 }
 
-                go.name = obj.Id;
-
-                go.transform.position = new Vector3(obj.Position.x, hit.point.y + 0.3f, obj.Position.z);
-                go.transform.rotation = obj.Rotation;
-                go.transform.localScale = obj.Scale;
-                Debug.Log("The given " + obj.Name + " position point is here: "+ go.transform.position);
 
             }
-            else
-            {
-
-                Debug.LogError("The given " + obj.Name + " postion point is out of boundary, please try diffrent position ");
-            }
-
-
         }
 
         // GenerateTerrain(Terrain, hm);// RAndom Terrain
-    }
+    } //Awake
 
     // Update is called once per frame
 

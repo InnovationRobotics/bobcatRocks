@@ -17,7 +17,7 @@ namespace AGXUnity.Model
             Tilt
         }
 
-        public bool ManualInput;
+        public bool ManualInput = false;
         [HideInInspector]
         public WheelLoader WheelLoader
         {

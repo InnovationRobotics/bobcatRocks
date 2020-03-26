@@ -23,7 +23,7 @@ MonoBehaviour:
   m_secondarySeparationDeadloadLimit: 0.8
   m_penetrationDepthThreshold: 0.2
   m_penetrationForceScaling: 1
-  m_maxPenetrationForce: Infinity
+  m_maxPenetrationForce: 0
   m_removeContacts: 0
   m_primaryExcavationSettings:
     Enabled: 1

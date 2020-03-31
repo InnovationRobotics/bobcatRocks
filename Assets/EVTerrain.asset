@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e817ad767e5d7cb48bc672a10e654626, type: 3}
+  m_Name: EVTerrain
+  m_EditorClassIdentifier: 
+  m_density: 1400
+  m_maximumDensity: 2000
+  m_youngsModulus: 50000000
+  m_poissonsRatio: 0.01
+  m_frictionAngle: 43
+  m_cohesion: 12000
+  m_dilatancyAngle: 13
+  m_swellFactor: 1.28
+  m_hardeningConstantKE: 1
+  m_hardeningConstantNE: 0.083333336
+  m_preconsolidationStress: 98000
+  m_bankStatePhi: 0.6666667
+  m_compressionIndex: 0.11
+  m_compactionTimeRelaxationConstant: 0.05
+  m_stressCutOffFraction: 0.01
+  m_angleOfReposeCompactionRate: 24
+  m_particleYoungsModulus: 10000000
+  m_particleRestitution: 0
+  m_particleSurfaceFriction: 0.4
+  m_particleRollingResistance: 0.1
+  m_particleCohesion: 200
+  m_particleTerrainYoungsModulus: 100000000
+  m_particleTerrainSurfaceFriction: 0.7
+  m_particleTerrainRestitution: 0
+  m_particleTerrainRollingResistance: 0.7
+  m_particleTerrainCohesion: 200
+  m_maximumContactDepth: 1
+  m_depthDecayFactor: 2
+  m_depthIncreaseFactor: 1
+  m_maximumAggregateNormalForce: Infinity
+  m_aggregateStiffnessMultiplier: 0.05

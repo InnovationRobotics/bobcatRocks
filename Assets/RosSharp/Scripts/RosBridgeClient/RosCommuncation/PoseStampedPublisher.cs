@@ -22,6 +22,7 @@ namespace RosSharp.RosBridgeClient
         public Transform PublishedTransform;
         public string FrameId = "Unity";
 
+
         private Messages.Geometry.PoseStamped message;
 
         protected override void Start()
@@ -63,7 +64,10 @@ namespace RosSharp.RosBridgeClient
             geometryPoint.x = position.x;
             geometryPoint.y = position.y;
             geometryPoint.z = position.z;
-
+            if (UiText)
+            {
+                UiText.text = " X:" + transform.position.x + " Y: " + transform.position.y + " Z: " + transform.position.z;
+            }
             // Debug.Log("position " + transform.position.x + " " + transform.position.y + " " + transform.position.z);
             return geometryPoint;
         }

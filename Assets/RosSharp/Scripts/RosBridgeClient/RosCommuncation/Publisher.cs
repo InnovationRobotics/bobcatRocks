@@ -14,6 +14,7 @@ limitations under the License.
 */
 
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace RosSharp.RosBridgeClient
 {
@@ -22,6 +23,7 @@ namespace RosSharp.RosBridgeClient
     {
         public string Topic;
         private string publicationId;
+        public Text UiText;
 
         protected virtual void Start()
         {

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
-#if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
+#if ENABLE_INPUT_SYSTEM
+
 #endif
 
 namespace AGXUnity.Model

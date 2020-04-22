@@ -28,7 +28,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
-    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -37,7 +37,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
-    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
     <NoConfig>true</NoConfig>
@@ -375,27 +375,6 @@
     </Reference>
     <Reference Include="AssetStoreToolsExtra">
       <HintPath>C:/UnityProjects/bobcat/Assets/BOBCATMODEL/AssetStoreTools/Editor/AssetStoreToolsExtra.dll</HintPath>
-    </Reference>
-    <Reference Include="DnsClient">
-      <HintPath>C:/UnityProjects/bobcat/Assets/Plugins/DnsClient.dll</HintPath>
-    </Reference>
-    <Reference Include="MongoDB.Bson">
-      <HintPath>C:/UnityProjects/bobcat/Assets/Plugins/MongoDB.Bson.dll</HintPath>
-    </Reference>
-    <Reference Include="MongoDB.Driver.Core">
-      <HintPath>C:/UnityProjects/bobcat/Assets/Plugins/MongoDB.Driver.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="MongoDB.Driver">
-      <HintPath>C:/UnityProjects/bobcat/Assets/Plugins/MongoDB.Driver.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpCompress">
-      <HintPath>C:/UnityProjects/bobcat/Assets/Plugins/SharpCompress.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Buffers">
-      <HintPath>C:/UnityProjects/bobcat/Assets/Plugins/System.Buffers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ServiceProcess">
-      <HintPath>C:/UnityProjects/bobcat/Assets/Plugins/System.ServiceProcess.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json.Bson">
       <HintPath>C:/UnityProjects/bobcat/Assets/RosSharp/Plugins/Newtonsoft.Json.Bson.dll</HintPath>

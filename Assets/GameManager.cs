@@ -10,8 +10,11 @@ public class GameManager : Subscriber<RosSharp.RosBridgeClient.Messages.Sensor.J
     public static GameManager Instance;
 
     private TankDriver tankDriver;
+    public DLDriver DlDriver;
+    public DLDriveJoy DlDriveJoy;
 
     public bool ManualInput;
+    public bool DriverInput;
 
     void Awake()
     {
@@ -47,8 +50,17 @@ public class GameManager : Subscriber<RosSharp.RosBridgeClient.Messages.Sensor.J
     public void ResetScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+
     }
 
+
+    public void ToggleCOntrollerInput()
+    {
+        DriverInput = !DriverInput;
+        DlDriveJoy.enabled = DriverInput;
+        DlDriver.enabled = !DriverInput;
+    }
 
 
 

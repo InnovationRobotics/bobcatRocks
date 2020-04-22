@@ -28,7 +28,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
-    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -37,7 +37,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
-    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
     <NoConfig>true</NoConfig>
@@ -74,21 +74,11 @@
     <Compile Include="Assets\BOBCATMODEL\_bobcatScripts\RigidBodyIterations.cs" />
     <Compile Include="Assets\BOBCATMODEL\_bobcatScripts\Vehicle\TankDriver.cs" />
     <Compile Include="Assets\cameraSmoothFollow.cs" />
-    <Compile Include="Assets\DataBaseMongo.cs" />
     <Compile Include="Assets\DLDriveJoy.cs" />
     <Compile Include="Assets\DLDriver.cs" />
     <Compile Include="Assets\GameManager.cs" />
     <Compile Include="Assets\GrabRobil.cs" />
     <Compile Include="Assets\JoytickMsg.cs" />
-    <Compile Include="Assets\MonogoScripts\DBFilterCreator.cs" />
-    <Compile Include="Assets\MonogoScripts\Enums.cs" />
-    <Compile Include="Assets\MonogoScripts\FilterElement.cs" />
-    <Compile Include="Assets\MonogoScripts\KeyAttribute.cs" />
-    <Compile Include="Assets\MonogoScripts\MongoDBHelper.cs" />
-    <Compile Include="Assets\MonogoScripts\Obstacle.cs" />
-    <Compile Include="Assets\MonogoScripts\ReceivedCommand.cs" />
-    <Compile Include="Assets\MonogoScripts\Report.cs" />
-    <Compile Include="Assets\MonogoScripts\WayPoint.cs" />
     <Compile Include="Assets\MoveRobil.cs" />
     <Compile Include="Assets\RosSharp\Scripts\Extensions\StandardHeaderExtensions.cs" />
     <Compile Include="Assets\RosSharp\Scripts\Extensions\TransformExtensions.cs" />
@@ -587,6 +577,10 @@
     <Compile Include="Assets\test\FibonacciGoal.cs" />
     <Compile Include="Assets\test\FibonacciResult.cs" />
     <Compile Include="Assets\UIDisplay.cs" />
+    <Compile Include="Assets\Velodyne\RayCast_Velodyne32.cs" />
+    <Compile Include="Assets\Velodyne\VelodyneConfig.cs" />
+    <Compile Include="Assets\Velodyne\VelodyneFrame.cs" />
+    <Compile Include="Assets\Velodyne\VelodyneWrapper.cs" />
     <None Include="Assets\RosSharp\Plugins\Newtonsoft.Json.xml" />
     <None Include="Assets\Runtime Transform Gizmos\Scripts\Runtime Package Common\Resources\Shaders\RTApp_TorusCull.shader" />
     <None Include="Assets\Runtime Transform Gizmos\Scripts\Runtime Package Common\Resources\Shaders\RTApp_XZGrid_Plane.shader" />
@@ -841,27 +835,6 @@
     </Reference>
     <Reference Include="agxDotNet">
       <HintPath>C:/UnityProjects/bobcat/Assets/AGXUnity/Plugins/x86_64/agxDotNet.dll</HintPath>
-    </Reference>
-    <Reference Include="DnsClient">
-      <HintPath>C:/UnityProjects/bobcat/Assets/Plugins/DnsClient.dll</HintPath>
-    </Reference>
-    <Reference Include="MongoDB.Bson">
-      <HintPath>C:/UnityProjects/bobcat/Assets/Plugins/MongoDB.Bson.dll</HintPath>
-    </Reference>
-    <Reference Include="MongoDB.Driver.Core">
-      <HintPath>C:/UnityProjects/bobcat/Assets/Plugins/MongoDB.Driver.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="MongoDB.Driver">
-      <HintPath>C:/UnityProjects/bobcat/Assets/Plugins/MongoDB.Driver.dll</HintPath>
-    </Reference>
-    <Reference Include="SharpCompress">
-      <HintPath>C:/UnityProjects/bobcat/Assets/Plugins/SharpCompress.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Buffers">
-      <HintPath>C:/UnityProjects/bobcat/Assets/Plugins/System.Buffers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ServiceProcess">
-      <HintPath>C:/UnityProjects/bobcat/Assets/Plugins/System.ServiceProcess.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json.Bson">
       <HintPath>C:/UnityProjects/bobcat/Assets/RosSharp/Plugins/Newtonsoft.Json.Bson.dll</HintPath>

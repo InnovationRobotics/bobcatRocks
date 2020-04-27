@@ -135,7 +135,7 @@ namespace AGXUnity.Model
         {
             if (ManualInput)
             {
-                SetSpeed(WheelLoader.SteeringHinge, -Steer);
+             // SetSpeed(WheelLoader.SteeringHinge, -Steer);
 
                 var speed = WheelLoader.Speed;
                 var throttle = Throttle;

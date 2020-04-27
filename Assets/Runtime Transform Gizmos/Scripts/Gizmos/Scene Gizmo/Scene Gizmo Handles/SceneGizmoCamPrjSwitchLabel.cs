@@ -74,7 +74,7 @@ namespace RTG
         private void OnGizmoPreUpdateBegin(Gizmo gizmo)
         {
             _handle.Is2DVisible = _sceneGizmo.LookAndFeel.IsCamPrjSwitchLabelVisible;
-            UpdateTransform();
+          //  UpdateTransform();
         }
 
         private void UpdateTransform()

@@ -49,6 +49,7 @@ namespace RosSharp.RosBridgeClient
                 IpFromJSon = JsonUtility.FromJson<URLConfig>(m_JsonString);
 
                 RosBridgeServerUrl = IpFromJSon.URL;
+                if(IpFromJSon.ConnectToRos)
                 new Thread(ConnectAndWait).Start();
             }
             catch (Exception)

@@ -1,3 +1,8 @@
+Release 1.1.1:
+---------------------------------------------
+[Bug Fix]	  : fixed bug which was preventing gizmos from being dragged 
+			    for certain camera angles.
+
 Release 1.1:
 ---------------------------------------------
 [New Feature] : added 'SetAxesLinesHoverable' function to the 'MoveGizmo' class;

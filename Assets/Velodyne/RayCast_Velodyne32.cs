@@ -57,7 +57,7 @@ public class RayCast_Velodyne32 : MonoBehaviour
     void Awake()
     {
         var GoInstance = GameManager.Instance;
-        VelodyneDataFilePath = FileFinder.Find(Application.streamingAssetsPath, "Velodyne32" + ".json");  //todo Set In Outside File
+        VelodyneDataFilePath = FileFinder.Find(Application.streamingAssetsPath, "Velodyne" + ".json");  //todo Set In Outside File
                                                                                                           //   ICD_ConfigFile = GoInstance.PathsAndConfigRef.PathToLoadVelodyneConfig;  //todo Set In Outside File
                                                                                                           //json parser ***all data commeing from json file 
         m_JsonString = File.ReadAllText(VelodyneDataFilePath);
@@ -112,7 +112,7 @@ public class RayCast_Velodyne32 : MonoBehaviour
         if (_sendDataOnIcd)
         {
             Debug.Log(ConfigRef.Ip);
-            vel32ICDinterface = new VelodyneWrapper(ConfigRef.Ip, ConfigRef.Port, ConfigRef.ReturnMode, ConfigRef.DataSource, false);
+            vel32ICDinterface = new VelodyneWrapper(ConfigRef.Ip, ConfigRef.Port, ConfigRef.ReturnMode, ConfigRef.DataSource, true);
             //vel32ICDinterface = new VelodyneWrapper(ICD_ConfigFile, false);
         }
     }

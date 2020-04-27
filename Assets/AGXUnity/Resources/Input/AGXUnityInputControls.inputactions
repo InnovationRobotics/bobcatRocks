@@ -1,5 +1,5 @@
 {
-    "name": "Controls",
+    "name": "AGXUnityInputControls",
     "maps": [
         {
             "name": "WheelLoader",
@@ -49,17 +49,6 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "a98332b1-710c-4ba3-89dd-0a2d0886a46b",
-                    "path": "<Gamepad>/rightTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Throttle",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "04fff7bc-3642-42c6-82e6-52965091d7ac",
                     "path": "<Keyboard>/w",
                     "interactions": "",
@@ -71,34 +60,12 @@
                 },
                 {
                     "name": "",
-                    "id": "5e42c2fc-cb47-495b-bfef-f10cc21e333e",
-                    "path": "<Gamepad>/leftTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Brake",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "02117bc4-12c8-4510-88bf-78532ff47ceb",
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Brake",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6fd521c0-04f5-4faf-b8cf-d16b3b1b1d58",
-                    "path": "<Gamepad>/leftStick/x",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Steer",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -126,17 +93,6 @@
                 },
                 {
                     "name": "",
-                    "id": "37a53456-a98c-4357-abc0-db411874014d",
-                    "path": "<Gamepad>/leftStick/y",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Elevate",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "eed38751-05fa-447e-8ee5-36d4ea0dc6de",
                     "path": "<Keyboard>/upArrow",
                     "interactions": "",
@@ -154,17 +110,6 @@
                     "processors": "Invert",
                     "groups": "",
                     "action": "Elevate",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b59d1cfc-b73b-4925-b406-2e723ea56eab",
-                    "path": "<Gamepad>/rightStick/x",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Tilt",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

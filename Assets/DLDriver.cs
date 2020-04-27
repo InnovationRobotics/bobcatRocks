@@ -91,47 +91,101 @@ public class DLDriver : Subscriber<RosSharp.RosBridgeClient.Messages.Mavros.Over
 
     protected override void ReceiveMessage(OverrideRCIn message)
     {
+        //Throttle 
         //min 1100
         //max 1900
 
-        //0 Steer
-        //2 Throttle
-        //1 Arm
+
+        //  Steer_Blade
+        //min 1200-1000 Left   -1
+        //max 1800-2000 Right  1             
+        //1500 Stop
+
+        //arm
+        // 1500 Stop
+        // Min 1900-2100  -1
+        // Max 1100-900   1
+
+        //2 Steer  
+        //0 Throttle 
+        //1 Arm   
         //3 Blade
         //5 oilpump
         //6 gear
 
-        if (ReturnClampedNumber(message.channels[2]) > 0) //Right prees
+        if (ReturnClampedNumberThrottle(message.channels[0]) > 0) //Right prees
         {
-            Throttle = message.channels[2];
+            Throttle = message.channels[0];
 
-            WheelLoaderInputController.throttle = ReturnClampedNumber(Throttle);
+            WheelLoaderInputController.throttle = ReturnClampedNumberThrottle(Throttle);
             WheelLoaderInputController.brake = 0;
 
         }
-        if (ReturnClampedNumber(message.channels[2]) == 0) //Left press
+        if (ReturnClampedNumberThrottle(message.channels[0]) == 0) //brack press
         {
             WheelLoaderInputController.brake = 0;
             WheelLoaderInputController.throttle = 0;
         }
 
-        if (ReturnClampedNumber(message.channels[2]) < 0) //Left press
+        if (ReturnClampedNumberThrottle(message.channels[0]) < 0) //Left press
         {
-            Brake = message.channels[2];
+            Brake = message.channels[0];
 
-            WheelLoaderInputController.brake = Mathf.Abs(ReturnClampedNumber(Brake));
+            WheelLoaderInputController.brake = Mathf.Abs(ReturnClampedNumberThrottle(Brake));
             WheelLoaderInputController.throttle = 0;
         }
 
 
-        WheelLoaderInputController.steer = ReturnClampedNumber(message.channels[0]);//Sterring
-        WheelLoaderInputController.elevate = ReturnClampedNumber(message.channels[1]); //Arm Up/down
-        WheelLoaderInputController.tilt = ReturnClampedNumber(message.channels[3]); //Loader Up/Down
+        WheelLoaderInputController.steer = ReturnClampedNumberSteer_Blade(message.channels[2]);//Sterring
+        WheelLoaderInputController.elevate = ReturnClampedNumberArm(message.channels[1]); //Arm Up/down
+        WheelLoaderInputController.tilt = ReturnClampedNumberSteer_Blade(message.channels[3]); //Loader Up/Down
     }
 
-    public float ReturnClampedNumber(float val)
+    public float ReturnClampedNumberThrottle(float val)
     {
         val = (val / 400) - 3.75f;
         return val;
     }
+
+    public float ReturnClampedNumberSteer_Blade(float val)
+    {
+        if (val == 1500)
+            return 0;
+        else
+        {
+            if (val >= 1800 && val <= 2000)
+            {
+                val = 0.00495f * val - 8.9f;
+
+            }
+          
+            else if(val >= 1000 && val <= 1200)
+            {
+                val = 0.00495f * val - 5.95f;
+            }
+            return -val;
+        }
+       
+    }
+
+    public float ReturnClampedNumberArm(float val)
+    {
+        if (val == 1500)
+            return 0;
+        else
+        {
+            if (val >= 1900 && val <= 2100)
+            {
+                val = -0.00495f * val + 9.395f;
+
+            }
+            else if (val >= 900 && val <= 1100)
+            {
+                val = -0.00495f * val + 5.455f;
+            }
+            return -val;
+        }
+
+    }
+
 }

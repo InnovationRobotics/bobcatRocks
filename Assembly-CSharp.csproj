@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\ArmHightPublisher.cs" />
+    <Compile Include="Assets\BladePichPublisher.cs" />
     <Compile Include="Assets\BOBCATMODEL\_bobcatScripts\$PID.cs" />
     <Compile Include="Assets\BOBCATMODEL\_bobcatScripts\BobcatAnimation.cs" />
     <Compile Include="Assets\BOBCATMODEL\_bobcatScripts\CenterOfMass.cs" />

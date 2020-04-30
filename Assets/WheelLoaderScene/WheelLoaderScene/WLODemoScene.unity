@@ -4212,6 +4212,46 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: 0}
+--- !u!1 &196389300 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8541433829234371971, guid: 76484931528985446b59c2ab4b5fa4e3,
+    type: 3}
+  m_PrefabInstance: {fileID: 91791242}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &196389305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 196389300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e444f70a89651ed4bb879d3b23868ba4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Topic: /arm/height
+  UiText: {fileID: 0}
+  ValueToPublish: 0
+  LayerMask:
+    serializedVersion: 2
+    m_Bits: 1024
+--- !u!114 &196389306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 196389300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff98778ae051cfd40a6e4effdf851ebd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Timeout: 10
+  Serializer: 0
+  Protocol: 0
+  RosBridgeServerUrl: ws://192.168.100.61:9090
 --- !u!114 &220699665 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3446550787779525335, guid: 76484931528985446b59c2ab4b5fa4e3,
@@ -4803,15 +4843,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 437741533}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e444f70a89651ed4bb879d3b23868ba4, type: 3}
+  m_Script: {fileID: 11500000, guid: 437d5eb940a5de949b2ba72c1c0f7eb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Topic: /arm/height
+  Topic: /arm/shortHeight
   UiText: {fileID: 0}
   ValueToPublish: 0
-  LayerMask:
-    serializedVersion: 2
-    m_Bits: 1024
 --- !u!114 &437741537
 MonoBehaviour:
   m_ObjectHideFlags: 0

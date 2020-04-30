@@ -19,12 +19,7 @@ public class DLDriver : Subscriber<RosSharp.RosBridgeClient.Messages.Mavros.Over
         base.Start();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-
-    }
+   
 
 
     //protected override void ReceiveMessage(Joy message)

@@ -78,6 +78,7 @@ namespace AGXUnity.Model
             get { return m_throttle; }
             set
             {
+                
                 m_throttle = value;
                 if (Engine != null)
                     Engine.setThrottle(m_throttle);

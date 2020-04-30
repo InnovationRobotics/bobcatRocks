@@ -210,14 +210,14 @@
     <Compile Include="Assets\AGXUnity\Editor\CustomEditors\AGXUnity+WireWinchEditor.cs" />
     <None Include="Assets\AGXUnity\Editor\Data\dep_fileID_types.txt" />
     <None Include="Assets\AGXUnity\Editor\Data\keep.txt" />
-    <Reference Include="UnityEngine.UI">
-      <HintPath>C:/Work/git/bobcatRocks/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>C:/Work/git/bobcatRocks/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Tilemap.Editor">
       <HintPath>C:/Work/git/bobcatRocks/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>C:/Work/git/bobcatRocks/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.TestRunner">
       <HintPath>C:/Work/git/bobcatRocks/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>

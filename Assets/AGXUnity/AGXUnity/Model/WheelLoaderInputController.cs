@@ -113,7 +113,7 @@ namespace AGXUnity.Model
 
             WheelLoader.SteeringHinge.GetController<TargetSpeedController>().Enable = false;
             WheelLoader.SteeringHinge.GetController<LockController>().Enable = true;
-
+          
             return true;
         }
 
@@ -133,9 +133,11 @@ namespace AGXUnity.Model
 
         private void Update()
         {
+
             if (ManualInput)
             {
-             // SetSpeed(WheelLoader.SteeringHinge, -Steer);
+
+                SetSpeed(WheelLoader.SteeringHinge, -Steer);
 
                 var speed = WheelLoader.Speed;
                 var throttle = Throttle;
@@ -189,6 +191,7 @@ namespace AGXUnity.Model
             }
             else
             {
+
                 SetSpeed(WheelLoader.SteeringHinge, -steer);
                 var speed = WheelLoader.Speed;
                 var idleSpeed = 0.05f;

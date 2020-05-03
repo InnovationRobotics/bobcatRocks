@@ -10,8 +10,10 @@ namespace AGXUnityEditor
 {
   public static class TopMenu
   {
-    public static string AGXUserManualURL = "https://www.algoryx.se/documentation/complete/agx/tags/latest/UserManual/source/";
-    public static string AGXAPIReferenceURL = "https://www.algoryx.se/documentation/complete/agx/tags/latest/";
+    public static readonly string AGXDynamicsForUnityManualURL = "https://us.download.algoryx.se/AGXUnity/documentation/current/";
+    public static readonly string AGXDynamicsForUnityExamplesURL = "https://us.download.algoryx.se/AGXUnity/documentation/current/examples.html";
+    public static readonly string AGXUserManualURL = "https://www.algoryx.se/documentation/complete/agx/tags/latest/UserManual/source/";
+    public static readonly string AGXAPIReferenceURL = "https://www.algoryx.se/documentation/complete/agx/tags/latest/";
 
     #region Shapes
     private static GameObject CreateShape<T>( MenuCommand command )
@@ -70,6 +72,27 @@ namespace AGXUnityEditor
     public static GameObject CreateMesh( MenuCommand command )
     {
       return Selection.activeGameObject = CreateShape<Mesh>( command );
+    }
+
+    [MenuItem( "AGXUnity/Collide/HollowCylinder", priority = 20 )]
+    [MenuItem( "GameObject/AGXUnity/Collide/Hollow Cylinder", validate = false, priority = 10 )]
+    public static GameObject CreateHollowCylinder( MenuCommand command )
+    {
+      return Selection.activeGameObject = CreateShape<HollowCylinder>( command );
+    }
+
+    [MenuItem( "AGXUnity/Collide/Cone", priority = 20 )]
+    [MenuItem( "GameObject/AGXUnity/Collide/Cone", validate = false, priority = 10 )]
+    public static GameObject CreateCone( MenuCommand command )
+    {
+      return Selection.activeGameObject = CreateShape<Cone>( command );
+    }
+
+    [MenuItem( "AGXUnity/Collide/HollowCone", priority = 20 )]
+    [MenuItem( "GameObject/AGXUnity/Collide/Hollow Cone", validate = false, priority = 10 )]
+    public static GameObject CreateHollowCone( MenuCommand command )
+    {
+      return Selection.activeGameObject = CreateShape<HollowCone>( command );
     }
     #endregion
 
@@ -145,6 +168,27 @@ namespace AGXUnityEditor
     public static GameObject CreateRigidBodyMesh( MenuCommand command )
     {
       return Selection.activeGameObject = CreateRigidBody<Mesh>( command );
+    }
+
+    [MenuItem( "AGXUnity/Rigid body/Hollow Cylinder", priority = 20 )]
+    [MenuItem( "GameObject/AGXUnity/Rigid body/Hollow Cylinder", validate = false, priority = 10 )]
+    public static GameObject CreateRigidBodyHollowCylinder( MenuCommand command )
+    {
+      return Selection.activeGameObject = CreateRigidBody<HollowCylinder>( command );
+    }
+
+    [MenuItem( "AGXUnity/Rigid body/Cone", priority = 20 )]
+    [MenuItem( "GameObject/AGXUnity/Rigid body/Cone", validate = false, priority = 10 )]
+    public static GameObject CreateRigidBodyCone( MenuCommand command )
+    {
+      return Selection.activeGameObject = CreateRigidBody<Cone>( command );
+    }
+
+    [MenuItem( "AGXUnity/Rigid body/Hollow Cone", priority = 20 )]
+    [MenuItem( "GameObject/AGXUnity/Rigid body/Hollow Cone", validate = false, priority = 10 )]
+    public static GameObject CreateRigidBodyHollowCone( MenuCommand command )
+    {
+      return Selection.activeGameObject = CreateRigidBody<HollowCone>( command );
     }
 
     [MenuItem( "AGXUnity/Rigid body/Empty", priority = 31 )]
@@ -263,7 +307,7 @@ namespace AGXUnityEditor
     {
       var terrainData = new TerrainData()
       {
-        size = new Vector3( 60 / 8.0f, 25, 60 / 8.0f ),
+        size = new Vector3( 60 / 8.0f, 45, 60 / 8.0f ),
         heightmapResolution = 257
       };
 #if UNITY_2018_1_OR_NEWER
@@ -382,78 +426,49 @@ namespace AGXUnityEditor
     }
     #endregion
 
-    #region Documentation
-    [MenuItem("AGXUnity/AGX Dynamics Manual", priority = 2001)]
+    #region Documentation, About and Update
+    [MenuItem( "AGXUnity/AGX Dynamics for Unity Manual", priority = 2001 )]
+    public static void AGXDynamicsForUnityManual()
+    {
+      Application.OpenURL( AGXDynamicsForUnityManualURL );
+    }
+
+    [MenuItem( "AGXUnity/AGX Dynamics for Unity Examples", priority = 2002 )]
+    public static void AGXDynamicsForUnityExamples()
+    {
+      Application.OpenURL( AGXDynamicsForUnityExamplesURL );
+    }
+
+    [MenuItem("AGXUnity/AGX Dynamics Manual", priority = 2020)]
     public static void AGXManual()
     {
       Application.OpenURL(AGXUserManualURL);
     }
 
-    [MenuItem("AGXUnity/AGX Dynamics API Reference", priority = 2002)]
+    [MenuItem("AGXUnity/AGX Dynamics API Reference", priority = 2021)]
     public static void AGXAPI()
     {
       Application.OpenURL(AGXAPIReferenceURL);
     }
 
-    // Separator through priority
-
-    [MenuItem("AGXUnity/About AGXUnity", priority = 2020)]
-    public static void Documentation()
+    [MenuItem("AGXUnity/About AGX Dynamics for Unity", priority = 2040)]
+    public static void AboutWindow()
     {
-      DocumentationWindow.Init();
+      Windows.AboutWindow.Open();
+    }
+
+    [MenuItem( "AGXUnity/Check for Updates...", priority = 2060, validate = true )]
+    public static bool CheckForUpdatesWindowValidater()
+    {
+      return PackageUpdateHandler.FindCurrentVersion().IsValid;
+    }
+
+    [MenuItem( "AGXUnity/Check for Updates...", priority = 2060 )]
+    public static void CheckForUpdatesWindow()
+    {
+      Windows.CheckForUpdatesWindow.Open();
     }
     #endregion
-  }
-
-  public class DocumentationWindow : EditorWindow
-  {
-    private static Texture2D m_logo;
-
-    // Add menu named "My Window" to the Window menu
-    public static void Init()
-    {
-      m_logo = AssetDatabase.LoadAssetAtPath( "Assets/Algoryx_Logotyp_White_Orange_RGB_72ppi.png", typeof( Texture2D ) ) as Texture2D;
-
-      // Get existing open window or if none, make a new one:
-      DocumentationWindow window = EditorWindow.GetWindowWithRect<DocumentationWindow>( new Rect( 100, 100, 400, 360 ), true, "AGX Dynamics for Unity" );
-      window.Show();
-    }
-
-    void OnGUI()
-    {
-      GUILayout.BeginHorizontal( GUILayout.Width( 570 ) );
-      GUILayout.Box( m_logo, AGXUnity.Utils.GUI.Skin.customStyles[ 3 ], GUILayout.Width( 400 ), GUILayout.Height( 100 ) );
-      GUILayout.EndHorizontal();
-
-      EditorGUILayout.SelectableLabel( "© " + System.DateTime.Now.Year + " Algoryx Simulations AB", AGXUnity.Utils.GUI.Skin.customStyles[ 2 ] );
-
-      InspectorGUI.BrandSeparator();
-      GUILayout.Space( 10 );
-
-      EditorGUILayout.SelectableLabel( "Thank you for using AGX Dynamics for Unity!\n\nAGX version: 2.27.1.0", GUILayout.Height( 45 ) );
-
-      GUILayout.Space( 10 );
-      InspectorGUI.BrandSeparator();
-      GUILayout.Space( 10 );
-
-      GUILayout.Label( "Online Documentation", EditorStyles.boldLabel );
-      GUILayout.BeginHorizontal( GUILayout.Width( 200 ) );
-      if ( GUILayout.Button( "  AGX Dynamics user manual", AGXUnity.Utils.GUI.Skin.customStyles[ 1 ] ) ) {
-        Application.OpenURL( TopMenu.AGXUserManualURL );
-      }
-      GUILayout.Label( " - " );
-      if ( GUILayout.Button( "AGX Dynamics API Reference", AGXUnity.Utils.GUI.Skin.customStyles[ 1 ] ) ) {
-        Application.OpenURL( TopMenu.AGXAPIReferenceURL );
-      }
-      GUILayout.EndHorizontal();
-
-      GUILayout.Space( 10 );
-      InspectorGUI.BrandSeparator();
-      GUILayout.Space( 10 );
-
-      GUILayout.Label( "Support", EditorStyles.boldLabel );
-      EditorGUILayout.SelectableLabel( "Please refer to the information received when purchasing your \n license for support contact information." );
-    }
   }
 }
 

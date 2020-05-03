@@ -149,6 +149,17 @@ namespace AGXUnityEditor
       EditorGUI.DrawRect( rect, InspectorGUISkin.BrandColor );
     }
 
+    public static void Separator( float height = 1.0f, float space = 1.0f )
+    {
+      var rect = EditorGUILayout.GetControlRect( GUILayout.Height( space + height ) );
+      rect.height = height;
+      rect.y += space / 2.0f;
+      EditorGUI.DrawRect( rect,
+                          Color.Lerp( BackgroundColor,
+                                      Color.black,
+                                      EditorGUIUtility.isProSkin ? 0.35f : 0.25f ) );
+    }
+
     public static void DashedBrandSeparator( float height = 1.0f, float space = 1.0f )
     {
       var rect = EditorGUILayout.GetControlRect( false, space + height );
@@ -161,6 +172,18 @@ namespace AGXUnityEditor
         EditorGUI.DrawRect( rect, InspectorGUISkin.BrandColor );
         rect.x += 2.0f * dw;
       }
+    }
+
+    public static bool Link( GUIContent content )
+    {
+      content.text = GUI.AddColorTag( content.text, EditorGUIUtility.isProSkin ?
+                                                      InspectorGUISkin.BrandColorBlue :
+                                                      Color.Lerp( InspectorGUISkin.BrandColorBlue,
+                                                                  Color.black,
+                                                                  0.20f ) );
+      var clicked = GUILayout.Button( content, InspectorEditor.Skin.Label );
+      EditorGUIUtility.AddCursorRect( GUILayoutUtility.GetLastRect(), MouseCursor.Link );
+      return clicked;
     }
 
     private static GUIContent s_miscIconButtonContent = new GUIContent();

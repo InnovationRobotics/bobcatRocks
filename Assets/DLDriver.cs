@@ -19,7 +19,7 @@ public class DLDriver : Subscriber<RosSharp.RosBridgeClient.Messages.Mavros.Over
         base.Start();
     }
 
-   
+
 
 
     //protected override void ReceiveMessage(Joy message)
@@ -153,14 +153,14 @@ public class DLDriver : Subscriber<RosSharp.RosBridgeClient.Messages.Mavros.Over
                 val = 0.00495f * val - 8.9f;
 
             }
-          
-            else if(val >= 1000 && val <= 1200)
+
+            else if (val >= 1000 && val <= 1200)
             {
                 val = 0.00495f * val - 5.95f;
             }
             return -val;
         }
-       
+
     }
 
     public float ReturnClampedNumberArm(float val)

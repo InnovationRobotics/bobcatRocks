@@ -35,7 +35,24 @@ namespace AGXUnityEditor.Tools
     public override void OnAdd()
     {
       m_createConstraintData.CreateInitialState( Parent.name );
-      AttachmentFrameTool = new ConstraintAttachmentFrameTool( new AttachmentPair[] { m_createConstraintData.AttachmentPair }, Parent );
+      AttachmentFrameTool = new ConstraintAttachmentFrameTool( new AttachmentPair[]
+                                                               {
+                                                                 m_createConstraintData.AttachmentPair
+                                                               },
+                                                               Parent );
+      AttachmentFrameTool.ReferenceFrameTool.TransformHandleActive = false;
+      // Enabling reference frame transform handle when select tool
+      // is done. When connected frame tool parent is set (first) we
+      // still activate the reference frame transform handle since
+      // this is the default behavior.
+      AttachmentFrameTool.ReferenceFrameTool.OnToolDoneCallback = tool =>
+      {
+        AttachmentFrameTool.ReferenceFrameTool.TransformHandleActive = true;
+      };
+      AttachmentFrameTool.ConnectedFrameTool.OnToolDoneCallback = tool =>
+      {
+        AttachmentFrameTool.ReferenceFrameTool.TransformHandleActive = true;
+      };
     }
 
     public override void OnRemove()
@@ -68,9 +85,17 @@ namespace AGXUnityEditor.Tools
                                                                 skin.TextField );
 
 
+#if UNITY_2018_1_OR_NEWER
+      m_createConstraintData.ConstraintType = (ConstraintType)EditorGUILayout.EnumPopup( GUI.MakeLabel( "Type", true ),
+                                                                                         m_createConstraintData.ConstraintType,
+                                                                                         val => (ConstraintType)val != ConstraintType.Unknown,
+                                                                                         false,
+                                                                                         skin.Popup );
+#else
       m_createConstraintData.ConstraintType = (ConstraintType)EditorGUILayout.EnumPopup( GUI.MakeLabel( "Type", true ),
                                                                                          m_createConstraintData.ConstraintType,
                                                                                          skin.Popup );
+#endif
 
       AttachmentFrameTool.OnPreTargetMembersGUI();
       AttachmentFrameTool.AttachmentPairs[ 0 ].Synchronize();

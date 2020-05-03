@@ -145,6 +145,18 @@ namespace AGXUnityEditor.IO
         }
         subProgress.Tack();
       }
+
+      // If this is a re-import, remove any game object that hasn't been
+      // referenced, i.e., UuidObjectDb.GetOrCreateGameObject hasn't been
+      // called with the UUID of this game object. This doesn't affect game
+      // objects created in the prefab editor since these objects doesn't
+      // have an UUID component, still, other components added to this game
+      // object will be removed as well.
+      var unreferencedGameObjects = FileInfo.ObjectDb.GetUnreferencedGameObjects();
+      foreach ( var unreferencedGameObject in unreferencedGameObjects ) {
+        UnityEngine.Object.DestroyImmediate( unreferencedGameObject, true );
+        EditorUtility.SetDirty( FileInfo.PrefabInstance );
+      }
     }
 
     /// <summary>
@@ -328,11 +340,12 @@ namespace AGXUnityEditor.IO
 
     private GameObject GetOrCreateGameObject( Node node )
     {
-      if ( node.GameObject != null )
+      if ( node.GameObject != null ) {
+        FileInfo.ObjectDb.Ref( node.Uuid );
         return node.GameObject;
+      }
 
-      node.GameObject = FileInfo.ObjectDb.GetGameObject( node.Uuid ) ?? new GameObject();
-      node.GameObject.GetOrCreateComponent<AGXUnity.IO.Uuid>().Native = node.Uuid;
+      node.GameObject = FileInfo.ObjectDb.GetOrCreateGameObject( node.Uuid );
 
       // Is it safe to exit if the node has a parent?
       // I.e., the node has been read from an existing prefab.
@@ -367,6 +380,27 @@ namespace AGXUnityEditor.IO
         var cylinder    = node.GameObject.GetOrCreateComponent<AGXUnity.Collide.Cylinder>();
         cylinder.Radius = Convert.ToSingle( nativeShape.asCylinder().getRadius() );
         cylinder.Height = Convert.ToSingle( nativeShape.asCylinder().getHeight() );
+      }
+      else if ( nativeShapeType == agxCollide.Shape.Type.HOLLOW_CYLINDER ) {
+        var hollowCylinder    = node.GameObject.GetOrCreateComponent<AGXUnity.Collide.HollowCylinder>();
+        hollowCylinder.Thickness = Convert.ToSingle( nativeShape.asHollowCylinder().getThickness() );
+        hollowCylinder.Radius = Convert.ToSingle( nativeShape.asHollowCylinder().getRadius() );
+        hollowCylinder.Height = Convert.ToSingle( nativeShape.asHollowCylinder().getHeight() );
+      }
+      else if (nativeShapeType == agxCollide.Shape.Type.CONE)
+      {
+        var cone = node.GameObject.GetOrCreateComponent<AGXUnity.Collide.Cone>();
+        cone.BottomRadius = Convert.ToSingle(nativeShape.asCone().getBottomRadius());
+        cone.TopRadius = Convert.ToSingle(nativeShape.asCone().getTopRadius());
+        cone.Height = Convert.ToSingle(nativeShape.asCone().getHeight());
+      }
+      else if (nativeShapeType == agxCollide.Shape.Type.HOLLOW_CONE)
+      {
+        var hollowCone = node.GameObject.GetOrCreateComponent<AGXUnity.Collide.HollowCone>();
+        hollowCone.Thickness = Convert.ToSingle(nativeShape.asHollowCone().getThickness());
+        hollowCone.BottomRadius = Convert.ToSingle(nativeShape.asHollowCone().getBottomRadius());
+        hollowCone.TopRadius = Convert.ToSingle(nativeShape.asHollowCone().getTopRadius());
+        hollowCone.Height = Convert.ToSingle(nativeShape.asHollowCone().getHeight());
       }
       else if ( nativeShapeType == agxCollide.Shape.Type.CAPSULE ) {
         var capsule    = node.GameObject.GetOrCreateComponent<AGXUnity.Collide.Capsule>();
@@ -609,7 +643,7 @@ namespace AGXUnityEditor.IO
       float fixedStepTime = Time.fixedDeltaTime;
       float readTimeStep  = Convert.ToSingle( Simulation.getTimeStep() );
       float timeStepRatio = fixedStepTime / readTimeStep;
-      if ( !Mathf.Approximately( timeStepRatio, 1.0f ) ) {
+      if ( !AGXUnity.Utils.Math.Approximately( timeStepRatio, 1.0f ) ) {
         foreach ( var ec in constraint.ElementaryConstraints ) {
           foreach ( var rowData in ec.RowData ) {
             if ( rowData.Compliance < -float.Epsilon ) {

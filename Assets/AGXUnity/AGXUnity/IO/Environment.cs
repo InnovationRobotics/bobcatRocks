@@ -72,10 +72,35 @@ namespace AGXUnity.IO
     public static void AddToPath( string dir )
     {
       var path = System.Environment.GetEnvironmentVariable( "PATH" );
-      if ( !path.Contains( dir ) )
+      if ( !path.Split( Path.PathSeparator ).Any( p => p == dir ) )
         System.Environment.SetEnvironmentVariable( "PATH",
                                                    path + Path.PathSeparator + dir,
                                                    System.EnvironmentVariableTarget.Process );
+    }
+
+    /// <summary>
+    /// Checks if <paramref name="dir"/> is in PATH.
+    /// </summary>
+    /// <param name="dir">Directory to check.</param>
+    /// <returns>True if <paramref name="dir"/> is in PATH, otherwise false.</returns>
+    public static bool IsInPath( string dir )
+    {
+      return System.Environment.GetEnvironmentVariable( "PATH" ).Split( Path.PathSeparator ).Any( p => p == dir );
+    }
+
+    /// <summary>
+    /// Remove given <paramref name="dir"/> from PATH.
+    /// </summary>
+    /// <param name="dir">Directory to remove from PATH.</param>
+    /// <returns>True if <paramref name="dir"/> was successfully removed from PATH, otherwise false.</returns>
+    public static bool RemoveFromPath( string dir )
+    {
+      var pathList = System.Environment.GetEnvironmentVariable( "PATH" ).Split( ';' ).ToList();
+      if ( !pathList.Remove( dir ) )
+        return false;
+      System.Environment.SetEnvironmentVariable( "PATH",
+                                                 string.Join( ";", pathList ) );
+      return true;
     }
 
     /// <summary>
@@ -145,9 +170,6 @@ namespace AGXUnity.IO
 
     /// <summary>
     /// Plugins path where the AGX Dynamics native modules are located.
-    /// NOTE: Due to limitations in dll-loading in Unity version earlier
-    ///       than 2019.2.4, the dlls are copied to the root folder for
-    ///       2019.2.3 and earlier.
     /// </summary>
     /// <param name="dataPath">Path to player data folder - nameOfExecutable_Data.</param>
     /// <returns>Path to the plugins folder.</returns>

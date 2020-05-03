@@ -14,6 +14,7 @@ namespace AGXUnityEditor
     FindTransformGivenEdge,
     CreateShapeGivenVisual,
     CreateConstraint,
+    CreateRigidBody,
     DisableCollisions,
     CreateVisual,
     ShapeResize,
@@ -44,7 +45,8 @@ namespace AGXUnityEditor
     Sphere,
     Capsule,
     Cylinder,
-    Mesh
+    Mesh,
+    ResetDefault
   }
 
   public static class IconManager
@@ -131,12 +133,34 @@ namespace AGXUnityEditor
       return m_toolIcons[ (int)toolIcon ];
     }
 
+    /// <summary>
+    /// Icon texture given misc icon type.
+    /// </summary>
+    /// <param name="miscIcon">Misc icon type.</param>
+    /// <returns>Misc icon texture.</returns>
     public static Texture2D GetIcon( MiscIcon miscIcon )
     {
       if ( m_miscIcons == null )
         LoadMiscIconContent();
 
       return m_miscIcons[ (int)miscIcon ];
+    }
+
+    /// <summary>
+    /// AGX Dynamics for Unity (AGXUnity) current official logo.
+    /// </summary>
+    /// <returns>AGXUnity logo texture.</returns>
+    public static Texture2D GetAGXUnityLogo()
+    {
+      if ( m_logo == null )
+        m_logo = EditorGUIUtility.Load( IO.Utils.AGXUnityEditorDirectory +
+                                        Path.DirectorySeparatorChar +
+                                        "Data" +
+                                        Path.DirectorySeparatorChar +
+                                        ( EditorGUIUtility.isProSkin ?
+                                            "agx_for_unity_logo_white.png" :
+                                            "agx_for_unity_logo_black.png" ) ) as Texture2D;
+      return m_logo;
     }
 
     /// <summary>
@@ -203,6 +227,7 @@ namespace AGXUnityEditor
       toolIconFilenames[ (int)ToolIcon.FindTransformGivenEdge ]  = "find_edge_icon";
       toolIconFilenames[ (int)ToolIcon.CreateShapeGivenVisual ]  = "shape_from_icon";
       toolIconFilenames[ (int)ToolIcon.CreateConstraint ]        = "hinge_icon";
+      toolIconFilenames[ (int)ToolIcon.CreateRigidBody ]         = "add_fat_icon";
       toolIconFilenames[ (int)ToolIcon.DisableCollisions ]       = "disable_collision_icon";
       toolIconFilenames[ (int)ToolIcon.CreateVisual ]            = "shape_from_2_icon";
       toolIconFilenames[ (int)ToolIcon.ShapeResize ]             = "resize_icon";
@@ -223,7 +248,7 @@ namespace AGXUnityEditor
     {
       var miscIconFilenames = CreateNameArray<MiscIcon>();
 
-      miscIconFilenames[ (int)MiscIcon.CreateAsset ]       = "small_fat_add_left_icon";//"shape_from_icon";
+      miscIconFilenames[ (int)MiscIcon.CreateAsset ]       = "small_fat_add_left_icon";
       miscIconFilenames[ (int)MiscIcon.ContextDropdown ]   = "small_add_dots_icon";
       miscIconFilenames[ (int)MiscIcon.EntryAdd ]          = "small_fat_add_left_icon";
       miscIconFilenames[ (int)MiscIcon.EntryInsertBefore ] = "small_insert_before_2_icon";
@@ -238,6 +263,7 @@ namespace AGXUnityEditor
       miscIconFilenames[ (int)MiscIcon.Capsule ]           = "capsule_icon";
       miscIconFilenames[ (int)MiscIcon.Cylinder ]          = "cylinder_icon";
       miscIconFilenames[ (int)MiscIcon.Mesh ]              = "mesh_icon";
+      miscIconFilenames[ (int)MiscIcon.ResetDefault ]      = "sync_icon";
 
       m_miscIcons = LoadIconContent<MiscIcon>( miscIconFilenames );
     }
@@ -281,6 +307,7 @@ namespace AGXUnityEditor
     private static Texture2D[] m_toolIcons                   = null;
     private static Texture2D[] m_miscIcons                   = null;
     private static string m_directory                        = string.Empty;
+    private static Texture2D m_logo                          = null;
   }
 
   public class IconViewerWindow : EditorWindow

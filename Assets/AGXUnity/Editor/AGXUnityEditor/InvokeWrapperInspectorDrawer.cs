@@ -70,107 +70,167 @@ namespace AGXUnityEditor
     private static List<Type> m_drawerClasses = new List<Type>() { typeof( InvokeWrapperInspectorDrawer ) };
 
     [InspectorDrawer( typeof( Vector4 ) )]
-    public static object Vector4Drawer( object obj, InvokeWrapper wrapper )
+    public static object Vector4Drawer( object[] objects, InvokeWrapper wrapper )
     {
       return EditorGUILayout.Vector4Field( InspectorGUI.MakeLabel( wrapper.Member ).text,
-                                           wrapper.Get<Vector4>( obj ) );
+                                           wrapper.Get<Vector4>( objects[ 0 ] ) );
     }
 
     [InspectorDrawer( typeof( Vector3 ) )]
-    public static object Vector3Drawer( object obj, InvokeWrapper wrapper )
+    public static object Vector3Drawer( object[] objects, InvokeWrapper wrapper )
     {
       return EditorGUILayout.Vector3Field( InspectorGUI.MakeLabel( wrapper.Member ),
-                                           wrapper.Get<Vector3>( obj ) );
+                                           wrapper.Get<Vector3>( objects[ 0 ] ) );
     }
 
     [InspectorDrawer( typeof( Vector2 ) )]
-    public static object Vector2Drawer( object obj, InvokeWrapper wrapper )
+    public static object Vector2Drawer( object[] objects, InvokeWrapper wrapper )
     {
       return EditorGUILayout.Vector2Field( InspectorGUI.MakeLabel( wrapper.Member ),
-                                           wrapper.Get<Vector2>( obj ) );
+                                           wrapper.Get<Vector2>( objects[ 0 ] ) );
     }
 
     [InspectorDrawer( typeof( int ) )]
-    public static object IntDrawer( object obj, InvokeWrapper wrapper )
+    public static object IntDrawer( object[] objects, InvokeWrapper wrapper )
     {
       return EditorGUILayout.IntField( InspectorGUI.MakeLabel( wrapper.Member ).text,
-                                       wrapper.Get<int>( obj ) );
+                                       wrapper.Get<int>( objects[ 0 ] ) );
     }
 
     [InspectorDrawer( typeof( bool ) )]
-    public static object BoolDrawer( object obj, InvokeWrapper wrapper )
+    public static object BoolDrawer( object[] objects, InvokeWrapper wrapper )
     {
       return InspectorGUI.Toggle( InspectorGUI.MakeLabel( wrapper.Member ),
-                                  wrapper.Get<bool>( obj ) );
+                                  wrapper.Get<bool>( objects[ 0 ] ) );
     }
 
     [InspectorDrawer( typeof( Color ) )]
-    public static object ColorDrawer( object obj, InvokeWrapper wrapper )
+    public static object ColorDrawer( object[] objects, InvokeWrapper wrapper )
     {
       return EditorGUILayout.ColorField( InspectorGUI.MakeLabel( wrapper.Member ),
-                                         wrapper.Get<Color>( obj ) );
+                                         wrapper.Get<Color>( objects[ 0 ] ) );
     }
 
     [InspectorDrawer( typeof( DefaultAndUserValueFloat ) )]
     [InspectorDrawerResult( HasCopyOp = true )]
-    public static object DefaultAndUserValueFloatDrawer( object obj, InvokeWrapper wrapper )
+    public static object DefaultAndUserValueFloatDrawer( object[] objects, InvokeWrapper wrapper )
     {
-      var dauvf = wrapper.Get<DefaultAndUserValueFloat>( obj );
-      var value = HandleDefaultAndUserValue( wrapper.Member.Name,
-                                             dauvf );
-
-      if ( wrapper.IsValid( value ) ) {
-        if ( !dauvf.UseDefault )
-          dauvf.Value = value;
-        return obj;
-      }
-
-      return null;
+      var result = HandleDefaultAndUserValue<float>( objects, wrapper );
+      return result.ContainsChanges ? (object)result : null;
     }
 
     public static void DefaultAndUserValueFloatDrawerCopyOp( object source, object destination )
     {
-      var s = source as DefaultAndUserValueFloat;
+      var s = (DefaultAndUserValueResult)source;
       var d = destination as DefaultAndUserValueFloat;
-      if ( s == null || d == null )
-        return;
-
-      d.CopyFrom( s );
+      s.PropagateChanges( d );
     }
 
     [InspectorDrawer( typeof( DefaultAndUserValueVector3 ) )]
     [InspectorDrawerResult( HasCopyOp = true )]
-    public static object DefaultAndUserValueVector3Drawer( object obj, InvokeWrapper wrapper )
+    public static object DefaultAndUserValueVector3Drawer( object[] objects, InvokeWrapper wrapper )
     {
-      var dauvv = wrapper.Get<DefaultAndUserValueVector3>( obj );
-      var value = HandleDefaultAndUserValue( wrapper.Member.Name,
-                                             dauvv );
-
-      if ( wrapper.IsValid( value ) ) {
-        if ( !dauvv.UseDefault )
-          dauvv.Value = value;
-        return obj;
-      }
-
-      return null;
+      var result = HandleDefaultAndUserValue<Vector3>( objects, wrapper );
+      return result.ContainsChanges ? (object)result : null;
     }
 
     public static void DefaultAndUserValueVector3DrawerCopyOp( object source, object destination )
     {
-      var s = source as DefaultAndUserValueVector3;
+      var s = (DefaultAndUserValueResult)source;
       var d = destination as DefaultAndUserValueVector3;
-      if ( s == null || d == null )
-        return;
-
-      d.CopyFrom( s );
+      s.PropagateChanges( d );
     }
 
     private static MethodInfo s_floatFieldMethod = null;
     private static MethodInfo s_vector3FieldMethod = null;
     private static object[] s_fieldMethodArgs = new object[] { null, "", null };
 
-    private static ValueT HandleDefaultAndUserValue<ValueT>( string name,
-                                                             DefaultAndUserValue<ValueT> valInField )
+    private struct DefaultAndUserValueResult
+    {
+      public bool DefaultToggleChanged;
+      public bool UseDefault;
+
+      public bool UpdateDefaultClicked;
+
+      public bool[] ValuesChanged;
+      public float[] Values;
+
+      public void OnChange<ValueT>( object oldValueObject, object newValueObject )
+        where ValueT : struct
+      {
+        if ( typeof( ValueT ) == typeof( float ) ) {
+          ValuesChanged = new bool[] { true };
+          Values = new float[] { (float)newValueObject };
+        }
+        else if ( typeof( ValueT ) == typeof( Vector3 ) ) {
+          var oldValue = (Vector3)oldValueObject;
+          var newValue = (Vector3)newValueObject;
+          ValuesChanged = new bool[] { false, false, false };
+          Values = new float[] { newValue.x, newValue.y, newValue.z };
+          for ( int i = 0; i < 3; ++i )
+            ValuesChanged[ i ] = !oldValue[ i ].Equals( Values[ i ] );
+        }
+      }
+
+      public void PropagateChanges( DefaultAndUserValueFloat destination )
+      {
+        if ( !ContainsChanges )
+          return;
+
+        PropagateChangesT( destination );
+
+        if ( ValuesChanged != null && ValuesChanged[ 0 ] )
+          destination.Value = Values[ 0 ];
+      }
+
+      public void PropagateChanges( DefaultAndUserValueVector3 destination )
+      {
+        if ( !ContainsChanges )
+          return;
+
+        PropagateChangesT( destination );
+
+        if ( ValuesChanged != null && ValuesChanged.Contains( true ) ) {
+          var newValue = new Vector3();
+          for ( int i = 0; i < 3; ++i )
+            newValue[ i ] = ValuesChanged[ i ] ? Values[ i ] : destination.Value[ i ];
+          destination.Value = newValue;
+        }
+      }
+
+      private void PropagateChangesT<ValueT>( DefaultAndUserValue<ValueT> destination )
+        where ValueT : struct
+      {
+        if ( DefaultToggleChanged )
+          destination.UseDefault = UseDefault;
+        if ( UpdateDefaultClicked )
+          destination.OnForcedUpdate();
+      }
+
+      public bool ContainsChanges
+      {
+        get
+        {
+          return DefaultToggleChanged ||
+                 UpdateDefaultClicked ||
+                 ( ValuesChanged != null && ValuesChanged.Contains( true ) );
+        }
+      }
+    }
+
+    private static bool CompareMulti<ValueT>( object[] objects,
+                                              InvokeWrapper wrapper,
+                                              Func<DefaultAndUserValue<ValueT>, bool> validator )
+      where ValueT : struct
+    {
+      var identical = true;
+      for ( int i = 1; i < objects.Length; ++i )
+        identical = identical && validator( wrapper.Get<DefaultAndUserValue<ValueT>>( objects[ i ] ) );
+      return identical;
+    }
+
+    private static DefaultAndUserValueResult HandleDefaultAndUserValue<ValueT>( object[] objects,
+                                                                                InvokeWrapper wrapper )
       where ValueT : struct
     {
       if ( s_floatFieldMethod == null )
@@ -190,12 +250,12 @@ namespace AGXUnityEditor
                                                                 typeof( Vector3 )
                                                               } );
 
-      var guiWasEnabled = UnityEngine.GUI.enabled;
-      var method        = typeof( ValueT ) == typeof( float ) ?
-                            s_floatFieldMethod :
-                          typeof( ValueT ) == typeof( Vector3 ) ?
-                            s_vector3FieldMethod :
-                            null;
+      var method = typeof( ValueT ) == typeof( float ) ?
+                      s_floatFieldMethod :
+                    typeof( ValueT ) == typeof( Vector3 ) ?
+                      s_vector3FieldMethod :
+                      null;
+
       if ( method == null )
         throw new NullReferenceException( "Unknown DefaultAndUserValue type: " + typeof( ValueT ).Name );
 
@@ -210,60 +270,82 @@ namespace AGXUnityEditor
       // hovering the update button or float field(s) so use
       // xMax as label width minus some magic number so that
       // e.g., Mass float field slider appears and works.
-      var widthUntilButton  = rect.xMax;
-      rect.xMax             = EditorGUIUtility.labelWidth - 28;
-      var useDefaultToggled = EditorGUI.ToggleLeft( rect,
-                                                    GUI.MakeLabel( name.SplitCamelCase(),
-                                                                   false,
-                                                                   "If checked - value will be default. Uncheck to manually enter value." ),
-                                                    valInField.UseDefault ) != valInField.UseDefault;
+      var widthUntilButton = rect.xMax;
+      rect.xMax            = EditorGUIUtility.labelWidth - 28;
+
+      // Result and reference instance.
+      var result   = new DefaultAndUserValueResult();
+      var instance = wrapper.Get<DefaultAndUserValue<ValueT>>( objects[ 0 ] );
+
+      UnityEngine.GUI.changed = false;
+      var hasMixedUseDefault  = !CompareMulti<ValueT>( objects,
+                                                       wrapper,
+                                                       other => other.UseDefault == instance.UseDefault );
+      EditorGUI.showMixedValue = hasMixedUseDefault;
+
+      var toggleInput = hasMixedUseDefault ?
+                          false :
+                          instance.UseDefault;
+      // During showMixedValue - Toggle will always return true (enabled)
+      // when the user clicks regardless of instance.UseDefault.
+      var toggleOutput = EditorGUI.ToggleLeft( rect,
+                                               GUI.MakeLabel( wrapper.Member.Name.SplitCamelCase(),
+                                                              false,
+                                                              "If checked - value will be default. Uncheck to manually enter value." ),
+                                               toggleInput );
+      if ( toggleOutput != toggleInput ) {
+        result.DefaultToggleChanged = true;
+        result.UseDefault = toggleOutput;
+      }
+
       // Restore width and calculate new start of the float
       // field(s). Start is label width but we have to remove
       // the current indent level since label width is independent
       // of the indent level. Unsure why we have to add LayoutMagicNumber pixels...
       // could be float field(s) default minimum label size.
-      rect.xMax   = widthUntilButton;
-      rect.x      = EditorGUIUtility.labelWidth - InspectorGUI.IndentScope.PixelLevel + InspectorGUI.LayoutMagicNumber;
+      rect.xMax  = widthUntilButton;
+      rect.x     = EditorGUIUtility.labelWidth - InspectorGUI.IndentScope.PixelLevel + InspectorGUI.LayoutMagicNumber;
       rect.xMax += -rect.x + InspectorGUI.LayoutMagicNumber;
 
       s_fieldMethodArgs[ 0 ] = rect;
-      s_fieldMethodArgs[ 2 ] = valInField.Value;
-      var newValue           = default( ValueT );
-      using ( new GUI.EnabledBlock( !valInField.UseDefault ) )
+      s_fieldMethodArgs[ 2 ] = instance.Value;
+      var newValue = default( ValueT );
+
+      EditorGUI.showMixedValue = !CompareMulti<ValueT>( objects,
+                                                        wrapper,
+                                                        other => instance.Value.Equals( other.Value ) );
+      using ( new GUI.EnabledBlock( !instance.UseDefault && !hasMixedUseDefault ) ) {
+        EditorGUI.BeginChangeCheck();
         newValue = (ValueT)method.Invoke( null, s_fieldMethodArgs );
-
-      rect.x                 = rect.xMax;
-      rect.width             = updateButtonWidth;
-      rect.height            = EditorGUIUtility.singleLineHeight -
-                               EditorGUIUtility.standardVerticalSpacing;
-      var updateDefaultValue = InspectorGUI.Button( rect,
-                                                    MiscIcon.Update,
-                                                    valInField.UseDefault,
-                                                    InspectorEditor.Skin.ButtonRight,
-                                                    "Force update of default value.",
-                                                    1.2f );
-      if ( useDefaultToggled ) {
-        valInField.UseDefault = !valInField.UseDefault;
-        updateDefaultValue    = valInField.UseDefault;
-
-        // We don't want the default value to be written to
-        // the user specified.
-        if ( !valInField.UseDefault )
-          newValue = valInField.UserValue;
+        if ( EditorGUI.EndChangeCheck() ) {
+          // Validate input here so that, e.g., 0 isn't propagated. It's
+          // not possible to check this in the CopyOp callback.
+          var clampAttribute = wrapper.GetAttribute<ClampAboveZeroInInspector>();
+          if ( clampAttribute == null || clampAttribute.IsValid( newValue ) )
+            result.OnChange<ValueT>( instance.Value, newValue );
+        }
       }
 
-      if ( updateDefaultValue )
-        valInField.OnForcedUpdate();
+      rect.x                      = rect.xMax;
+      rect.width                  = updateButtonWidth;
+      rect.height                 = EditorGUIUtility.singleLineHeight -
+                                    EditorGUIUtility.standardVerticalSpacing;
+      result.UpdateDefaultClicked = InspectorGUI.Button( rect,
+                                                         MiscIcon.Update,
+                                                         instance.UseDefault,
+                                                         InspectorEditor.Skin.ButtonRight,
+                                                         "Force update of default value.",
+                                                         1.2f );
 
-      return newValue;
+      return result;
     }
 
     [InspectorDrawer( typeof( RangeReal ) )]
     [InspectorDrawerResult( HasCopyOp = true )]
-    public static object RangeRealDrawer( object obj, InvokeWrapper wrapper )
+    public static object RangeRealDrawer( object[] objects, InvokeWrapper wrapper )
     {
       return InspectorGUI.RangeRealField( InspectorGUI.MakeLabel( wrapper.Member ),
-                                          wrapper.Get<RangeReal>( obj ) );
+                                          wrapper.Get<RangeReal>( objects[ 0 ] ) );
     }
 
     public static object RangeRealDrawerCopyOp( object data, object destination )
@@ -293,13 +375,13 @@ namespace AGXUnityEditor
 
     [InspectorDrawer( typeof( DeformableTerrainShovelSettings.ExcavationSettings ) )]
     [InspectorDrawerResult( HasCopyOp = true )]
-    public static object DeformableTerrainShovelExcavationSettingsDrawer( object obj, InvokeWrapper wrapper )
+    public static object DeformableTerrainShovelExcavationSettingsDrawer( object[] objects, InvokeWrapper wrapper )
     {
       var data = new ExcavationSettingsResult()
       {
-        Value = wrapper.Get<DeformableTerrainShovelSettings.ExcavationSettings>( obj )
+        Value = wrapper.Get<DeformableTerrainShovelSettings.ExcavationSettings>( objects[ 0 ] )
       };
-      if ( InspectorGUI.Foldout( EditorData.Instance.GetData( obj as Object, wrapper.Member.Name ),
+      if ( InspectorGUI.Foldout( EditorData.Instance.GetData( objects[ 0 ] as Object, wrapper.Member.Name ),
                                  InspectorGUI.MakeLabel( wrapper.Member ) ) ) {
         using ( InspectorGUI.IndentScope.Single ) {
           data.Value.Enabled                   = InspectorGUI.Toggle( GUI.MakeLabel( "Enabled" ),
@@ -335,36 +417,36 @@ namespace AGXUnityEditor
     }
 
     [InspectorDrawer( typeof( string ) )]
-    public static object StringDrawer( object obj, InvokeWrapper wrapper )
+    public static object StringDrawer( object[] objects, InvokeWrapper wrapper )
     {
       return EditorGUILayout.TextField( InspectorGUI.MakeLabel( wrapper.Member ),
-                                        wrapper.Get<string>( obj ),
+                                        wrapper.Get<string>( objects[ 0 ] ),
                                         InspectorEditor.Skin.TextField );
     }
 
     [InspectorDrawer( typeof( Enum ), IsBaseType = true )]
-    public static object EnumDrawer( object obj, InvokeWrapper wrapper )
+    public static object EnumDrawer( object[] objects, InvokeWrapper wrapper )
     {
       if ( !wrapper.GetContainingType().IsVisible )
         return null;
 
       if ( wrapper.GetContainingType().GetCustomAttribute<FlagsAttribute>() != null )
         return EditorGUILayout.EnumFlagsField( InspectorGUI.MakeLabel( wrapper.Member ),
-                                               wrapper.Get<Enum>( obj ),
+                                               wrapper.Get<Enum>( objects[ 0 ] ),
                                                InspectorEditor.Skin.Popup );
       else
         return EditorGUILayout.EnumPopup( InspectorGUI.MakeLabel( wrapper.Member ),
-                                          wrapper.Get<Enum>( obj ),
+                                          wrapper.Get<Enum>( objects[ 0 ] ),
                                           InspectorEditor.Skin.Popup );
     }
 
     [InspectorDrawer( typeof( float ) )]
     [InspectorDrawer( typeof( double ) )]
-    public static object DecimalDrawer( object obj, InvokeWrapper wrapper )
+    public static object DecimalDrawer( object[] objects, InvokeWrapper wrapper )
     {
       float value = wrapper.GetContainingType() == typeof( double ) ?
-                      Convert.ToSingle( wrapper.Get<double>( obj ) ) :
-                      wrapper.Get<float>( obj );
+                      Convert.ToSingle( wrapper.Get<double>( objects[ 0 ] ) ) :
+                      wrapper.Get<float>( objects[ 0 ] );
       FloatSliderInInspector slider = wrapper.GetAttribute<FloatSliderInInspector>();
       if ( slider != null )
         return EditorGUILayout.Slider( InspectorGUI.MakeLabel( wrapper.Member ),
@@ -377,10 +459,10 @@ namespace AGXUnityEditor
     }
 
     [InspectorDrawer( typeof( List<> ), IsGeneric = true )]
-    public static object GenericListDrawer( object obj, InvokeWrapper wrapper )
+    public static object GenericListDrawer( object[] objects, InvokeWrapper wrapper )
     {
-      var list = wrapper.Get<System.Collections.IList>( obj );
-      var target = obj as Object;
+      var list = wrapper.Get<System.Collections.IList>( objects[ 0 ] );
+      var target = objects[ 0 ] as Object;
 
       if ( InspectorGUI.Foldout( EditorData.Instance.GetData( target, wrapper.Member.Name ),
                                  InspectorGUI.MakeLabel( wrapper.Member ) ) ) {
@@ -397,41 +479,18 @@ namespace AGXUnityEditor
           using ( InspectorGUI.IndentScope.Single ) {
             GUILayout.BeginHorizontal();
             {
-              GUILayout.BeginVertical();
-              {
-                // Using target to render listObject since it normally (CollisionGroupEntry) isn't an Object.
-                InspectorEditor.DrawMembersGUI( new Object[] { target }, ignored => listObject );
-              }
-              GUILayout.EndVertical();
+              InspectorGUI.Separator( 1.0f, EditorGUIUtility.singleLineHeight );
 
-              //if ( GUILayout.Button( GUI.MakeLabel( GUI.AddColorTag( GUI.Symbols.ListInsertElementBefore.ToString(),
-              //                                                       InspectorGUISkin.BrandColor ),
-              //                                      false,
-              //                                      "Insert new element before this" ),
-              //                        skin.ButtonMiddle,
-              //                        buttonLayout ) )
               if ( InspectorGUI.Button( MiscIcon.EntryInsertBefore,
                                         true,
                                         "Insert new element before this.",
                                         buttonLayout ) )
                 insertElementBefore = listObject;
-              //if ( GUILayout.Button( GUI.MakeLabel( GUI.AddColorTag( GUI.Symbols.ListInsertElementAfter.ToString(),
-              //                                                       InspectorGUISkin.BrandColor ),
-              //                                      false,
-              //                                      "Insert new element after this" ),
-              //                        skin.ButtonMiddle,
-              //                        buttonLayout ) )
               if ( InspectorGUI.Button( MiscIcon.EntryInsertAfter,
                                         true,
                                         "Insert new element after this.",
                                         buttonLayout ) )
                 insertElementAfter = listObject;
-              //if ( GUILayout.Button( GUI.MakeLabel( GUI.AddColorTag( GUI.Symbols.ListEraseElement.ToString(),
-              //                                                       InspectorGUISkin.BrandColor ),
-              //                                      false,
-              //                                      "Erase this element" ),
-              //                        skin.ButtonMiddle,
-              //                        buttonLayout ) )
               if ( InspectorGUI.Button( MiscIcon.EntryRemove,
                                         true,
                                         "Remove this element.",
@@ -439,10 +498,13 @@ namespace AGXUnityEditor
                 eraseElement = listObject;
             }
             GUILayout.EndHorizontal();
-          }
 
-          GUILayout.Space( 4.0f );
+            InspectorEditor.DrawMembersGUI( new Object[] { target }, ignored => listObject );
+
+          }
         }
+
+        InspectorGUI.Separator( 1.0f, 0.5f * EditorGUIUtility.singleLineHeight );
 
         if ( list.Count == 0 )
           GUILayout.Label( GUI.MakeLabel( "Empty", true ), skin.Label );
@@ -451,12 +513,6 @@ namespace AGXUnityEditor
         GUILayout.BeginHorizontal();
         {
           GUILayout.FlexibleSpace();
-          //addElementToList = GUILayout.Button( GUI.MakeLabel( GUI.AddColorTag( GUI.Symbols.ListInsertElementAfter.ToString(),
-          //                                                                     InspectorGUISkin.BrandColor ),
-          //                                                    false,
-          //                                                    "Add new element to list" ),
-          //                                      skin.ButtonMiddle,
-          //                                      buttonLayout );
           addElementToList = InspectorGUI.Button( MiscIcon.EntryInsertAfter,
                                                   true,
                                                   "Add new element.",
@@ -494,20 +550,20 @@ namespace AGXUnityEditor
     [InspectorDrawer( typeof( ScriptComponent ), AssignableFrom = true )]
     [InspectorDrawer( typeof( Object ), IsBaseType = true )]
     [InspectorDrawerResult( IsNullable = true )]
-    public static object ScriptDrawer( object obj, InvokeWrapper wrapper )
+    public static object ScriptDrawer( object[] objects, InvokeWrapper wrapper )
     {
       object result         = null;
       var type              = wrapper.GetContainingType();
       bool allowSceneObject = type == typeof( GameObject ) ||
                               typeof( ScriptComponent ).IsAssignableFrom( type );
-      Object valInField     = wrapper.Get<Object>( obj );
+      Object valInField     = wrapper.Get<Object>( objects[ 0 ] );
       bool recursiveEditing = wrapper.HasAttribute<AllowRecursiveEditing>();
 
       if ( recursiveEditing ) {
         result = InspectorGUI.FoldoutObjectField( InspectorGUI.MakeLabel( wrapper.Member ),
                                                   valInField,
                                                   type,
-                                                  EditorData.Instance.GetData( obj as Object,
+                                                  EditorData.Instance.GetData( objects[ 0 ] as Object,
                                                                                wrapper.Member.Name ),
                                                   !wrapper.CanWrite() );
       }

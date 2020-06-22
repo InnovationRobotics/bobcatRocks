@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e817ad767e5d7cb48bc672a10e654626, type: 3}
   m_Name: EVTerrain
   m_EditorClassIdentifier: 
-  m_density: 1400
+  m_preset: 2
+  m_density: 1100
   m_maximumDensity: 2000
   m_youngsModulus: 50000000
   m_poissonsRatio: 0.01

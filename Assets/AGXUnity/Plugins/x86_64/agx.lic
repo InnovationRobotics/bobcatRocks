@@ -1,0 +1,15 @@
+Key {
+  User         "Einav Kiperman"
+  Contact      "ekiperman@elta.co.il"
+  EndDate      "none"
+  HwKey        "41C6BFA8DD636E157ED369FA44241645"
+  Modules      "AgX,AgX-DriveTrain,AgX-Granular,AgX-Particles,AgX-Terrain,AgX-Tires"
+  Version      "2"
+  Info         "AGX Dynamics Toolkit"
+  Url          "https://www.algoryx.se"
+  Id1          ""
+  Id2          "EndOfUpdate \"2020-06-30\""
+  Serial       ""
+
+  License      "MFQCKHQddRenRmbUxA836jEK4mxiWPF6PPAOgIkXVzaqZiU6UMfWDV+ehPkCKH4ks/Hf7m8DdzTOMs+dPCZfh102Hya/Gy3hdTxtymIoVGgv5tMffqg="
+}

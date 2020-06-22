@@ -2,6 +2,7 @@
 using RosSharp.RosBridgeClient;
 using RosSharp.RosBridgeClient.Messages.Mavros;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DLDriver : Subscriber<RosSharp.RosBridgeClient.Messages.Mavros.OverrideRCIn> /*Subscriber<RosSharp.RosBridgeClient.Messages.Sensor.Joy>*/
 {
@@ -10,7 +11,7 @@ public class DLDriver : Subscriber<RosSharp.RosBridgeClient.Messages.Mavros.Over
     public float Throttle = 0;
     public float Brake = 0;
     public float Steer = 0;
-
+    public Text text; 
     public float Elevate = 0;
     public float Tilt = 0;
     // Start is called before the first frame update
@@ -139,6 +140,7 @@ public class DLDriver : Subscriber<RosSharp.RosBridgeClient.Messages.Mavros.Over
     public float ReturnClampedNumberThrottle(float val)
     {
         val = (val / 400) - 3.75f;
+        text.text = val.ToString();
         return val;
     }
 

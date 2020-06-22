@@ -58,7 +58,7 @@ public class SpawnPoint : MonoBehaviour
 
                 go.name = obj.Id;
 
-                go.transform.position = new Vector3(obj.Position.x, hit.point.y + 0.3f, obj.Position.z);
+                go.transform.position = new Vector3(obj.Position.x, 0.06f, obj.Position.z);
                 go.transform.rotation = obj.Rotation;
                 go.transform.localScale = obj.Scale;
                 Debug.Log("The given " + obj.Name + " position point is here: " + go.transform.position);

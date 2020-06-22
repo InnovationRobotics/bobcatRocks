@@ -641,11 +641,11 @@ namespace AGXUnity.Model
 
 
 
-        public float throttle;
-        public float brake;
-        public float steer;
-        public float elevate;
-        public float tilt;
+        public float throttle=0;
+        public float brake=0;
+        public float steer=0;
+        public float elevate=0;
+        public float tilt=0;
 
         private void Update()
         {
@@ -708,8 +708,8 @@ namespace AGXUnity.Model
                 SetSpeed(WheelLoader.SteeringHinge, -steer);
 
                 var speed = WheelLoader.Speed;
-                var throttle = this.throttle;
-                var brake = this.brake;
+               // var throttle = throttle;
+               // var brake = brake;
 
                 var idleSpeed = 0.05f;
                 if (Utils.Math.EqualsZero(throttle) && Utils.Math.EqualsZero(brake))

@@ -55,6 +55,9 @@ namespace RosSharp.RosBridgeClient
 
         private void UpdateMessage()
         {
+            if (message == null)
+                return;
+
             if (!Outside_Time_Synchronization){
                 message.header.Update();
                 message.orientation = GetGeometryQuaternion(rb.transform.rotation.Unity2Ros());

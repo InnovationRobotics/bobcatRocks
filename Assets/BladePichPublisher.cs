@@ -35,6 +35,8 @@ namespace RosSharp.RosBridgeClient
 
         private void UpdateMessage()
         {
+            if (message == null)
+                return;
             //Down 213 -->276 
             //UP 31  -->80
 

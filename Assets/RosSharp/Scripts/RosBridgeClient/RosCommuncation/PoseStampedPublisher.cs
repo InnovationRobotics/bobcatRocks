@@ -51,6 +51,8 @@ namespace RosSharp.RosBridgeClient
 
         private void UpdateMessage()
         {
+            if (message == null)
+                return;
             message.header.Update();
             message.pose.position = GetGeometryPoint(PublishedTransform.position.Unity2Ros());
             message.pose.orientation = GetGeometryQuaternion(PublishedTransform.rotation.Unity2Ros());
@@ -66,7 +68,8 @@ namespace RosSharp.RosBridgeClient
             geometryPoint.z = position.z;
             if (UiText)
             {
-                UiText.text = " X:" + transform.position.x + " Y: " + transform.position.y + " Z: " + transform.position.z;
+                
+                UiText.text = " X:" + transform.position.x.ToString("0.00") + " Y: " + transform.position.y.ToString("0.00") + " Z: " + transform.position.z.ToString("0.00");
             }
             // Debug.Log("position " + transform.position.x + " " + transform.position.y + " " + transform.position.z);
             return geometryPoint;

@@ -197,7 +197,7 @@ public class RayCast_Velodyne32 : MonoBehaviour
 
 
         // Schedule the batch of raycasts
-        JobHandle handle = RaycastCommand.ScheduleBatch(commands, results, 8, default(JobHandle));// m_ResWidth * ConfigRef.Channels
+        JobHandle handle = RaycastCommand.ScheduleBatch(commands, results, 8);// m_ResWidth * ConfigRef.Channels
         // Wait for the batch processing job to complete
         handle.Complete();
 

@@ -53,6 +53,8 @@ namespace RosSharp.RosBridgeClient
         }
         private void UpdateMessage()
         {
+            if (message == null)
+                return;
             float deltaTime = Time.realtimeSinceStartup - previousRealTime;
 
             Vector3 linearVelocity = (PublishedTransform.position - previousPosition)/deltaTime;

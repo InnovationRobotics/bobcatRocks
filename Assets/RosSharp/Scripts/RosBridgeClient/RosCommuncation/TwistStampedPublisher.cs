@@ -17,13 +17,13 @@ using UnityEngine;
 
 namespace RosSharp.RosBridgeClient
 {
-    public class TwistStampedPublisher : Publisher<Messages.Geometry.TwistStamped>
+    public class TwistStampedPublisher : Publisher<MessageTypes.Geometry.TwistStamped>
     {
         public Transform PublishedTransform;
         public string FrameId = "Unity";
 
-        private Messages.Geometry.Twist twist;
-        private Messages.Geometry.TwistStamped message;
+        private MessageTypes.Geometry.Twist twist;
+        private MessageTypes.Geometry.TwistStamped message;
         private float previousRealTime;        
         private Vector3 previousPosition = Vector3.zero;
         private Quaternion previousRotation = Quaternion.identity;
@@ -41,15 +41,15 @@ namespace RosSharp.RosBridgeClient
 
         private void InitializeMessage()
         {
-            message = new Messages.Geometry.TwistStamped()
+            message = new MessageTypes.Geometry.TwistStamped()
             {
-                header = new Messages.Standard.Header()
+                header = new MessageTypes.Std.Header()
                 {
                     frame_id = FrameId
                 }
             };
-            message.twist.linear = new Messages.Geometry.Vector3();
-            message.twist.angular = new Messages.Geometry.Vector3();
+            message.twist.linear = new MessageTypes.Geometry.Vector3();
+            message.twist.angular = new MessageTypes.Geometry.Vector3();
         }
         private void UpdateMessage()
         {
@@ -70,9 +70,9 @@ namespace RosSharp.RosBridgeClient
             Publish(message);
         }
 
-        private static Messages.Geometry.Vector3 GetGeometryVector3(Vector3 vector3)
+        private static MessageTypes.Geometry.Vector3 GetGeometryVector3(Vector3 vector3)
         {
-            Messages.Geometry.Vector3 geometryVector3 = new Messages.Geometry.Vector3();
+            MessageTypes.Geometry.Vector3 geometryVector3 = new MessageTypes.Geometry.Vector3();
             geometryVector3.x = vector3.x;
             geometryVector3.y = vector3.y;
             geometryVector3.z = vector3.z;

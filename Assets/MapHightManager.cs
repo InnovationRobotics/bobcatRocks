@@ -14,7 +14,7 @@ public class MapHightManager : MonoBehaviour
     {
         [ReadOnly]
         public NativeArray<RaycastHit>_RayCastHits;
-        public NativeArray<float> _TerrainHeights;
+        public NativeArray<double> _TerrainHeights;
  
 
         public void Execute(int index)
@@ -76,7 +76,7 @@ public class MapHightManager : MonoBehaviour
     public float Width;
     public float Height;
     public NativeArray<Vector3> cells;
-    public NativeArray<float> TerrainHeights;
+    public NativeArray<double> TerrainHeights;
     public NativeArray<RaycastHit> RayCastResults;
     public NativeArray<RaycastCommand> Commands;
     public Vector3 To;
@@ -100,7 +100,7 @@ public class MapHightManager : MonoBehaviour
         Terrain = Terrain.activeTerrain;
 
         cells = new NativeArray<Vector3>((int)size, Allocator.Persistent); 
-        TerrainHeights = new NativeArray<float>((int)size, Allocator.Persistent); 
+        TerrainHeights = new NativeArray<double>((int)size, Allocator.Persistent); 
         Commands = new NativeArray<RaycastCommand>((int)size, Allocator.Persistent); 
         RayCastResults = new NativeArray<RaycastHit>((int)size, Allocator.Persistent);
 

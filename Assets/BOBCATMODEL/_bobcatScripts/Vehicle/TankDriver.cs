@@ -5,7 +5,7 @@ using RosSharp.RosBridgeClient;
 
 using UnityEngine;
 
-public class TankDriver : Subscriber<RosSharp.RosBridgeClient.Messages.Sensor.Joy>
+public class TankDriver : Subscriber<RosSharp.RosBridgeClient.MessageTypes.Sensor.Joy>
 {
     public bool ManualInput = true;
 
@@ -158,7 +158,7 @@ public class TankDriver : Subscriber<RosSharp.RosBridgeClient.Messages.Sensor.Jo
 
     }
 
-    protected override void ReceiveMessage(RosSharp.RosBridgeClient.Messages.Sensor.Joy message)
+    protected override void ReceiveMessage(RosSharp.RosBridgeClient.MessageTypes.Sensor.Joy message)
     {
         //Right Stick LEFT/RIGHT    -1 <-[0]-> 1 
 

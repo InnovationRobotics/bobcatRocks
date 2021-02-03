@@ -20,7 +20,7 @@ using AGXUnity;
 
 namespace RosSharp.RosBridgeClient
 {
-    public class NavSatFixPublisher : Publisher<Messages.Sensor.NavSatFix>
+    public class NavSatFixPublisher : Publisher<MessageTypes.Sensor.NavSatFix>
     {
 const double  CENTER_X_NS = 31.2622f;		// GPS coordinates
 const double  CENTER_Y_EW = 34.803611f;	// of lab 320
@@ -39,7 +39,7 @@ const double PI  =3.141592653589793238463;
         public Text Bearing;
 
         Vector3 _init_pos = Vector3.zero;
-        private Messages.Sensor.NavSatFix message;
+        private MessageTypes.Sensor.NavSatFix message;
         private float start_latitude, start_longitude, start_altitude;
         private double stLatRad, stLonRad, complementaryLatRad, LatRad, LatDeg, additionalLongitudeRad, additionalLongitudeDeg, LonRad, LonDeg;
         private Vector3 tmpPos = Vector3.zero;
@@ -69,22 +69,22 @@ const double PI  =3.141592653589793238463;
 
         public void InitializeMessage()
         {
-            message = new Messages.Sensor.NavSatFix
+            message = new MessageTypes.Sensor.NavSatFix
             {
-                header = new Messages.Standard.Header()
+                header = new MessageTypes.Std.Header()
                 {
                     frame_id = FrameId
                 },
-                status = new Messages.Sensor.NavSatStatus()
+                status = new MessageTypes.Sensor.NavSatStatus()
                 {
-                    status = (sbyte)Messages.Sensor.NavSatStatus.StatusType.STATUS_FIX,
-                    service = (short)Messages.Sensor.NavSatStatus.ServiceType.SERVICE_GPS
+                    status = (sbyte)MessageTypes.Sensor.NavSatStatus.STATUS_FIX,
+                    service = (ushort)MessageTypes.Sensor.NavSatStatus.SERVICE_GPS
                 },
                 latitude = start_latitude,
                 longitude = start_longitude,
                 altitude = start_altitude          
             };
-            message.position_covariance = new float[] {1,0,0,0,1,0,0,0,1};
+            message.position_covariance = new double[] {1,0,0,0,1,0,0,0,1};
             message.position_covariance_type=  0;
         }
 
@@ -98,9 +98,9 @@ const double PI  =3.141592653589793238463;
              }
         }
 
-        public void SendSynchronizedMessage(Messages.Standard.Time synchronized_time)
+        public void SendSynchronizedMessage(MessageTypes.Std.Time synchronized_time)
         {
-            Debug.Log("GPS:Send Sync Messages..."); //+message.header.stamp);
+            Debug.Log("GPS:Send Sync MessageTypes..."); //+message.header.stamp);
 
             message.header.TimeSynchronization(synchronized_time);
             ComposeAndComputeMessage();

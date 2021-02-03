@@ -16,8 +16,8 @@ limitations under the License.
 using System.IO;
 using UnityEngine;
 using UnityEditor;
-using RosBridgeClient.Messages;
-using MessageType = RosBridgeClient.Messages.MessageType;
+using RosBridgeClient.MessageTypes;
+using MessageType = RosBridgeClient.MessageTypes;
 
 namespace RosSharp.RosBridgeClient
 {
@@ -159,9 +159,9 @@ namespace RosSharp.RosBridgeClient
                              EditorPrefs.GetString("ROSPackageName") :
                              "actionlib_tutorials");
 
-            goalElements     = new MessageElement[] { new MessageElement { messageType = MessageType.@int, messageName = "order" } };
-            resultElements   = new MessageElement[] { new MessageElement { messageType = MessageType.@int, messageName = "sequence", isArray = true } };
-            feedbackElements = new MessageElement[] { new MessageElement { messageType = MessageType.@int, messageName = "sequence", isArray = true } };
+            goalElements     = new MessageElement[] { new MessageElement { messageType = MessageType.MessageType.@int, messageName = "order" } };
+            resultElements   = new MessageElement[] { new MessageElement { messageType = MessageType.MessageType.@int, messageName = "sequence", isArray = true } };
+            feedbackElements = new MessageElement[] { new MessageElement { messageType = MessageType.MessageType.@int, messageName = "sequence", isArray = true } };
         }
 
         private void SetEditorPrefs()

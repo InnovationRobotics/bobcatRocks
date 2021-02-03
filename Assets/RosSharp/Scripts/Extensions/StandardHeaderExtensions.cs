@@ -29,7 +29,7 @@ namespace RosSharp.RosBridgeClient
             timer = defaultTimer;
         }
 
-        public static void Update(this Messages.Standard.Header header)
+        public static void Update(this MessageTypes.Std.Header header)
         {
             if (timer == null)
             {
@@ -40,7 +40,7 @@ namespace RosSharp.RosBridgeClient
             header.stamp = timer.Now();
         }
 
-        public static void TimeSynchronization(this Messages.Standard.Header header, Messages.Standard.Time sync_time )
+        public static void TimeSynchronization(this MessageTypes.Std.Header header, MessageTypes.Std.Time sync_time )
         {
             header.seq++;
             header.stamp = sync_time;

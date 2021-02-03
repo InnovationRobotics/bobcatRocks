@@ -17,7 +17,7 @@ using UnityEngine;
 
 namespace RosSharp.RosBridgeClient
 {
-    public class MultiLaserScanPublisher : Publisher<Messages.Robil.MultiLaserScan>
+    public class MultiLaserScanPublisher : Publisher<MessageTypes.Robil.MultiLaserScan>
     {
         public LaserScanReader laserScanReader_t1;
         public LaserScanReader laserScanReader_t2;
@@ -26,7 +26,7 @@ namespace RosSharp.RosBridgeClient
 
         public string FrameId = "Unity";
         
-        private Messages.Robil.MultiLaserScan message;
+        private MessageTypes.Robil.MultiLaserScan message;
         public int Samples;  
         public float Update_Rate = 500; //12.5 Hz
         private float ScanPeriod;
@@ -56,9 +56,9 @@ namespace RosSharp.RosBridgeClient
             ScanPeriod = Samples / Update_Rate;
             Debug.Log("InitializeMessage has been called , ScanPeriod = "+ScanPeriod.ToString());
 
-            message = new Messages.Robil.MultiLaserScan
+            message = new MessageTypes.Robil.MultiLaserScan
             {
-                header = new Messages.Standard.Header { frame_id = FrameId },
+                header = new MessageTypes.Std.Header { frame_id = FrameId },
                 angle_min_t       = -0.77667f, //min_ang = -44.5deg
                 angle_max_t       = 0.44505f,  //max_ang = 25.5deg
                 angle_min_b       = -0.78534f, //=-45deg

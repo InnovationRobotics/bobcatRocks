@@ -18,15 +18,15 @@ using AGXUnity;
 
 namespace RosSharp.RosBridgeClient
 {
-    public class RobilShiffonFusion  : MonoBehaviour //Publisher<Messages.Sensor.Imu>
+    public class RobilShiffonFusion  : MonoBehaviour //Publisher<MessageTypes.Sensor.Imu>
     {
         Transform myref;
         public string FrameId = "Unity";
         public RigidBody rb;
         Vector3 lastPos = Vector3.zero;
-        private Messages.Sensor.Imu imu_msg;
-        private Messages.Sensor.NavSatFix gps_speed_msg;
-        private Messages.Sensor.NavSatFix gps_msg;
+        private MessageTypes.Sensor.Imu imu_msg;
+        private MessageTypes.Sensor.NavSatFix gps_speed_msg;
+        private MessageTypes.Sensor.NavSatFix gps_msg;
 
         private ImuPublisher imu_pub;
         private GPSSpeedPublisher gps_speed_pub;
@@ -79,7 +79,7 @@ namespace RosSharp.RosBridgeClient
 
          private void UpdateMessages()
         {
-            Messages.Standard.Time synced = new Messages.Standard.Time();
+            MessageTypes.Std.Time synced = new MessageTypes.Std.Time();
             float time = Time.realtimeSinceStartup;
             synced.secs = (uint)time;
             synced.nsecs = (uint)(1e9 * (time - synced.secs));

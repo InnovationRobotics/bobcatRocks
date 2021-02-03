@@ -15,12 +15,12 @@ limitations under the License.
 
 namespace RosSharp.RosBridgeClient
 {
-    public class Int32Publisher : Publisher<Messages.Standard.Int32>
+    public class Int32Publisher : Publisher<MessageTypes.Std.Int32>
     {
         public int ValueToPublish = 0;
         //public float Rate;
 
-        private Messages.Standard.Int32 message;
+        private MessageTypes.Std.Int32 message;
 
         protected override void Start()
         {
@@ -37,7 +37,7 @@ namespace RosSharp.RosBridgeClient
 
         private void InitializeMessage()
         {
-            message = new Messages.Standard.Int32();
+            message = new MessageTypes.Std.Int32();
             message.data = ValueToPublish;
         }
 

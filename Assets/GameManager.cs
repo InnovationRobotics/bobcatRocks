@@ -1,9 +1,9 @@
 ﻿using RosSharp.RosBridgeClient;
-using RosSharp.RosBridgeClient.Messages.Sensor;
+using RosSharp.RosBridgeClient.MessageTypes.Sensor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : Subscriber<RosSharp.RosBridgeClient.Messages.Sensor.Joy>
+public class GameManager : Subscriber<RosSharp.RosBridgeClient.MessageTypes.Sensor.Joy>
 {
 
 

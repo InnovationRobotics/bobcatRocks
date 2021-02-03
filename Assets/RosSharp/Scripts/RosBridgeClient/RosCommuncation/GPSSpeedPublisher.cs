@@ -19,13 +19,13 @@ using AGXUnity;
 
 namespace RosSharp.RosBridgeClient
 {
-    public class GPSSpeedPublisher : Publisher<Messages.Sensor.NavSatFix>
+    public class GPSSpeedPublisher : Publisher<MessageTypes.Sensor.NavSatFix>
     {
         public string FrameId = "Unity";
         public RigidBody rb;
         public bool Outside_Time_Synchronization=false;
 
-        private Messages.Sensor.NavSatFix message;
+        private MessageTypes.Sensor.NavSatFix message;
         private float start_latitude, start_longitude, start_altitude;
 
         protected override void Start()
@@ -49,22 +49,22 @@ namespace RosSharp.RosBridgeClient
 
         public void InitializeMessage()
         {
-            message = new Messages.Sensor.NavSatFix
+            message = new MessageTypes.Sensor.NavSatFix
             {
-                header = new Messages.Standard.Header()
+                header = new MessageTypes.Std.Header()
                 {
                     frame_id = FrameId
                 },
-                status = new Messages.Sensor.NavSatStatus()
+                status = new MessageTypes.Sensor.NavSatStatus()
                 {
-                    status = (sbyte)Messages.Sensor.NavSatStatus.StatusType.STATUS_FIX,
-                    service = (short)Messages.Sensor.NavSatStatus.ServiceType.SERVICE_GPS
+                    status = (sbyte)MessageTypes.Sensor.NavSatStatus.STATUS_FIX,
+                    service = (ushort)MessageTypes.Sensor.NavSatStatus.SERVICE_GPS
                 },
                 latitude = start_latitude,
                 longitude = start_longitude,
                 altitude = start_altitude          
             };
-            message.position_covariance = new float[] {1,0,0,0,1,0,0,0,1};
+            message.position_covariance = new double[] {1,0,0,0,1,0,0,0,1};
             message.position_covariance_type=  0;
         }
 
@@ -81,7 +81,7 @@ namespace RosSharp.RosBridgeClient
            
         }
 
-        public void SendSynchronizedMessage(Messages.Standard.Time synchronized_time)
+        public void SendSynchronizedMessage(MessageTypes.Std.Time synchronized_time)
         {
                 message.header.TimeSynchronization(synchronized_time);
                 //Compute current coordinates

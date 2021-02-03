@@ -17,14 +17,14 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace RosSharp.RosBridgeClient
 {
-    public class JointStateSubscriberNoURDF : Subscriber<Messages.Sensor.JointState>
+    public class JointStateSubscriberNoURDF : Subscriber<MessageTypes.Sensor.JointState>
     {
         public List<string> JointNames;
         //public List<JointStateWriter> JointStateWriters;
 
         public BobcatArm bobcatArm;
 
-        protected override void ReceiveMessage(Messages.Sensor.JointState message)
+        protected override void ReceiveMessage(MessageTypes.Sensor.JointState message)
         {
             int index;
             for (int i = 0; i < message.name.Length; i++)

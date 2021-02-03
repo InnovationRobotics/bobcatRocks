@@ -16,7 +16,7 @@ using UnityEngine;
 
 namespace RosSharp.RosBridgeClient
 {
-    public class JoySubscriber : Subscriber<Messages.Sensor.Joy>
+    public class JoySubscriber : Subscriber<MessageTypes.Sensor.Joy>
     {
         public JoyButtonWriter[] joyButtonWriters;
         public JoyAxisWriter[] joyAxisWriters;
@@ -26,7 +26,7 @@ namespace RosSharp.RosBridgeClient
             base.Start();
         }
 
-        protected override void ReceiveMessage(Messages.Sensor.Joy joy)
+        protected override void ReceiveMessage(MessageTypes.Sensor.Joy joy)
         {
             Debug.Log("Received JOY values=" + joy.axes[0].ToString() + ","+joy.axes[2].ToString() + "," + joy.axes[3].ToString() + "," + joy.axes[4].ToString() + "," + joy.axes[5].ToString());
             int I = joyButtonWriters.Length < joy.buttons.Length ? joyButtonWriters.Length : joy.buttons.Length;

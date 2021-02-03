@@ -15,7 +15,7 @@ limitations under the License.
 
 using System.IO;
 
-namespace RosBridgeClient.Messages
+namespace RosBridgeClient.MessageTypes
 {
     public static class ServiceMessageGenerator
     {
@@ -29,11 +29,11 @@ namespace RosBridgeClient.Messages
 
                 outfile.WriteLine(
                     "using Newtonsoft.Json;\n" +
-                    "using RosSharp.RosBridgeClient.Messages.Geometry;\n" +
-                    "using RosSharp.RosBridgeClient.Messages.Navigation;\n" +
-                    "using RosSharp.RosBridgeClient.Messages.Sensor;\n" +
-                    "using RosSharp.RosBridgeClient.Messages.Standard;\n" +
-                    "using RosSharp.RosBridgeClient.Messages.Actionlib;\n\n" +
+                    "using RosSharp.RosBridgeClient.MessageTypes.Geometry;\n" +
+                    "using RosSharp.RosBridgeClient.MessageTypes.Navigation;\n" +
+                    "using RosSharp.RosBridgeClient.MessageTypes.Sensor;\n" +
+                    "using RosSharp.RosBridgeClient.MessageTypes.Standard;\n" +
+                    "using RosSharp.RosBridgeClient.MessageTypes.Actionlib;\n\n" +
 
                     "namespace RosSharp.RosBridgeClient.Services\n" +
                     "{\n" +

@@ -16,8 +16,8 @@ limitations under the License.
 using System.IO;
 using UnityEngine;
 using UnityEditor;
-using RosBridgeClient.Messages;
-using MessageType = RosBridgeClient.Messages.MessageType;
+using RosBridgeClient.MessageTypes;
+using MessageType = RosBridgeClient.MessageTypes;
 
 namespace RosSharp.RosBridgeClient
 {
@@ -135,9 +135,9 @@ namespace RosSharp.RosBridgeClient
                              EditorPrefs.GetString("ROSPackageName") :
                              "beginner_tutorials");
 
-            messageElements = new MessageElement[] { new MessageElement { messageType = MessageType.@int, messageName = "a" },
-                                                     new MessageElement { messageType = MessageType.String, messageName = "str" },
-                                                     new MessageElement { messageType = MessageType.Odometry, messageName = "odom" }};
+            messageElements = new MessageElement[] { new MessageElement { messageType = MessageType.MessageType.@int, messageName = "a" },
+                                                     new MessageElement { messageType = MessageType.MessageType.String, messageName = "str" },
+                                                     new MessageElement { messageType = MessageType.MessageType.Odometry, messageName = "odom" }};
         }
 
         private void SetEditorPrefs()

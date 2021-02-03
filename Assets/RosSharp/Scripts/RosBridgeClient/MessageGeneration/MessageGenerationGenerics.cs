@@ -13,7 +13,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-namespace RosBridgeClient.Messages
+namespace RosBridgeClient.MessageTypes
 {
     public enum MessageType
     {

@@ -17,12 +17,12 @@ using UnityEngine;
 
 namespace RosSharp.RosBridgeClient
 {
-    public class PointPublisher : Publisher<Messages.Geometry.Point>
+    public class PointPublisher : Publisher<MessageTypes.Geometry.Point>
     {
         public Transform PublishedTransform;
         
 
-        private Messages.Geometry.Point message;
+        private MessageTypes.Geometry.Point message;
 
         protected override void Start()
         {
@@ -37,7 +37,7 @@ namespace RosSharp.RosBridgeClient
 
         private void InitializeMessage()
         {
-            message = new Messages.Geometry.Point();
+            message = new MessageTypes.Geometry.Point();
          
         }
 
@@ -49,9 +49,9 @@ namespace RosSharp.RosBridgeClient
             Publish(message);
         }
 
-        private Messages.Geometry.Point GetGeometryPoint(Vector3 position)
+        private MessageTypes.Geometry.Point GetGeometryPoint(Vector3 position)
         {
-            Messages.Geometry.Point geometryPoint = new Messages.Geometry.Point();
+            MessageTypes.Geometry.Point geometryPoint = new MessageTypes.Geometry.Point();
             geometryPoint.x = position.x;
             geometryPoint.y = position.y;
             geometryPoint.z = position.z;

@@ -3,13 +3,14 @@ This message class is generated automatically with 'SimpleMessageGenerator' of R
 */ 
 
 using Newtonsoft.Json;
-using RosSharp.RosBridgeClient.Messages.Geometry;
-using RosSharp.RosBridgeClient.Messages.Navigation;
-using RosSharp.RosBridgeClient.Messages.Sensor;
-using RosSharp.RosBridgeClient.Messages.Standard;
-using RosSharp.RosBridgeClient.Messages.Actionlib;
+using RosSharp.RosBridgeClient.MessageTypes.Geometry;
 
-namespace RosSharp.RosBridgeClient.Messages
+using RosSharp.RosBridgeClient.MessageTypes.Nav;
+using RosSharp.RosBridgeClient.MessageTypes.Sensor;
+using RosSharp.RosBridgeClient.MessageTypes.Std;
+using RosSharp.RosBridgeClient.MessageTypes.Actionlib;
+
+namespace RosSharp.RosBridgeClient.MessageTypes
 {
 public class FibonacciActionGoal : Message
 {

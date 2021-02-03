@@ -14,7 +14,7 @@ limitations under the License.
 */
 
 using System.Collections.Generic;
-using rosapi = RosSharp.RosBridgeClient.Services.RosApi;
+using rosapi = RosSharp.RosBridgeClient.MessageTypes.Rosapi;
 
 namespace RosSharp.RosBridgeClient
 {
@@ -27,10 +27,15 @@ namespace RosSharp.RosBridgeClient
         
         protected override bool ServiceCallHandler(rosapi.GetParamRequest request, out rosapi.GetParamResponse response)
         {
+            string value;
+
             response = new rosapi.GetParamResponse();
-            
-            if (Parameters.TryGetValue(request.name, out response.value))
+            if (Parameters.TryGetValue(request.name, out value))
+            {
+                response.value = value;
                 return true;
+            }
+                
 
             response.value = "unknown parameter " + request.name;
             return false;

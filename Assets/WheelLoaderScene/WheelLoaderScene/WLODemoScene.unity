@@ -228,12 +228,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d293f7ecd04acc780b83665d4bca476c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Topic: /LLC/EFFORTS/Jointsts
-  TimeStep: 0.1
-  JointNames:
-  - arm
-  - loader
-  - bracket
+  Topic: 
+  TimeStep: 0
+  JointNames: []
   bobcatArm: {fileID: 0}
 --- !u!114 &28285939
 MonoBehaviour:
@@ -259,8 +256,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac3b5c497c54f1b4ab2a96f69bc1586d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Topic: /joy
-  TimeStep: 0.1
+  Topic: 
+  TimeStep: 0
   joyButtonWriters: []
   joyAxisWriters: []
 --- !u!114 &28285942
@@ -277,7 +274,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Timeout: 10
   Serializer: 0
-  Protocol: 1
+  Protocol: 0
   RosBridgeServerUrl: ws://192.168.100.61:9090
 --- !u!4 &28285943
 Transform:
@@ -371,7 +368,7 @@ MonoBehaviour:
   _settings:
     _canBeDisplayed: 1
     _isExpanded: 1
-    _enableGizmoSorting: 0
+    _enableGizmoSorting: 1
   _sceneGizmoLookAndFeel:
     _canBeDisplayed: 1
     _isExpanded: 1
@@ -4145,7 +4142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf910afe7ec945e49824651f72101819, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isEnabled: 0
+  _isEnabled: 1
   _actionLimit: 50
 --- !u!1 &180680208 stripped
 GameObject:
@@ -4197,8 +4194,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91d53079956b96b3fbce6436057dd450, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Topic: /mavros/imu/data
-  UiText: {fileID: 523849464}
+  Topic: 
+  UiText: {fileID: 0}
   FrameId: Unity
   rb: {fileID: 0}
   Outside_Time_Synchronization: 0
@@ -4214,9 +4211,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa23b622c60c13f48bdfa74b2e974f20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Topic: /mavros/local_position/pose
-  UiText: {fileID: 523849464}
-  PublishedTransform: {fileID: 192736469}
+  Topic: 
+  UiText: {fileID: 0}
+  PublishedTransform: {fileID: 0}
   FrameId: Unity
 --- !u!114 &192736464
 MonoBehaviour:
@@ -4230,9 +4227,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbbca38ff49c96240b3a4a7c15a79916, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Topic: /mavros/local_position/velocity
+  Topic: 
   UiText: {fileID: 0}
-  PublishedTransform: {fileID: 192736469}
+  PublishedTransform: {fileID: 0}
   FrameId: Unity
 --- !u!114 &192736465
 MonoBehaviour:
@@ -4288,14 +4285,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e444f70a89651ed4bb879d3b23868ba4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Topic: /arm/height
+  Topic: 
   UiText: {fileID: 0}
   ValueToPublish: 0
   LayerMask:
     serializedVersion: 2
-    m_Bits: 1024
-  origin: {fileID: 1117570820}
-  destination: {fileID: 1595959466}
+    m_Bits: 0
+  origin: {fileID: 0}
+  destination: {fileID: 0}
 --- !u!114 &196389306
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4983,7 +4980,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 437d5eb940a5de949b2ba72c1c0f7eb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Topic: /arm/shortHeight
+  Topic: 
   UiText: {fileID: 0}
   ValueToPublish: 0
 --- !u!114 &437741537
@@ -5014,7 +5011,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91d53079956b96b3fbce6436057dd450, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Topic: /arm/blade/Imu
+  Topic: 
   UiText: {fileID: 0}
   FrameId: Unity
   rb: {fileID: 0}
@@ -5679,6 +5676,8 @@ GameObject:
   - component: {fileID: 734059810}
   - component: {fileID: 734059809}
   - component: {fileID: 734059812}
+  - component: {fileID: 734059814}
+  - component: {fileID: 734059813}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -5777,7 +5776,38 @@ MonoBehaviour:
   Width: 120
   Height: 120
   To: {x: 0, y: 0, z: 0}
-  collider: {fileID: 734059809}
+  collider: {fileID: 0}
+--- !u!114 &734059813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 734059807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa847127be7ccaf48a40b8142c335cf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Topic: 
+  UiText: {fileID: 0}
+  ValueToPublish: 0
+--- !u!114 &734059814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 734059807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff98778ae051cfd40a6e4effdf851ebd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Timeout: 10
+  Serializer: 0
+  Protocol: 0
+  RosBridgeServerUrl: ws://192.168.100.61:9090
 --- !u!1 &768313753
 GameObject:
   m_ObjectHideFlags: 0
@@ -6570,7 +6600,7 @@ MonoBehaviour:
   _settings:
     _canBeDisplayed: 1
     _isExpanded: 1
-    _isVisible: 0
+    _isVisible: 1
     _cellSizeX: 1
     _cellSizeZ: 1
     _yOffset: 0
@@ -7344,7 +7374,7 @@ MonoBehaviour:
   _settings:
     _canBeDisplayed: 1
     _isExpanded: 1
-    _physicsMode: 1
+    _physicsMode: 2
     _nonMeshObjectSize: 1
 --- !u!1 &1375849575
 GameObject:
@@ -7597,7 +7627,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3e7d6204dc66485cba67b32bcb2618d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 2142064245}
+  target: {fileID: 0}
   distance: 15
   height: 10
   heightDamping: 0.01
@@ -7614,12 +7644,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1127a21737497f43800a68d4d870ef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 7.54
-  height: 3.39
-  Rotation: -153.4
-  Duration: 1
+  distance: 10
+  height: 5
+  Rotation: 5
+  Duration: 0
   LookAt: 0
-  ExaminedObjects: {fileID: 2007589157}
+  ExaminedObjects: {fileID: 0}
 --- !u!114 &1446835688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7632,13 +7662,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dca6b5728905b54f816d62f7248a4d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 2007589157}
+  target: {fileID: 0}
   distance: 10
   height: 5
   Rotation: 5
   Duration: 0
   LookAt: 0
-  ExaminedObjects: {fileID: 2007589157}
+  ExaminedObjects: {fileID: 0}
 --- !u!114 &1446835689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9290,9 +9320,9 @@ MonoBehaviour:
   ObjectList:
     Objects: []
   Terrain: {fileID: 0}
-  divRange: 6
-  hm: 1
-  Target: {fileID: 1446835687}
+  divRange: 0
+  hm: 0
+  Target: {fileID: 0}
 --- !u!1 &1973931842
 GameObject:
   m_ObjectHideFlags: 0
@@ -9463,12 +9493,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1997440668}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &2007589157 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7704123569013938350, guid: 76484931528985446b59c2ab4b5fa4e3,
-    type: 3}
-  m_PrefabInstance: {fileID: 91791242}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2034393882
 GameObject:
   m_ObjectHideFlags: 0
@@ -9587,8 +9611,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Topic: 
   TimeStep: 0
-  DlDriver: {fileID: 2142064250}
-  DlDriveJoy: {fileID: 2142064246}
+  DlDriver: {fileID: 0}
+  DlDriveJoy: {fileID: 0}
   ManualInput: 0
   DriverInput: 0
 --- !u!1 &2107106318 stripped
@@ -9914,9 +9938,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb0175a5f1226ac41abb5372cd3d44e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Topic: /joy
-  TimeStep: 0.1
-  WheelLoaderInputController: {fileID: 2142064238}
+  Topic: 
+  TimeStep: 0
+  WheelLoaderInputController: {fileID: 0}
   Throttle: 0
   Brake: 0
   Steer: 0
@@ -9950,12 +9974,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26e5853d428e28946830a2ac3df1689b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Topic: /mavros/rc/override
-  TimeStep: 0.1
-  WheelLoaderInputController: {fileID: 2142064238}
+  Topic: 
+  TimeStep: 0
+  WheelLoaderInputController: {fileID: 0}
   Throttle: 0
   Brake: 0
   Steer: 0
-  text: {fileID: 241128348}
+  text: {fileID: 0}
   Elevate: 0
   Tilt: 0

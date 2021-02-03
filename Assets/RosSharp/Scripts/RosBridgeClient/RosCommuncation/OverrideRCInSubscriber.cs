@@ -15,7 +15,7 @@ limitations under the License.
 using UnityEngine;
 namespace RosSharp.RosBridgeClient
 {
-    public class OverrideRCInSubscriber : Subscriber<Messages.Mavros.OverrideRCIn>
+    public class OverrideRCInSubscriber : Subscriber<MessageTypes.Mavros.OverrideRcIn>
     {
         //public OverrideChannelsWriter[] channelWriters;
        
@@ -25,7 +25,7 @@ namespace RosSharp.RosBridgeClient
 			base.Start();
 		}
 		
-        protected override void ReceiveMessage(Messages.Mavros.OverrideRCIn orc)
+        protected override void ReceiveMessage(MessageTypes.Mavros.OverrideRcIn orc)
         {
             int idx;
             for (idx=0; idx<8; idx++)

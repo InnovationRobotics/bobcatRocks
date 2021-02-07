@@ -31,7 +31,7 @@ namespace RosSharp.RosBridgeClient
         public RosBridgeClient.RosSocket.SerializerEnum Serializer;
         public Protocols Protocol;
         URLConfig IpFromJSon;
-        public string RosBridgeServerUrl = "ws://192.168.100.61:9090";
+        public string RosBridgeServerUrl; // "ws://192.168.100.61:9090";
         public static string IPAddres ;
 
         private ManualResetEvent isConnected = new ManualResetEvent(false);

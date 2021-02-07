@@ -10,25 +10,28 @@ using Unity.Mathematics;
 public class MapHightManager : MonoBehaviour
 {
     [BurstCompile]
-    public struct RayCastHeightJob : IJobParallelFor
+    public struct RayToHeightJob : IJobParallelFor
     {
         [ReadOnly]
         public NativeArray<RaycastHit>_RayCastHits;
         public NativeArray<double> _TerrainHeights;
- 
+        
 
         public void Execute(int index)
         {
            
             var hit = _RayCastHits[index];
             var dis = hit.point.y;
-            _TerrainHeights[index] = dis;           
+            _TerrainHeights[index] = dis;
+            
+
+
 
         }
     }
 
     [BurstCompile]
-    public struct HightMapJob : IJobParallelFor
+    public struct ShotRayCastJob : IJobParallelFor
     {
 
        // public NativeArray<Vector3> _PositionCell;
@@ -79,24 +82,24 @@ public class MapHightManager : MonoBehaviour
     public NativeArray<double> TerrainHeights;
     public NativeArray<RaycastHit> RayCastResults;
     public NativeArray<RaycastCommand> Commands;
-    public Vector3 To;
-    JobHandle handle;
-    HightMapJob Job;
-    private RayCastHeightJob rayCastHeightJob;
-    float size;
-    Vector3 startPoint;
-    public BoxCollider collider;
+    public float size;
+
+    private ShotRayCastJob RayCastJob;
+    private RayToHeightJob RayCastToHeightJob;
+
+    public double[] TerrainHeightResultArry;
+   
     bool paint = false;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake  ()
     {
 
-        collider = GetComponentInParent<BoxCollider>();
+        
         Width /= 0.2f;
         Height /= 0.2f;
         size = Width * Height;
-
+        TerrainHeightResultArry = new double[(int)size];
         Terrain = Terrain.activeTerrain;
 
         cells = new NativeArray<Vector3>((int)size, Allocator.Persistent); 
@@ -106,7 +109,7 @@ public class MapHightManager : MonoBehaviour
 
 
 
-        Job = new HightMapJob()
+        RayCastJob = new ShotRayCastJob()
         {
             // _PositionCell = cells,
             _Width = Width,
@@ -118,11 +121,12 @@ public class MapHightManager : MonoBehaviour
         };
 
 
-        rayCastHeightJob = new RayCastHeightJob
+        RayCastToHeightJob = new RayToHeightJob
         {
             _RayCastHits = RayCastResults,
             _TerrainHeights = TerrainHeights,
-          
+           
+
         };
 
        
@@ -155,24 +159,24 @@ public class MapHightManager : MonoBehaviour
 
         //}
 
-        Job.Min = Sphere.localPosition;
-        Job._TransformPostion = transform.position;
-        Job._Quaternion = transform.rotation;
-        Job._TransformScale = transform.localScale;      
+        RayCastJob.Min = Sphere.localPosition;
+        RayCastJob._TransformPostion = transform.position;
+        RayCastJob._Quaternion = transform.rotation;
+        RayCastJob._TransformScale = transform.localScale;      
 
 
 
 
-        handle = Job.Schedule(Commands.Length,1);
+        JobHandle handle = RayCastJob.Schedule(Commands.Length,1);
         handle.Complete();
 
   
           //  Schedule the batch of raycasts
-        JobHandle RayCastHandle = RaycastCommand.ScheduleBatch(Commands, RayCastResults, 8);                                                                                        
+        JobHandle RayCastHandle = RaycastCommand.ScheduleBatch(Commands, RayCastResults, 8);                   
         RayCastHandle.Complete();
 
 
-        JobHandle TerrainHeightHandle = rayCastHeightJob.Schedule(RayCastResults.Length, 1);
+        JobHandle TerrainHeightHandle = RayCastToHeightJob.Schedule(RayCastResults.Length, 1);
         TerrainHeightHandle.Complete();
 
 

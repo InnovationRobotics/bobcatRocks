@@ -1,4 +1,4 @@
 {
- "URL": "ws://172.23.40.19:9090",
-  "ConnectToRos": false
+ "URL": "ws://172.23.40.25:9090",
+  "ConnectToRos": true
 }

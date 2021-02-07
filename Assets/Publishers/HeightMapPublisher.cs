@@ -28,11 +28,12 @@ namespace RosSharp.RosBridgeClient
         protected override void Start()
         {
             base.Start();
+
             mapHightManager = GetComponent<MapHightManager>();
             InitializeMessage();
         }
 
-        private void LateUpdate()
+        private void FixedUpdate()
         {
             UpdateMessage();
         }
@@ -42,12 +43,12 @@ namespace RosSharp.RosBridgeClient
         private void InitializeMessage()
         {
             message = new MessageTypes.Std.Float64MultiArray();
-            message.data = mapHightManager.TerrainHeights.ToArray();
+            message.data = new double[(int)mapHightManager.size];
         }
 
         private void UpdateMessage()
         {
-            message.data = mapHightManager.TerrainHeights.ToArray();
+            mapHightManager.TerrainHeights.CopyTo(message.data);
             Publish(message);
         }
     }

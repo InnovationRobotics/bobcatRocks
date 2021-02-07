@@ -12,7 +12,7 @@ public class SpawnPoint : MonoBehaviour
     public float divRange;
     public float hm;
 
-    public focusCamera Target;
+    public FoucsCameraToTarget Target;
     // Start is called before the first frame update
     void Awake()
     {
@@ -73,7 +73,7 @@ public class SpawnPoint : MonoBehaviour
 
         }
 
-        // GenerateTerrain(Terrain, hm);// RAndom Terrain
+         GenerateTerrain(Terrain, hm);// RAndom Terrain
     }
 
     // Update is called once per frame

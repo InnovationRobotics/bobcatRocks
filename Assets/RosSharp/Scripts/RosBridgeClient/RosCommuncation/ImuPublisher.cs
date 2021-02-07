@@ -18,6 +18,7 @@ using System;
 using AGXUnity;
 namespace RosSharp.RosBridgeClient
 {
+    
     public class ImuPublisher : Publisher<MessageTypes.Sensor.Imu>
     {
         public string FrameId = "Unity";
@@ -31,7 +32,7 @@ namespace RosSharp.RosBridgeClient
         {
             base.Start();
             InitializeMessage();
-       //     rb = GetComponent<RigidBody>();
+           rb = GetComponent<RigidBody>();
         }
 
         private void FixedUpdate()
@@ -60,14 +61,18 @@ namespace RosSharp.RosBridgeClient
 
             if (!Outside_Time_Synchronization){
                 message.header.Update();
-                message.orientation = GetGeometryQuaternion(rb.transform.rotation.Unity2Ros());
+                var geo=GetGeometryQuaternion(rb.transform.rotation.Unity2Ros());
+                message.orientation = geo;
+
                 message.orientation_covariance = new double[] {1,0,0,0,1,0,0,0,1};
-                message.angular_velocity=  GetGeometryVector3(rb.AngularVelocity.Unity2Ros());
+                var geoV=  GetGeometryVector3(rb.AngularVelocity.Unity2Ros());
+                message.angular_velocity = geoV;
                 message.angular_velocity_covariance = new double[] {1,0,0,0,1,0,0,0,1};
                 Vector3 distancePerFrame = rb.transform.position - lastPos;
                 lastPos = rb.transform.position;
                 Vector3 speed = distancePerFrame * Time.deltaTime;
-                message.linear_acceleration=  GetGeometryVector3(speed.Unity2Ros());
+                var geoC= GetGeometryVector3(speed.Unity2Ros());
+                message.linear_acceleration = geoC;
                 message.linear_acceleration_covariance = new double[] {1,0,0,0,1,0,0,0,1};
 
                 Publish(message);

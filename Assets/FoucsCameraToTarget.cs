@@ -41,8 +41,6 @@ using UnityEngine;
 
         IEnumerator center()
         {
-                lock (transform)
-                {
                     transform.position = target.position;
                     var wantedRotationAngle = target.eulerAngles.y + Rotation;
                     var wantedHeight = target.position.y + height;
@@ -80,7 +78,7 @@ using UnityEngine;
                     yield return new WaitForEndOfFrame();
 
 
-                }
+                
         }
 
 

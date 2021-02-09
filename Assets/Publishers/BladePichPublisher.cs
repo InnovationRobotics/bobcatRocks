@@ -52,7 +52,7 @@ namespace RosSharp.RosBridgeClient
         {
 
             val = 1.077f * val + 46.582f;
-            Debug.Log("Pitch:" + val);
+          //  Debug.Log("Pitch:" + val);
             return val;
 
 

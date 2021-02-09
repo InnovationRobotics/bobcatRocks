@@ -74,15 +74,7 @@
     <Compile Include="Assets\BOBCATMODEL\_bobcatScripts\misc\PlayerControls.cs" />
     <Compile Include="Assets\BOBCATMODEL\_bobcatScripts\RigidBodyIterations.cs" />
     <Compile Include="Assets\BOBCATMODEL\_bobcatScripts\Vehicle\TankDriver.cs" />
-    <Compile Include="Assets\cameraSmoothFollow.cs" />
     <Compile Include="Assets\FoucsCameraToTarget.cs" />
-    <Compile Include="Assets\GameManager.cs" />
-    <Compile Include="Assets\GrabRobil.cs" />
-    <Compile Include="Assets\JoytickMsg.cs" />
-    <Compile Include="Assets\MapHightManager.cs" />
-    <Compile Include="Assets\MeasureTool.cs" />
-    <Compile Include="Assets\MoveRobil.cs" />
-    <Compile Include="Assets\PrintMyPosition.cs" />
     <Compile Include="Assets\Publishers\ArmHightPublisher.cs" />
     <Compile Include="Assets\Publishers\BladePichPublisher.cs" />
     <Compile Include="Assets\Publishers\DLDriveJoy.cs" />
@@ -573,20 +565,29 @@
     <Compile Include="Assets\Runtime Transform Gizmos\Scripts\Runtime Package Common\Utilities\ObjectSurfaceSnap.cs" />
     <Compile Include="Assets\Runtime Transform Gizmos\Scripts\Runtime Package Common\Utilities\ObjectVertexCollect.cs" />
     <Compile Include="Assets\Runtime Transform Gizmos\Scripts\Runtime Package Common\Utilities\UniqueNameGen.cs" />
+    <Compile Include="Assets\Scripts\cameraSmoothFollow.cs" />
     <Compile Include="Assets\Scripts\FileFinder.cs" />
     <Compile Include="Assets\Scripts\focusCamera.cs" />
+    <Compile Include="Assets\Scripts\FPSDisplay.cs" />
+    <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\GrabRobil.cs" />
     <Compile Include="Assets\Scripts\IpConfig1.cs" />
+    <Compile Include="Assets\Scripts\JoytickMsg.cs" />
+    <Compile Include="Assets\Scripts\MapHightManager.cs" />
+    <Compile Include="Assets\Scripts\MeasureTool.cs" />
+    <Compile Include="Assets\Scripts\MoveRobil.cs" />
     <Compile Include="Assets\Scripts\Obj.cs" />
     <Compile Include="Assets\Scripts\ObjList.cs" />
+    <Compile Include="Assets\Scripts\PrintMyPosition.cs" />
     <Compile Include="Assets\Scripts\SpawnPoint.cs" />
-    <Compile Include="Assets\StoneDetect.cs" />
+    <Compile Include="Assets\Scripts\StoneDetect.cs" />
+    <Compile Include="Assets\Scripts\UIDisplay.cs" />
     <Compile Include="Assets\test\FibonacciActionFeedback.cs" />
     <Compile Include="Assets\test\FibonacciActionGoal.cs" />
     <Compile Include="Assets\test\FibonacciActionResult.cs" />
     <Compile Include="Assets\test\FibonacciFeedback.cs" />
     <Compile Include="Assets\test\FibonacciGoal.cs" />
     <Compile Include="Assets\test\FibonacciResult.cs" />
-    <Compile Include="Assets\UIDisplay.cs" />
     <Compile Include="Assets\Velodyne\RayCast_Velodyne32.cs" />
     <Compile Include="Assets\Velodyne\VelodyneConfig.cs" />
     <Compile Include="Assets\Velodyne\VelodyneFrame.cs" />
@@ -1579,6 +1580,14 @@
     <ProjectReference Include="AGXUnityEditor.csproj">
       <Project>{D57BB285-5BB6-EEBF-1C48-56A748779B44}</Project>
       <Name>AGXUnityEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="IngameDebugConsole.Runtime.csproj">
+      <Project>{C17DEBE6-241C-5D7E-FB9D-74B9D0FD3702}</Project>
+      <Name>IngameDebugConsole.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="IngameDebugConsole.Editor.csproj">
+      <Project>{FDA409D2-EC6A-6151-D0D0-48BE194402E8}</Project>
+      <Name>IngameDebugConsole.Editor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

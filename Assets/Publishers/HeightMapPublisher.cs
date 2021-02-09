@@ -33,9 +33,9 @@ namespace RosSharp.RosBridgeClient
             InitializeMessage();
         }
 
-        private void FixedUpdate()
+        private void LateUpdate()
         {
-            UpdateMessage();
+           // UpdateMessage();
         }
 
 
@@ -48,7 +48,11 @@ namespace RosSharp.RosBridgeClient
 
         private void UpdateMessage()
         {
-            mapHightManager.TerrainHeights.CopyTo(message.data);
+            for (int i = 0; i < mapHightManager.TerrainHeights.Length; i++)
+            {
+                message.data[i] = mapHightManager.TerrainHeights[i];
+            }
+     
             Publish(message);
         }
     }

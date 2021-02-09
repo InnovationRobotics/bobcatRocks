@@ -46,7 +46,7 @@ namespace RosSharp.RosBridgeClient
             float hight = ReayCast();
             // Debug.Log("HIGHT :" + hight);
             message.data = CalcRange(hight);
-            Debug.Log("Hight:" + message.data);
+          //  Debug.Log("Hight:" + message.data);
             Publish(message);
         }
 

@@ -24,15 +24,16 @@ namespace RosSharp.RosBridgeClient
         public string Topic;
         private string publicationId;
         public Text UiText;
-
+        RosConnector rosConnector;
         protected virtual void Start()
         {
-            publicationId = GetComponent<RosConnector>().RosSocket.Advertise<T>(Topic);
+            rosConnector = GetComponent<RosConnector>();
+            publicationId = rosConnector.RosSocket.Advertise<T>(Topic);
         }
 
         protected void Publish(T message)
         {
-            GetComponent<RosConnector>().RosSocket.Publish(publicationId, message);
+            rosConnector.RosSocket.Publish(publicationId, message);
         }
     }
 }

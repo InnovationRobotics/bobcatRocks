@@ -72,10 +72,11 @@ using UnityEngine;
                         // Always look at the target
                         transform.LookAt(target);
                         ElpsedTime += Time.deltaTime;
+                        yield return null;
                     }
 
 
-                    yield return new WaitForEndOfFrame();
+                 
 
 
                 

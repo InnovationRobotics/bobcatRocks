@@ -1107,14 +1107,6 @@
       <Project>{D393E934-4EC3-EAE5-AE1D-C49EC14A2669}</Project>
       <Name>Assembly-CSharp</Name>
     </ProjectReference>
-    <ProjectReference Include="AGXUnity.csproj">
-      <Project>{9608A4C9-03B0-87C5-2C76-B5FD8A4EF9E1}</Project>
-      <Name>AGXUnity</Name>
-    </ProjectReference>
-    <ProjectReference Include="AGXUnityEditor.csproj">
-      <Project>{D57BB285-5BB6-EEBF-1C48-56A748779B44}</Project>
-      <Name>AGXUnityEditor</Name>
-    </ProjectReference>
     <ProjectReference Include="IngameDebugConsole.Runtime.csproj">
       <Project>{C17DEBE6-241C-5D7E-FB9D-74B9D0FD3702}</Project>
       <Name>IngameDebugConsole.Runtime</Name>
@@ -1122,6 +1114,14 @@
     <ProjectReference Include="IngameDebugConsole.Editor.csproj">
       <Project>{FDA409D2-EC6A-6151-D0D0-48BE194402E8}</Project>
       <Name>IngameDebugConsole.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="AGXUnity.csproj">
+      <Project>{9608A4C9-03B0-87C5-2C76-B5FD8A4EF9E1}</Project>
+      <Name>AGXUnity</Name>
+    </ProjectReference>
+    <ProjectReference Include="AGXUnityEditor.csproj">
+      <Project>{D57BB285-5BB6-EEBF-1C48-56A748779B44}</Project>
+      <Name>AGXUnityEditor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

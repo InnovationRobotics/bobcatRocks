@@ -4,7 +4,7 @@ using RosSharp.RosBridgeClient.MessageTypes.Mavros;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DLDriver : Subscriber<RosSharp.RosBridgeClient.MessageTypes.Mavros.OverrideRcIn> /*Subscriber<RosSharp.RosBridgeClient.MessageTypes.Sensor.Joy>*/
+public class DLDriver : Subscriber<OverrideRcIn> /*Subscriber<RosSharp.RosBridgeClient.MessageTypes.Sensor.Joy>*/
 {
     public WheelLoaderInputController WheelLoaderInputController;
 
